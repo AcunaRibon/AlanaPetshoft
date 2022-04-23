@@ -5,7 +5,7 @@
 @section('content')
 <div class="container py-5">
     <div class="row">
-        <div class="col-10">
+        <div class="col-12">
             <div class="table-responsive p-2">
                 <div class="d-flex justify-content-between">
                     <h2 class="text-center">Compras</h2>
@@ -204,32 +204,36 @@
                 </table>
             </div>
         </div>
-        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-            <div class="bg-dark text-white text-center p-2 rounded-3 mb-2">
-                <p class="text-center fs-5 fw-bolder">Compras registradas</p>
-                <div class="d-flex justify-content-center align-items-center fs-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-cart me-1" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg>
-                    <p class="fw-bold m-0">{{ $totalCompra }} </p>
+        <div class="mt-4 d-flex justify-content-center">
+            <div class="d-flex d-inline-flex flex-column justify-content-center align-items-center p-2">
+                <div class="bg-dark text-white text-center p-2 rounded-3 mb-2">
+                    <p class="text-center fs-5 fw-bolder">Compras registradas</p>
+                    <div class="d-flex justify-content-center align-items-center fs-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-cart me-1" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                        <p class="fw-bold m-0">{{ $totalCompra }} </p>
+                    </div>
                 </div>
+                <a class="btn btn-warning mb-2" href="{{ url('compra/report') }}">
+                    Generar reporte
+                </a>
             </div>
-            <a class="btn btn-warning mb-2" href="{{ url('compra/report') }}">
-                Generar reporte
-            </a>
-            <div class="bg-dark text-white text-center p-2 rounded-3 mb-2">
-                <p class="text-center fs-5 fw-bolder">Compras canceladas</p>
-                <div class="d-flex justify-content-center align-items-center fs-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-cart-x me-1" viewBox="0 0 16 16">
-                    <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z"/>
-                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                </svg>
-                    <p class="fw-bold m-0">{{ $totalCompraCancelada }} </p>
+            <div class="d-flex d-inline-flex flex-column justify-content-center align-items-center p-2">
+                <div class="bg-dark text-white text-center p-2 rounded-3 mb-2">
+                    <p class="text-center fs-5 fw-bolder">Compras canceladas</p>
+                    <div class="d-flex justify-content-center align-items-center fs-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-cart-x me-1" viewBox="0 0 16 16">
+                        <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z"/>
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                        <p class="fw-bold m-0">{{ $totalCompraCancelada }} </p>
+                    </div>
                 </div>
+                <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#comprasCanceladas">
+                    Compras canceladas
+                </button>
             </div>
-            <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#comprasCanceladas">
-                Compras canceladas
-            </button>
         </div>
         <div class="modal fade" id="comprasCanceladas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
