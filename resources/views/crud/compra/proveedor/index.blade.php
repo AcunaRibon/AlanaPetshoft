@@ -5,53 +5,56 @@
 @section('content')
 <div class="container py-5">
     <div class="row">
-        <div class="col-10">
-            <div class="table-responsive p-2">
-                <div class="d-flex justify-content-between">
-                    <h2 class="text-center">Proveedor</h2>
-                    <button type="button" class="btn btn-dark mb-2" data-bs-toggle="modal" data-bs-target="#registrar">
-                        Registrar
-                    </button>
-                </div>
-                <div class="modal fade" id="registrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Registrar Proveedor</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('proveedor.store') }}" method="post">
-                                    @csrf
-                                    <div class="mb-2">
-                                        <label for="nombre_proveedor" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor" value="{{ old('nombre_proveedor', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required>
-                                        @error('nombre_proveedor')
-                                            <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                            <p class="text-danger fw-bold">
-                                                * {{$message}}
-                                            </p>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="celular_proveedor" class="form-label">Celular</label>
-                                        <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor" value="{{ old('celular_proveedor', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required>
-                                        @error('celular_proveedor')
-                                            <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                            <p class="text-danger fw-bold">
-                                                * {{$message}}
-                                            </p>
-                                        @enderror
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary registrar">Registrar</button>
-                                </form>
-                            </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-9 col-xxl-10">
+            <div class="d-flex justify-content-between px-2">
+                <h2 class="text-center" title="Proveedores registrados">Proveedor</h2>
+                <button type="button" class="btn btn-dark mb-2" data-bs-toggle="modal" data-bs-target="#registrar" title="Registrar proveedor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-lg me-1" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                    </svg>
+                    Registrar
+                </button>
+            </div>
+            <div class="modal fade" id="registrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Registrar Proveedor</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Cerrar ventana"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('proveedor.store') }}" method="post">
+                                @csrf
+                                <div class="mb-2">
+                                    <label for="nombre_proveedor" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor" value="{{ old('nombre_proveedor', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Ingresar nombre">
+                                    @error('nombre_proveedor')
+                                        <input value="errorRegistrar" id="tipoAlerta" hidden>
+                                        <p class="text-danger fw-bold">
+                                            * {{$message}}
+                                        </p>
+                                    @enderror
+                                </div>
+                                <div class="mb-2">
+                                    <label for="celular_proveedor" class="form-label">Celular</label>
+                                    <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor" value="{{ old('celular_proveedor', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Ingresar celular">
+                                    @error('celular_proveedor')
+                                        <input value="errorRegistrar" id="tipoAlerta" hidden>
+                                        <p class="text-danger fw-bold">
+                                            * {{$message}}
+                                        </p>
+                                    @enderror
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
+                                <button type="submit" class="btn btn-success registrar" title="Registrar proveedor">Registrar</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="table-responsive p-2">
                 <table id="tabla" class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
@@ -69,7 +72,10 @@
                             <td>{{ $proveedores -> celular_proveedor }}</td>
                             <td>
                                 <div class='d-flex justify-content-evenly'>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar-{{$proveedores -> id_proveedor}}">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar-{{$proveedores -> id_proveedor}}" title="Editar proveedor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pen me-1" viewBox="0 0 16 16">
+                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                        </svg>
                                         Editar
                                     </button>
                                     <div class="modal fade" id="editar-{{$proveedores -> id_proveedor}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,7 +83,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Editar Proveedor</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Cerrar ventana"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="{{ route('proveedor.update', $proveedores -> id_proveedor) }}" method="post">
@@ -85,7 +91,7 @@
                                                         @method('PUT')
                                                         <div class="mb-2">
                                                             <label for="nombre_proveedor" class="form-label">Nombre</label>
-                                                            <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor_m" value="{{ old('nombre_proveedor_m', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required>
+                                                            <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor_m" value="{{ old('nombre_proveedor_m', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Nombre">
                                                             @error('nombre_proveedor_m')
                                                                 <input value="errorModificar" id="tipoAlerta" hidden>
                                                                 <p class="text-danger fw-bold">
@@ -95,7 +101,7 @@
                                                         </div>
                                                         <div class="mb-2">
                                                             <label for="celular_proveedor" class="form-label">Celular</label>
-                                                            <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor_m" value="{{ old('celular_proveedor_m', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required>
+                                                            <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor_m" value="{{ old('celular_proveedor_m', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Celular">
                                                             @error('celular_proveedor_m')
                                                                 <input value="errorModificar" id="tipoAlerta" hidden>
                                                                 <p class="text-danger fw-bold">
@@ -105,8 +111,8 @@
                                                         </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-                                                        <button type="submit" class="btn btn-primary actualizar">Modificar</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
+                                                        <button type="submit" class="btn btn-success actualizar" title="Modificar proveedor">Modificar</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -120,19 +126,26 @@
                 </table>
             </div>
         </div>
-        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-            <div class="bg-dark text-white text-center p-2 rounded-3 mb-2">
-                <p class="text-center fs-5 fw-bolder">Proveedores registrados</p>
-                <div class="d-flex justify-content-center align-items-center fs-3 mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" heigh="40" fill="currentColor" class="bi bi-person-fill me-1" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
-                    <p class="fw-bold m-0">{{ $total }}</p>
+        <div class="mt-4 d-flex justify-content-center col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-3 col-xxl-2">
+            <div class="d-flex d-inline-flex flex-column justify-content-center align-items-center p-2">
+                <div class="bg-dark text-white text-center p-2 rounded-3 mb-2">
+                    <p class="text-center fs-5 fw-bolder">Proveedores registrados</p>
+                    <div class="d-flex justify-content-center align-items-center fs-3 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-shop me-1" viewBox="0 0 16 16">
+                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+                        </svg>
+                        <p class="fw-bold m-0">{{ $total }}</p>
+                    </div>
                 </div>
+                <a class="btn btn-warning mb-2" href="{{ url('proveedor/report') }}" title="Generar nuevo reporte">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-journal-plus me-1" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                        <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                    </svg>
+                    Nuevo reporte
+                </a>
             </div>
-            <a class="btn btn-warning mb-2" href="{{ url('proveedor/report') }}">
-                Generar reporte
-            </a>
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Editar Compra</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Cerrar ventana"></button>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
@@ -11,9 +11,13 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-6 mb-2">
+                            <div class="col-4 mb-2">
+                                <label for="id_compra" class="form-label">ID Compra</label>
+                                <input type="text" class="form-control" id="id_compra" name="id_compra" value="{{ old('id_compra_m', $compras->id_compra) }}" readonly required title="ID de la compra">
+                            </div>
+                            <div class="col-4 mb-2">
                                 <label for="fecha_pedido_compra" class="form-label">Fecha de pedido</label>
-                                <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra_m" value="{{ old('fecha_pedido_compra_m', $compras->fecha_pedido_compra) }}" required>
+                                <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra_m" value="{{ old('fecha_pedido_compra_m', $compras->fecha_pedido_compra) }}" required title="Fecha de pedido">
                                 @error('fecha_pedido_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
                                     <p class="text-danger fw-bold">
@@ -21,9 +25,9 @@
                                     </p>
                                 @enderror
                             </div>
-                            <div class="col-6 mb-2">
+                            <div class="col-4 mb-2">
                                 <label for="fecha_entrega_compra" class="form-label">Fecha de entrega</label>
-                                <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra_m" value="{{ old('fecha_entrega_compra_m', $compras->fecha_entrega_compra) }}" required>
+                                <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra_m" value="{{ old('fecha_entrega_compra_m', $compras->fecha_entrega_compra) }}" required title="Fecha de entrega">
                                 @error('fecha_entrega_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
                                     <p class="text-danger fw-bold">
@@ -35,7 +39,7 @@
                         <div class="row">
                             <div class="col-4 mb-2">
                                 <label for="estado_pedido_compra" class="form-label">Estado</label>
-                                <select class="form-select" name="estado_pedido_compra_m" id="estado_pedido_compra" required>
+                                <select class="form-select" name="estado_pedido_compra_m" id="estado_pedido_compra" required title="Estado de la compra">
                                     @if(isset($compras->estado_pedido_compra))
                                         @if($compras->estado_pedido_compra == 'Entregado')
                                             <option value="Entregado" {{ old('estado_pedido_compra_m') == 'Entregado' ? 'selected' : '' }}>Entregado</option>
@@ -61,7 +65,7 @@
                             </div>
                             <div class="col-4 mb-2">
                                 <label for="proveedor_id " class="form-label">Proveedor</label>
-                                <select class="form-select" name="proveedor_id_{{ $compras->id_compra }}" id="proveedor_id" required>
+                                <select class="form-select" name="proveedor_id_{{ $compras->id_compra }}" id="proveedor_id" required title="Proveedor">
                                     @if(isset($compras->proveedor_id))
                                         @foreach ($proveedor as $proveedores)
                                             @if($proveedores->id_proveedor == $compras->proveedor_id)
@@ -75,7 +79,7 @@
                             </div>
                             <div class="col-4 mb-2">
                                 <label for="total_compra" class="form-label">Costo total</label>
-                                <input type="text" class="form-control" id="total_compra_{{ $compras->id_compra }}" name="total_compra_m" value="{{ isset($compras->total_compra)?$compras->total_compra:'' }}" readonly required>
+                                <input type="text" class="form-control" id="total_compra_{{ $compras->id_compra }}" name="total_compra_m" value="{{ isset($compras->total_compra)?$compras->total_compra:'' }}" readonly required title="Costo total de la compra">
                                 @error('total_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
                                     <p class="text-danger fw-bold">
@@ -86,12 +90,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
+                                <hr>
+                                <h5 class="text-center" title="Productos comprados">Detalle de compra</h5>
+                                <hr>
                                 <div class="table-responsive p-2">
-                                    <hr>
-                                    <h5 class="text-center">Detalle de compra</h5>
-                                    <hr>
                                     @if(count($detalleCompra) > 0)
-                                        <table class="table table-striped table-hover table-bordered">
+                                        <table class="table table-striped table-hover">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th>ID Detalle</th>
@@ -142,6 +146,10 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <button type="button" class="btn btn-danger" onclick="eliminarProductoEditar({{ $valor->id_detalle_compra }}, {{ $compras->id_compra }})">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg me-1" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                                                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                                                </svg>
                                                                 Eliminar
                                                             </button>
                                                         </td>
@@ -155,12 +163,12 @@
                             </div>
                             <div class="col-12">
                                 <hr>
-                                <h5 class="text-center">Registrar más productos</h5>
+                                <h5 class="text-center" title="Agregar más productos a la compra">Registrar más productos</h5>
                                 <hr>
                                 <div class="row">
                                     <div class="col-5 mb-2">
                                         <label for="producto_id" class="form-label">Productos</label>
-                                        <select class="form-select" name="producto_id" id="producto_id_{{ $compras->id_compra }}" onchange="agregarPrecioProductoDetalle({{ $compras->id_compra }})">
+                                        <select title="Seleccionar productos" class="form-select" name="producto_id" id="producto_id_{{ $compras->id_compra }}" onchange="agregarPrecioProductoDetalle({{ $compras->id_compra }})">
                                             <option hidden>Seleccione los productos</option>
                                             @foreach ($producto as $productos)
                                                 <option precio="{{ $productos->precio_producto }}" value="{{ $productos->id_producto }}">{{ $productos->nombre_producto }}</option>
@@ -169,39 +177,46 @@
                                     </div>
                                     <div class="col-3 mb-2">
                                         <label for="precio_producto" class="form-label">Precio producto</label>
-                                        <input type="number" class="form-control" id="precio_producto_{{ $compras->id_compra }}" readonly>
+                                        <input type="number" class="form-control" id="precio_producto_{{ $compras->id_compra }}" readonly title="Precio del producto seleccionado">
                                     </div>
                                     <div class="col-2 mb-2">
                                         <label for="cantidad_detalle_compra" class="form-label">Cantidad</label>
-                                        <input type="text" class="form-control" id="nueva_cantidad_detalle_compra_{{ $compras->id_compra }}">
+                                        <input type="text" class="form-control" id="nueva_cantidad_detalle_compra_{{ $compras->id_compra }}" title="Ingresar cantidad de productos">
                                     </div>
                                     <div class="col-2 mb-2 text-white">
                                         <label class="form-label">Agregar producto</label>
-                                        <input type="button" onclick="agregarProductoDetalle({{ $compras->id_compra }})" class="form-control btn btn-success" value="Agregar" required>
+                                        <button type="button" onclick="agregarProductoDetalle({{ $compras->id_compra }})" class="form-control btn btn-success" title="Agregar producto ingresado">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-lg me-1" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                            </svg>
+                                            Agregar
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-9 mb-2">
-                                        <label class="form-label">Lista de productos</label>
-                                        <table class="table table-striped table-hover table-bordered">
-                                            <thead class="table-dark">
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Nombre</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Precio</th>
-                                                    <th>Subtotal</th>
-                                                    <th>Opciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tablaProductosEditar{{ $compras->id_compra }}">
-                                                
-                                            </tbody>
-                                        </table>
+                                        <label class="form-label" title="Tabla de productos a comprar">Lista de productos</label>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nombre</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Precio</th>
+                                                        <th>Subtotal</th>
+                                                        <th>Opciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tablaProductosEditar{{ $compras->id_compra }}">
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="col-3 mb-2">
                                         <label for="total_compra" class="form-label">Costo total</label>
-                                        <input type="text" class="form-control" id="total_compra_{{ $compras->id_compra }}" value="{{ $compras->total_compra }}" readonly required>
+                                        <input type="text" class="form-control" id="total_compra_{{ $compras->id_compra }}" value="{{ $compras->total_compra }}" readonly required title="Costo total de todos los productos (incluye los productos ya comprados)">
                                     </div>
                                 </div>
                             </div>
@@ -209,8 +224,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary actualizar">Modificar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
+                        <button type="submit" class="btn btn-success actualizar" title="Modificar la venta">Modificar</button>
                     </form>
             </div>
         </div>
