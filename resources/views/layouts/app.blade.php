@@ -140,7 +140,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <h5>Mi cuenta</h5>
                         @if(Auth::user())
                             <ul class="list-unstyled">
@@ -175,7 +175,7 @@
                             </ul>
                         @endif
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <h5>Categorías</h5>
                         <ul class="list-unstyled">
                             <li class="py-1">
@@ -195,6 +195,14 @@
                             </li>
                             <li class="py-1">
                                 <a class="link-light text-decoration-none" href="">Medicamentos</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-2">
+                        <h5>Accesibilidad</h5>
+                        <ul class="list-unstyled">
+                            <li class="py-1">
+                                <a class="link-light text-decoration-none" href="{{ asset('files/manual_usuario_alana_petshop.pdf') }}" target="_blank">Manual de usuario</a>
                             </li>
                         </ul>
                     </div>
