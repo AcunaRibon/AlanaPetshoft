@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-4 mb-2">
                                 <label for="fecha_pedido_compra" class="form-label">Fecha de pedido</label>
-                                <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra_m" value="{{ old('fecha_pedido_compra_m', $compras->fecha_pedido_compra) }}" required title="Fecha de pedido">
+                                <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra_m" value="{{ old('fecha_pedido_compra_m', $compras->fecha_pedido_compra) }}" required title="Editar fecha de pedido">
                                 @error('fecha_pedido_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
                                     <p class="text-danger fw-bold">
@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-4 mb-2">
                                 <label for="fecha_entrega_compra" class="form-label">Fecha de entrega</label>
-                                <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra_m" value="{{ old('fecha_entrega_compra_m', $compras->fecha_entrega_compra) }}" required title="Fecha de entrega">
+                                <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra_m" value="{{ old('fecha_entrega_compra_m', $compras->fecha_entrega_compra) }}" required title="Editar fecha de entrega">
                                 @error('fecha_entrega_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
                                     <p class="text-danger fw-bold">
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-4 mb-2">
                                 <label for="estado_pedido_compra" class="form-label">Estado</label>
-                                <select class="form-select" name="estado_pedido_compra_m" id="estado_pedido_compra" required title="Estado de la compra">
+                                <select class="form-select" name="estado_pedido_compra_m" id="estado_pedido_compra" required title="Editar estado de la compra">
                                     @if(isset($compras->estado_pedido_compra))
                                         @if($compras->estado_pedido_compra == 'Entregado')
                                             <option value="Entregado" {{ old('estado_pedido_compra_m') == 'Entregado' ? 'selected' : '' }}>Entregado</option>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-4 mb-2">
                                 <label for="proveedor_id " class="form-label">Proveedor</label>
-                                <select class="form-select" name="proveedor_id_{{ $compras->id_compra }}" id="proveedor_id" required title="Proveedor">
+                                <select class="form-select" name="proveedor_id_{{ $compras->id_compra }}" id="proveedor_id" required title="Editar proveedor">
                                     @if(isset($compras->proveedor_id))
                                         @foreach ($proveedor as $proveedores)
                                             @if($proveedores->id_proveedor == $compras->proveedor_id)
@@ -128,12 +128,12 @@
                                                                     {{ $valor->cantidad_detalle_compra }}
                                                                 </p>
                                                                 <div class="d-flex justify-content-between">
-                                                                    <button type="button" class="btn btn-secondary btn-sm m-1 p-1" onclick="agregarCantidadEditar({{ $valor->cantidad_detalle_compra }}, {{ $valor->precio_producto }}, {{ $valor->id_detalle_compra }}, {{ $compras->id_compra }})">
+                                                                    <button type="button" class="btn btn-secondary btn-sm m-1 p-1" onclick="agregarCantidadEditar({{ $valor->cantidad_detalle_compra }}, {{ $valor->precio_producto }}, {{ $valor->id_detalle_compra }}, {{ $compras->id_compra }})" title="Agregar un producto">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                                                         </svg>
                                                                     </button>
-                                                                    <button type="button" class="btn btn-secondary btn-sm m-1 p-1" onclick="quitarCantidadEditar({{ $valor->cantidad_detalle_compra }}, {{ $valor->precio_producto }}, {{ $valor->id_detalle_compra }}, {{ $compras->id_compra }})">
+                                                                    <button type="button" class="btn btn-secondary btn-sm m-1 p-1" onclick="quitarCantidadEditar({{ $valor->cantidad_detalle_compra }}, {{ $valor->precio_producto }}, {{ $valor->id_detalle_compra }}, {{ $compras->id_compra }})" title="Quitar un producto">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                                                                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                                                                         </svg>
@@ -145,8 +145,8 @@
                                                             {{ $valor->precio_detalle_compra }}
                                                         </td>
                                                         <td class="text-center">
-                                                            <button type="button" class="btn btn-danger" onclick="eliminarProductoEditar({{ $valor->id_detalle_compra }}, {{ $compras->id_compra }})">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg me-1" viewBox="0 0 16 16">
+                                                            <button type="button" class="btn btn-danger" onclick="eliminarProductoEditar({{ $valor->id_detalle_compra }}, {{ $compras->id_compra }})" title="Eliminar todos los productos de la línea">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg me-1" viewBox="0 0 16 16" title="Eliminar producto de la compra">
                                                                     <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
                                                                     <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
                                                                 </svg>

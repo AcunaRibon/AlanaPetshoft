@@ -91,7 +91,7 @@
                                                         @method('PUT')
                                                         <div class="mb-2">
                                                             <label for="nombre_proveedor" class="form-label">Nombre</label>
-                                                            <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor_m" value="{{ old('nombre_proveedor_m', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Nombre">
+                                                            <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor_m" value="{{ old('nombre_proveedor_m', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Editar nombre">
                                                             @error('nombre_proveedor_m')
                                                                 <input value="errorModificar" id="tipoAlerta" hidden>
                                                                 <p class="text-danger fw-bold">
@@ -101,7 +101,7 @@
                                                         </div>
                                                         <div class="mb-2">
                                                             <label for="celular_proveedor" class="form-label">Celular</label>
-                                                            <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor_m" value="{{ old('celular_proveedor_m', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Celular">
+                                                            <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor_m" value="{{ old('celular_proveedor_m', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Editar celular">
                                                             @error('celular_proveedor_m')
                                                                 <input value="errorModificar" id="tipoAlerta" hidden>
                                                                 <p class="text-danger fw-bold">

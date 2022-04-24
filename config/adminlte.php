@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'Alana Petshoft',
-    'title_prefix' => '',
+    'title' => '',
+    'title_prefix' => 'Alana Petshop | ',
     'title_postfix' => '',
 
     /*
@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => 'Alana Petshoft',
+    'logo' => 'Alana Petshop',
     'logo_img' => 'ilustraciones/Alanita.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => '',
     'logo_img_xl_class' => 'brand-image-sm',
-    'logo_img_alt' => 'Alana',
+    'logo_img_alt' => 'Alana Petshop',
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-primary',
+    'usermenu_header_class' => 'bg-secondary',
     'usermenu_image' => false,
     'usermenu_desc' => true,
     'usermenu_profile_url' => true,
@@ -85,8 +85,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -228,8 +228,8 @@ return [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
+            'text'         => 'Buscar',
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -239,8 +239,9 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Buscar',
         ],
+        ['header' => 'Administración'],
         [
             'text'    => 'Usuarios',
             'icon'    => 'fas fa-fw fa-users',
@@ -268,7 +269,7 @@ return [
                 ],
                 [
                     'text'    => 'Estado Venta',
-                    'icon'    => 'fas fa-fw fa-eye',
+                    'icon'    => 'fas fa-fw fa-tag',
                     'url'     => 'estadoVenta',
                 ],
                 [
@@ -278,39 +279,45 @@ return [
                 ],
             ],
             ],
-            [
-                'text'    => 'Producto',
-                'icon'    => 'fas fa-fw fa-store',
-                'submenu' => [
-                    [
-                        'text' => 'Gestión Producto',
-                        'icon'    => 'fas fa-fw fa-info',
-                        'url'  => 'producto',
-                    ],
-                    [
-                        'text'    => 'Tipo Producto',
-                        'icon'    => 'fas fa-fw fa-tags',
-                        'url'     => 'tipoProducto',
-                    ],
+        [
+            'text'    => 'Producto',
+            'icon'    => 'fas fa-fw fa-box',
+            'submenu' => [
+                [
+                    'text' => 'Gestión Producto',
+                    'icon'    => 'fas fa-fw fa-info',
+                    'url'  => 'producto',
+                ],
+                [
+                    'text'    => 'Tipo Producto',
+                    'icon'    => 'fas fa-fw fa-tags',
+                    'url'     => 'tipoProducto',
                 ],
             ],
-            [
-                'text'    => 'Compra',
-                'icon'    => 'fas fa-fw fa-box',
-                'submenu' => [
-                    [
-                        'text' => 'Gestión Compra',
-                        'icon'    => 'fas fa-fw fa-info',
-                        'url'  => 'compra',
-                    ],
-                    [
-                        'text'    => 'Proveedor',
-                        'icon'    => 'fas fa-fw fa-truck',
-                        'url'     => 'proveedor',
-                    ],
+        ],
+        [
+            'text'    => 'Compra',
+            'icon'    => 'fas fa-fw fa-truck',
+            'submenu' => [
+                [
+                    'text' => 'Gestión Compra',
+                    'icon'    => 'fas fa-fw fa-solid fa-box',
+                    'url'  => 'compra',
+                ],
+                [
+                    'text'    => 'Proveedor',
+                    'icon'    => 'fas fa-fw fa-store',
+                    'url'     => 'proveedor',
                 ],
             ],
-        
+        ],
+        ['header' => 'Accesibilidad'],
+        [
+            'text' => 'Manual de usuario',
+            'icon' => 'fas fa-fw fa-eye',
+            'url' => 'files/manual_usuario_admin_empl_alana_petshop.pdf',
+            'target' => '_blank'
+        ]
         
     ],
 
