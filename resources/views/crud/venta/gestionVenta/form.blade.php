@@ -14,23 +14,23 @@
 
             <?php
             if (isset($venta->cliente_id) == false) {
-            ?>
+                ?>
                 <option selected disabled>Selecciona una opción</option>
 
             <?php
-            }
-            ?>
+        }
+        ?>
 
             @foreach($Clientes as $cliente)
             <option <?php
                     if (isset($venta->cliente_id)) {
                         if ($cliente->id_cliente == $venta->cliente_id) {
-                    ?> selected <?php
-                            }
-                        } else if (old('cliente_id') == $cliente->id_cliente) {
+                            ?> selected <?php
+                                }
+                            } else if (old('cliente_id') == $cliente->id_cliente) {
                                 ?> selected <?php
                                         }
-                                            ?> value="{{$cliente->id_cliente}}">{{$cliente->nombres_cliente}} {{$cliente->apellidos_cliente}}</option>
+                                        ?> value="{{$cliente->id_cliente}}">{{$cliente->nombres_cliente}} {{$cliente->apellidos_cliente}}</option>
             @endforeach
         </select>
         @error('cliente_id')
@@ -44,21 +44,21 @@
         <select name="domiciliario_documento" id="domiciliario_documento" class="form-select  @error('domiciliario_documento') is-invalid @enderror" autocomplete="domiciliario_documento" autofocus>
             <?php
             if (isset($venta->domiciliario_documento) == false) {
-            ?>
+                ?>
                 <option selected disabled>Selecciona una opción</option>
             <?php
-            }
-            ?>
+        }
+        ?>
             @foreach($Domiciliarios as $Domiciliario)
             <option <?php
                     if (isset($venta->domiciliario_documento)) {
                         if ($Domiciliario->documento_domiciliario == $venta->domiciliario_documento) {
-                    ?>selected <?php
-                            }
-                        }else if (old('domiciliario_documento') == $Domiciliario->documento_domiciliario) {
-                            ?> selected <?php
+                            ?>selected <?php
+                                }
+                            } else if (old('domiciliario_documento') == $Domiciliario->documento_domiciliario) {
+                                ?> selected <?php
                                     }
-                                        ?> value="{{$Domiciliario->documento_domiciliario }}">{{$Domiciliario->nombres_domiciliario}} {{$Domiciliario->apellidos_domiciliario}}</option>
+                                    ?> value="{{$Domiciliario->documento_domiciliario }}">{{$Domiciliario->nombres_domiciliario}} {{$Domiciliario->apellidos_domiciliario}}</option>
             @endforeach
         </select>
         @error('domiciliario_documento')
@@ -98,21 +98,21 @@
         <select name="estado_venta_id" id="estado_venta_id" class="form-select @error('estado_venta_id') is-invalid @enderror" autocomplete="estado_venta_id" autofocus>
             <?php
             if (isset($venta->estado_venta_id) == false) {
-            ?>
+                ?>
                 <option selected disabled>Selecciona una opción</option>
             <?php
-            }
-            ?>
+        }
+        ?>
             @foreach($estados as $estado)
             <option <?php
                     if (isset($venta->estado_venta_id)) {
                         if ($estado->id_estado_venta == $venta->estado_venta_id) {
-                    ?>selected <?php
-                            }
-                        }else if (old('estado_venta_id') == $estado->id_estado_venta) {
-                            ?> selected <?php
+                            ?>selected <?php
+                                }
+                            } else if (old('estado_venta_id') == $estado->id_estado_venta) {
+                                ?> selected <?php
                                     }
-                                        ?>value="{{$estado->id_estado_venta}}">{{$estado->nombre_estado_venta}}</option>
+                                    ?>value="{{$estado->id_estado_venta}}">{{$estado->nombre_estado_venta}}</option>
             @endforeach
             )
         </select>
@@ -127,46 +127,46 @@
         <select name="calificacion_servicio_venta" id="calificacion_servicio_venta" class="form-control">
             <?php
             if (isset($venta->calificacion_servicio_venta) == false) {
-            ?>
+                ?>
                 <option selected>Selecciona una opción</option>
             <?php
-            }
-            ?>
+        }
+        ?>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta) {
-                    ?> selected <?php
+                            ?> selected <?php
+                                }
                             }
-                        }
-                                ?> value="1"> Pésima</option>
+                            ?> value="1"> Pésima</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 2) {
-                    ?> selected <?php
+                            ?> selected <?php
+                                }
                             }
-                        }
-                                ?> value="2"> mala</option>
+                            ?> value="2"> mala</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 3) {
-                    ?> selected <?php
+                            ?> selected <?php
+                                }
                             }
-                        }
-                                ?> value="3"> regular</option>
+                            ?> value="3"> regular</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 3) {
-                    ?> selected <?php
+                            ?> selected <?php
+                                }
                             }
-                        }
-                                ?> value="4"> buena</option>
+                            ?> value="4"> buena</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 5) {
-                    ?> selected <?php
+                            ?> selected <?php
+                                }
                             }
-                        }
-                                ?> value="5"> excelente</option>
+                            ?> value="5"> excelente</option>
         </select>
     </div>
     <div class="col-3 mb-2">
@@ -198,20 +198,20 @@
                     <th>Opciones</th>
                 </tr>
             </thead>
-            <tbody id="tablaProductos{{isset($venta->id_venta)?$venta->id_venta:0}}">
+            <tbody id="tablaPP{{isset($venta->id_venta)?$venta->id_venta:0}}">
 
 
                 <?php
                 if (isset($venta->id_venta)) {
 
 
-                ?>
+                    ?>
                     @foreach($detalles as $key => $detalle)
                     <?php
                     if ($venta->id_venta == $detalle->venta_id) {
 
 
-                    ?>
+                        ?>
                         <tr id="tr{{isset($venta->id_venta) ? $venta->id_venta : 0}}_{{$detalle->producto_id}}">
                             <td>
                                 <input type="hidden" name="productos_id[]" value="{{$detalle->producto_id}}" />
@@ -235,12 +235,12 @@
                             </td>
                         </tr>
                     <?php
-                    }
-                    ?>
-                    @endforeach
-                <?php
                 }
                 ?>
+                    @endforeach
+                <?php
+            }
+            ?>
             </tbody>
         </table>
     </div>

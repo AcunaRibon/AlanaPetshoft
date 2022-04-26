@@ -304,14 +304,18 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.css"/>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 @stop
 
 @section('js')
+
+
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js" defer></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('js/tablas.js') }}" defer></script>
+<script src="{{ asset('js/ventas.js') }}" defer></script>
 
 <input value="la venta" id="mensajeAlerta" hidden>
 <input value="Venta" id="mensajeAlerta1" hidden>
