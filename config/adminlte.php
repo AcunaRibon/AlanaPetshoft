@@ -259,28 +259,7 @@ return [
             ],
         ],
         [
-            'text'    => 'Venta',
-            'icon'    => 'fas fa-fw fa-coins',
-            'submenu' => [
-                [
-                    'text' => 'Domiciliario',
-                    'icon'    => 'fas fa-fw fa-motorcycle',
-                    'url'  => 'domiciliario',
-                ],
-                [
-                    'text'    => 'Estado Venta',
-                    'icon'    => 'fas fa-fw fa-tag',
-                    'url'     => 'estadoVenta',
-                ],
-                [
-                    'text' => 'Gestión Venta',
-                    'icon'    => 'fas fa-fw fa-info',
-                    'url'  => 'venta',
-                ],
-            ],
-            ],
-        [
-            'text'    => 'Producto',
+            'text'    => 'Productos',
             'icon'    => 'fas fa-fw fa-box',
             'submenu' => [
                 [
@@ -296,12 +275,33 @@ return [
             ],
         ],
         [
-            'text'    => 'Compra',
+            'text'    => 'Ventas',
+            'icon'    => 'fas fa-fw fa-coins',
+            'submenu' => [
+                [
+                    'text' => 'Gestión Venta',
+                    'icon'    => 'fas fa-fw fa-info',
+                    'url'  => 'venta',
+                ],
+                [
+                    'text' => 'Domiciliario',
+                    'icon'    => 'fas fa-fw fa-motorcycle',
+                    'url'  => 'domiciliario',
+                ],
+                [
+                    'text'    => 'Estado Venta',
+                    'icon'    => 'fas fa-fw fa-tag',
+                    'url'     => 'estadoVenta',
+                ]
+            ],
+        ],
+        [
+            'text'    => 'Compras',
             'icon'    => 'fas fa-fw fa-truck',
             'submenu' => [
                 [
                     'text' => 'Gestión Compra',
-                    'icon'    => 'fas fa-fw fa-solid fa-box',
+                    'icon'    => 'fas fa-fw fa-solid fa-info',
                     'url'  => 'compra',
                 ],
                 [
@@ -314,7 +314,7 @@ return [
         ['header' => 'Accesibilidad'],
         [
             'text' => 'Manual de usuario',
-            'icon' => 'fas fa-fw fa-eye',
+            'icon' => 'fas fa-fw fa-file',
             'url' => 'files/manual_usuario_admin_empl_alana_petshop.pdf',
             'target' => '_blank'
         ]

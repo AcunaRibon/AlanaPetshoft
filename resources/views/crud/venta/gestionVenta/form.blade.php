@@ -55,7 +55,7 @@
                         if ($Domiciliario->documento_domiciliario == $venta->domiciliario_documento) {
                     ?>selected <?php
                             }
-                        }else if (old('domiciliario_documento') == $cliente->id_cliente) {
+                        }else if (old('domiciliario_documento') == $Domiciliario->documento_domiciliario) {
                             ?> selected <?php
                                     }
                                         ?> value="{{$Domiciliario->documento_domiciliario }}">{{$Domiciliario->nombres_domiciliario}} {{$Domiciliario->apellidos_domiciliario}}</option>
@@ -109,7 +109,7 @@
                         if ($estado->id_estado_venta == $venta->estado_venta_id) {
                     ?>selected <?php
                             }
-                        }else if (old('domiciliario_documento') == $cliente->id_cliente) {
+                        }else if (old('estado_venta_id') == $estado->id_estado_venta) {
                             ?> selected <?php
                                     }
                                         ?>value="{{$estado->id_estado_venta}}">{{$estado->nombre_estado_venta}}</option>
