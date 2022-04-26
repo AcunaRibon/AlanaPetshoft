@@ -126,7 +126,7 @@
                                     <div class="row">
                                         <div class="col-9 mb-2 table-responsive">
                                             <label class="form-label" title="Tabla de productos a comprar">Lista de productos</label>
-                                            <table class="table table-striped table-hover table-bordered">
+                                            <table class="table table-striped table-hover">
                                                 <thead class="table-dark">
                                                     <tr>
                                                         <th>ID</th>

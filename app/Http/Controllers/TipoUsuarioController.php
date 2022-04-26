@@ -5,72 +5,82 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TipoUsuario;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class TipoUsuarioController extends Controller
 {
-    public function index(){
 
-        $tipou['tipo_usuario']=TipoUsuario::paginate(10);
-        return view('tipoUsuario.index',$tipou);
+    public function index()
+    {
+        $total = TipoUsuario::select("tipo_usuario.*")->count();
+        $tipo_usuario=TipoUsuario::paginate(10);
+        return view('crud.usuario.tipoUsuario.index', compact('tipo_usuario', 'total'))->with('status', 'listado');
+    }
+
+    public function create()
+    {
+        return view('tipoUsuario.index');
+    }
+
+    public function edit($id)
+    {
+        return view('tipoUsuario.form');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $input = $request->all();
+
+        try
+        {
+            DB::beginTransaction();
+
+            $tipou = TipoUsuario::findOrFail($id);
+            $tipou -> nombre_tipo_usuario = $input["nombre_tipo_usuario"];
+            $tipou -> update();
+
+            DB::commit();
+
+            return redirect('tipoUsuario')->with('status', 'actualizado');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect('/tipoUsuario')->with('status', $e->getMessage());
+        }
+    }
+
+    public function show()
+    {
+        return view('tipoUsuario.form');
     }
 
 
-public function create(){
-return view('tipoUsuario.index');
-}
+    public function store(Request $request)
+    {
+        $input = request()->all();
 
-public function edit($id){
+        try {
+            DB::beginTransaction();
 
-return view('tipoUsuario.form');
-}
+            TipoUsuario::create([
+                "nombre_tipo_usuario" => $input['nombre_tipo_usuario']
+            ]);
 
-public function update(Request $request, $id){
+            DB::commit();
 
-$tipou=request()->except(['_token','_method']);
-TipoUsuario::where('id_tipo_usuario','=',$id)->update($tipou);
-
-// $usuarios=User::findOrFail($id);
-return redirect('tipoUsuario');
-}
-
-public function show(){
-return view('tipoUsuario.form');
-}
-
-
-public function store(Request $request){
-
-$input = request()->all();
+            return redirect("/tipoUsuario")->with('status', 'registrado');
+        } 
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            return redirect("/tipoUsuario")->with('status', $e->getMessage());
+        }
 
 
-try {
+    } 
 
-    DB::beginTransaction();
+    public function destroy($id)
+    {
 
-    $tipou = TipoUsuario::create([
-        "id_tipo_usuario" => $input['id_tipo_usuario'],
-        "nombre_tipo_usuario" => $input['nombre_tipo_usuario']
-     
-    ]);
-
-
-    DB::commit();
-    return redirect("/tipoUsuario")->with('status', '1');;
-} catch (\Exception $e) {
-    DB::rollBack();
-    return redirect("/tipoUsuario")->with('status', $e->getMessage());
-}
-
-
-} 
-
-public function destroy($id){
-
-User::destroy($id);
-
-return redirect('tipoUsuario');
-}
-
-
+    }
 }

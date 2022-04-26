@@ -13,42 +13,56 @@ use Maatwebsite\Excel\Facades\Excel;
 class UserController extends Controller
 {
 
-    public function index(){
-
+    public function index()
+    {
         $usuarios['users']=User::all();
         $total = User::count();
         return view('crud.usuario.usuario.index',$usuarios, compact('usuarios', 'total'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('usuario.index');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
 
         return view('usuario.form');
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
+        try
+        {
+            DB::beginTransaction();
 
-        $usuarios=request()->except(['_token','_method']);
-        User::where('id','=',$id)->update($usuarios);
+            $usuarios=request()->except(['_token','_method']);
+            User::where('id','=',$id)->update($usuarios);
 
-        // $usuarios=User::findOrFail($id);
-        return redirect('usuario');
+            DB::commit();
+
+            return redirect('/usuario')->with('status', 'actualizado');
+        }
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            return redirect("/usuario")->with('status', $e->getMessage());
+        }
     }
 
-    public function show(){
+    public function show()
+    {
         return view('usuario.form');
     }
     
 
-    public function store(Request $request){
-        
+    public function store(Request $request)
+    {
         $input = request()->all();
 
-
-        try {
+        try 
+        {
 
             DB::beginTransaction();
 
@@ -65,28 +79,24 @@ class UserController extends Controller
                 
 
             ]);
-           
 
             DB::commit();
-            return redirect("/usuario")->with('status', '1');;
-        } catch (\Exception $e) {
+            return redirect("/usuario")->with('status', 'registrado');;
+        } 
+        catch (\Exception $e) 
+        {
             DB::rollBack();
             return redirect("/usuario")->with('status', $e->getMessage());
         }
-
-        
     } 
 
-    public function destroy($id){
-       
-        User::destroy($id);
+    public function destroy($id)
+    {
 
-        return redirect('usuario');
     }
 
-    public function report(){
+    public function report()
+    {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
-    
-    
 }

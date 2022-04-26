@@ -3,7 +3,7 @@
 const swalA = Swal.mixin({
     customClass: {
         confirmButton: 'btn btn-primary mx-1',
-        cancelButton: 'btn btn-dark mx-1'
+        cancelButton: 'btn btn-secondary mx-1'
     },
     buttonsStyling: false
 })
@@ -37,7 +37,7 @@ $('.actualizar').on('click', function(e){
     var form = event.target.form;
 
     swalA.fire({
-        title: '¿Deseas actualizar ' + mensaje + '?',
+        title: '¿Deseas modificar ' + mensaje + '?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Sí',

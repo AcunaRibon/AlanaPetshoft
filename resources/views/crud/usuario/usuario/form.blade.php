@@ -1,31 +1,36 @@
-    <div class="form-group mb-2">
-        <label for="">Nombre:</label>
+<div class="row">
+    <div class="form-group mb-2 col-4">
+        <label for="">Nombres:</label>
         <input type="text" name="name" id="name" class="form-control" value="{{isset($usuario->name)?$usuario->name:''}}">
     </div>
-    <div class="form-group mb-2">
-        <label for="">Apellido:</label>
+    <div class="form-group mb-2 col-4">
+        <label for="">Apellidos:</label>
         <input type="text" name="last_name" id="last_name" class="form-control" value="{{isset($usuario->last_name)?$usuario->last_name:''}}">
     </div>
-    <div class="form-group mb-2">
-        <label for="">Email:</label>
+    <div class="form-group mb-2 col-4">
+        <label for="">Correo electrónico:</label>
         <input type="email" name="email" id="email" class="form-control" value="{{isset($usuario->email)?$usuario->email:''}}">
     </div>
-    <div class="form-group mb-2">
+    <div class="form-group mb-2 col-4">
         <label for="">Celular:</label>
-        <input type="text" name="cellphone" id="cellphone" class="form-control" value="{{isset($usuario->cellphone)?$usuario->cellphone:''}}">
+        <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{isset($usuario->cellphone)?$usuario->cellphone:''}}">
     </div>
-    <div class="form-group mb-2">
+    <div class="form-group mb-2 col-4">
         <label for="">Contraseña:</label>
         <input type="password" name="password" id="password" class="form-control" value="{{isset($usuario->password)?$usuario->password:''}}">
     </div>
-    <div class="form-group mb-2">
+    <div class="form-group mb-2 col-4">
+        <label for="">Confirmar contraseña:</label>
+        <input type="password" name="password" id="password" class="form-control" value="{{isset($usuario->password)?$usuario->password:''}}">
+    </div>
+    <div class="form-group mb-2 col-6">
         <label for="">Dirección:</label>
         <input type="text" name="address" id="address" class="form-control" value="{{isset($usuario->address)?$usuario->address:''}}">
     </div>
    
-    <div class="form-group mb-2">
+    <div class="form-group mb-2 col-3">
         <label for="">Estado: </label>
-        <select name="user_status" id="user_status" class="form-control">
+        <select name="user_status" id="user_status" class="form-select">
             <?php
             if (isset($usuario->user_status) == false) {
             ?>
@@ -50,9 +55,9 @@
         </select>
     </div>
 
-    <div class="form-group mb-2">
+    <div class="form-group mb-2 col-3">
         <label for="">Tipo Usuario: </label>
-        <select name="tipo_usuario_id" id="tipo_usuario_id" class="form-control">
+        <select name="tipo_usuario_id" id="tipo_usuario_id" class="form-select">
             <?php
             if (isset($usuario->tipo_usuario_id) == false) {
             ?>
@@ -83,7 +88,4 @@
                                     ?> value="3"> Cliente</option>
         </select>
     </div>
-
-  
-   
-   
+</div>

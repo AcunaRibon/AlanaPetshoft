@@ -22,42 +22,35 @@ class CompraController extends Controller
      */
     public function index()
     {
-        try
-        {
-            $producto = Producto::all();
-            $proveedor = Proveedor::all();
+        $producto = Producto::all();
+        $proveedor = Proveedor::all();
 
-            $compra = Compra::select("compra.*", "proveedor.nombre_proveedor")
-                ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
-                ->where("compra.estado_pedido_compra", "!=", "Cancelado")
-                ->get();
+        $compra = Compra::select("compra.*", "proveedor.nombre_proveedor")
+            ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
+            ->where("compra.estado_pedido_compra", "!=", "Cancelado")
+            ->get();
 
-            $compraCancelada = Compra::select("compra.*", "proveedor.nombre_proveedor")
-                ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
-                ->where("compra.estado_pedido_compra", "like", "Cancelado")
-                ->get(); 
-            
-            $detalleCompra = DetalleCompra::select("detalle_compra.*", "producto.nombre_producto", "producto.precio_producto")
-                ->join("compra", "compra.id_compra", "=", "detalle_compra.compra_id")
-                ->join("producto", "producto.id_producto", "=", "detalle_compra.producto_id")
-                ->get();
+        $compraCancelada = Compra::select("compra.*", "proveedor.nombre_proveedor")
+            ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
+            ->where("compra.estado_pedido_compra", "like", "Cancelado")
+            ->get(); 
+        
+        $detalleCompra = DetalleCompra::select("detalle_compra.*", "producto.nombre_producto", "producto.precio_producto")
+            ->join("compra", "compra.id_compra", "=", "detalle_compra.compra_id")
+            ->join("producto", "producto.id_producto", "=", "detalle_compra.producto_id")
+            ->get();
 
-            $totalCompra = Compra::select("compra.*", "proveedor.nombre_proveedor")
-                ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
-                ->where("compra.estado_pedido_compra", "!=", "Cancelado")
-                ->count();
+        $totalCompra = Compra::select("compra.*", "proveedor.nombre_proveedor")
+            ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
+            ->where("compra.estado_pedido_compra", "!=", "Cancelado")
+            ->count();
 
-            $totalCompraCancelada = Compra::select("compra.*", "proveedor.nombre_proveedor")
-                ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
-                ->where("compra.estado_pedido_compra", "like", "Cancelado")
-                ->count(); 
+        $totalCompraCancelada = Compra::select("compra.*", "proveedor.nombre_proveedor")
+            ->join("proveedor", "compra.proveedor_id", "=", "proveedor.id_proveedor")
+            ->where("compra.estado_pedido_compra", "like", "Cancelado")
+            ->count(); 
 
-            return view('crud.compra.gestionCompra.index', compact('producto', 'compra', 'proveedor', 'detalleCompra', 'totalCompra', 'compraCancelada', 'totalCompraCancelada'))->with('status', 'listado');
-        }
-        catch(\Exception $e)
-        {
-            return redirect('/compra')->with('status', $e->getMessage());
-        }
+        return view('crud.compra.gestionCompra.index', compact('producto', 'compra', 'proveedor', 'detalleCompra', 'totalCompra', 'compraCancelada', 'totalCompraCancelada'));
     }
 
     /**
