@@ -1,4 +1,4 @@
-function colocar_precio(e){
+ function colocar_precio(e){
     let precio =$("#producto_id"+e+" option:selected").attr("precio");
     $("#precio_detalle_venta"+e).val(precio);
 
@@ -30,46 +30,52 @@ function agregar_producto(k){
             
           
         }
+    
+        if(e==true){
+            $('#tablaPP'+k).append( `
 
-       
-    if(e==true){
-        $("#tablaProductos"+k).append( `
-            <tr id="tr${k}_${producto_id}">
-                <td>
-                <input type="hidden" name="productos_id[]" value="${producto_id}"/>
-                <input type="hidden" name="cantidades[]" value="${cantidad}"/>
 
-                ${producto_id}
-                </td>
-                <td>
-                ${producto_nom}
-                </td>
-                <td id="cd${k}_${producto_id}">${cantidad}</td>
-                <td>${precio}</td>
-                <td id="st${k}_${producto_id}">${parseInt(cantidad) * parseInt(precio)}</td>
-                <td>
-                <button type="button" class="btn btn-danger" onclick="eliminar_producto(${producto_id},${parseInt(cantidad) * parseInt(precio)},${k})">
-                x
-                </button>
-                </td>
-                
-
-            </tr>
-        `);
-        let total = $("#total_venta"+k).val() || 0;
-        $("#total_venta"+k).val(parseInt(total)+ parseInt(cantidad) * parseInt(precio));
-    }else{
-        let st =parseInt(cantidad) * parseInt(precio);
+                <tr id="tr${k}_${producto_id}">
+                    <td>
+                    <input type="hidden" name="productos_id[]" value="${producto_id}"/>
+                    <input type="hidden" name="cantidades[]" value="${cantidad}"/>
+    
+                    ${producto_id}
+                    </td>
+                    <td>
+                    ${producto_nom}
+                    </td>
+                    <td id="cd${k}_${producto_id}">${cantidad}</td>
+                    <td>${precio}</td>
+                    <td id="st${k}_${producto_id}">${parseInt(cantidad) * parseInt(precio)}</td>
+                    <td>
+                    <button type="button" class="btn btn-danger" onclick="eliminar_producto(${producto_id},${parseInt(cantidad) * parseInt(precio)},${k})">
+                    x
+                    </button>
+                    </td>
+                    
+    
+                </tr>
+            `);
             let total = $("#total_venta"+k).val() || 0;
-            $("#total_venta"+k).val((parseInt(total)-parseInt(document.getElementById('st'+k+'_'+producto_id).innerHTML))+ st);
+            $("#total_venta"+k).val(parseInt(total)+ parseInt(cantidad) * parseInt(precio));
 
-            $("#cantidadDetalle"+k+"_"+producto_id).val(cantidad);
+           
+        }else{
+            console.log("HP2");
+            let st =parseInt(cantidad) * parseInt(precio);
+                let total = $("#total_venta"+k).val() || 0;
+                $("#total_venta"+k).val((parseInt(total)-parseInt(document.getElementById('st'+k+'_'+producto_id).innerHTML))+ st);
+    
+                $("#cantidadDetalle"+k+"_"+producto_id).val(cantidad);
+                
+            document.getElementById('cd'+k+'_'+producto_id).innerHTML=cantidad;
+            document.getElementById('st'+k+'_'+producto_id).innerHTML=st;
             
-        document.getElementById('cd'+k+'_'+producto_id).innerHTML=cantidad;
-        document.getElementById('st'+k+'_'+producto_id).innerHTML=st;
-        
-        
-    }
+            
+        }
+       
+    
        
     }
 }
