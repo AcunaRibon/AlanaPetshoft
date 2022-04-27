@@ -189,32 +189,45 @@
                             <td>{{ $compras -> nombre_proveedor}}</td>
                             <td>
                                 <div class='d-flex justify-content-evenly'>
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ver-{{ $compras -> id_compra }}" title="Ver compra">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye me-1" viewBox="0 0 16 16">
-                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                                        </svg>
-                                        Ver
-                                    </button>
-                                    @include('crud.compra.gestionCompra.ver')
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar-{{ $compras -> id_compra }}" title="Editar compra">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pen me-1" viewBox="0 0 16 16">
-                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                        </svg>
-                                        Editar
-                                    </button>
-                                    @include('crud.compra.gestionCompra.editar')
-                                    <form action="{{ route('compra.destroy', $compras->id_compra) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger cancelar" title="Cancelar compra">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg me-1" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-                                                <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-                                            </svg>
-                                            Cancelar
+                                    <div class="dropdown">
+                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Acciones disponibles">
+                                            Acciones
                                         </button>
-                                    </form>
+                                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <button class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#ver-{{ $compras -> id_compra }}" title="Ver compra">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye me-1" viewBox="0 0 16 16">
+                                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                    </svg>
+                                                    Ver
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#editar-{{ $compras -> id_compra }}" title="Editar compra">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pen me-1" viewBox="0 0 16 16">
+                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                    </svg>
+                                                    Editar
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <form action="{{ route('compra.destroy', $compras->id_compra) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="dropdown-item cancelar fw-bold" type="submit" title="Cancelar compra">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg me-1" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                                            <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                                        </svg>
+                                                        Cancelar
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    @include('crud.compra.gestionCompra.ver')
+                                    @include('crud.compra.gestionCompra.editar')
                                 </div>
                             </td>
                         </tr>
@@ -234,14 +247,86 @@
                         <p class="fw-bold m-0">{{ $totalCompra }} </p>
                     </div>
                 </div>
-                <a class="btn btn-warning mb-2" href="{{ url('compra/report') }}" title="Generar nuevo reporte de compras">
+                <button class="btn btn-warning mb-2" title="Generar nuevo reporte de compras" data-bs-toggle="modal" data-bs-target="#informe">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-journal-plus me-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
                         <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
                         <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
                     </svg>
                     Nuevo reporte
-                </a>
+                </button>
+                <div class="modal fade" id="informe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Generar reporte</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Cerrar ventana"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('compra.report') }}" method="get">
+                                    @csrf
+                                    <div class="row">
+                                        <p class="mb-4">Complete el siguiente formulario para la generación del reporte:</p>
+                                        <div class="col-6 mb-2">
+                                            <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
+                                            <input type="date" class="form-control" name="fecha_inicio" required title="Ingresar fecha de inicio" value="{{ old('fecha_inicio') }}">
+                                            @error('fecha_inicio')
+                                                <input value="errorInforme" id="tipoAlerta" hidden>
+                                                <p class="text-danger fw-bold">
+                                                    * {{$message}}
+                                                </p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-6 mb-2">
+                                            <label for="fecha_fin" class="form-label">Fecha de fin</label>
+                                            <input type="date" class="form-control" name="fecha_fin" required title="Ingresar fecha de fin" value="{{ old('fecha_fin') }}">
+                                            @error('fecha_fin')
+                                                <input value="errorInforme" id="tipoAlerta" hidden>
+                                                <p class="text-danger fw-bold">
+                                                    * {{$message}}
+                                                </p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-6 mb-2">
+                                            <label for="columna" class="form-label">Ordenar por columna:</label>
+                                            <select name="columna" class="form-select" title="Seleccionar columna para ordenar los registros">
+                                                <option value="compra.id_compra" {{ old('columna') == 'compra.id_compra' ? 'selected' : '' }}>ID de la compra</option>
+                                                <option value="compra.total_compra" {{ old('columna') == 'compra.total_compra' ? 'selected' : '' }}>Costo total</option>
+                                                <option value="compra.fecha_pedido_compra" {{ old('columna') == 'compra.fecha_pedido_compra' ? 'selected' : '' }}>Fecha de pedido</option>
+                                                <option value="compra.fecha_entrega_compra" {{ old('columna') == 'compra.fecha_entrega_compra' ? 'selected' : '' }}>Fecha de entrega</option>
+                                                <option value="compra.estado_pedido_compra" {{ old('columna') == 'compra.estado_pedido_compra' ? 'selected' : '' }}>Estado de la compra</option>
+                                                <option value="compra.proveedor_id" {{ old('columna') == 'compra.proveedor_id' ? 'selected' : '' }}>Proveedor</option>
+                                            </select>
+                                            @error('columna')
+                                                <input value="errorInforme" id="tipoAlerta" hidden>
+                                                <p class="text-danger fw-bold">
+                                                    * {{$message}}
+                                                </p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-6 mb-2">
+                                            <label for="orden" class="form-label">Orden de los registros:</label>
+                                            <select name="orden" class="form-select" title="Seleccionar el orden en el que se van a mostrar los registros">
+                                                <option value="asc" {{ old('orden') == 'asc' ? 'selected' : '' }}>Ascendente</option>
+                                                <option value="desc" {{ old('orden') == 'desc' ? 'selected' : '' }}>Descendente</option>
+                                            </select>
+                                            @error('orden')
+                                                <input value="errorInforme" id="tipoAlerta" hidden>
+                                                <p class="text-danger fw-bold">
+                                                    * {{$message}}
+                                                </p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
+                                <button type="submit" class="btn btn-success reporte" title="Generar y descargar el reporte">Generar reporte</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="d-flex d-inline-flex flex-column justify-content-center align-items-center p-2">
                 <div class="bg-dark text-white text-center p-2 rounded-3 mb-2">
@@ -293,12 +378,30 @@
                                         <td>{{ $compras -> nombre_proveedor}}</td>
                                         <td>
                                             <div class='d-flex justify-content-evenly'>
-                                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ver-{{ $compras -> id_compra }}" title="Ver compra">
-                                                    Ver
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Acciones disponibles">
+                                                    Acciones
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#restablecer-{{ $compras -> id_compra }}" title="Restablecer compra">
-                                                    Restablecer
-                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                                                    <li>
+                                                        <button class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#ver-{{ $compras -> id_compra }}" title="Ver compra">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye me-1" viewBox="0 0 16 16">
+                                                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                            </svg>
+                                                            Ver
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#restablecer-{{ $compras -> id_compra }}" title="Restablecer compra">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-counterclockwise me-1" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                                                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                                                        </svg>
+                                                            Restablecer
+                                                        </button>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </td>
                                     </tr>

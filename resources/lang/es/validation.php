@@ -161,6 +161,10 @@ return [
         'estado_pedido_compra_m' => 'estado',
         'total_compra_m' => 'costo total',
         'producto_id' => 'producto',
+        'fecha_inicio' => 'fecha de inicio',
+        'fecha_fin' => 'fecha de fin',
+        'columna' => 'ordenar por columna',
+        'orden' => 'orden de los registros',
         'cantidad_detalle_compra' => 'cantidad'
     ],
 

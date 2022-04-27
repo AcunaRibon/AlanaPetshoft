@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Proveedor;
 use Illuminate\Support\Facades\DB;
 use App\Exports\ProveedorExport;
+use App\Http\Requests\ValidarReporteProveedor;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProveedorController extends Controller
@@ -128,8 +129,8 @@ class ProveedorController extends Controller
         */
     }
 
-    public function report()
+    public function report(ValidarReporteProveedor $request)
     {
-        return Excel::download(new ProveedorExport, 'proveedor.xlsx');
+        return Excel::download(new ProveedorExport($request->fecha_inicio, $request->fecha_fin, $request->columna, $request->orden), 'proveedor.xlsx');
     }
 }

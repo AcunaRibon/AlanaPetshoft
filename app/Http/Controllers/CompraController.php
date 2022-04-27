@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ValidarRegistrarCompra;
 use App\Http\Requests\ValidarModificarCompra;
 use App\Exports\CompraExport;
+use App\Http\Requests\ValidarReporteCompra;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CompraController extends Controller
@@ -426,8 +427,8 @@ class CompraController extends Controller
         }
     }
 
-    public function report()
+    public function report(ValidarReporteCompra $request)
     {
-        return Excel::download(new CompraExport, 'compra.xlsx');
+        return Excel::download(new CompraExport($request->fecha_inicio, $request->fecha_fin, $request->columna, $request->orden), 'compra.xlsx');
     }
 }

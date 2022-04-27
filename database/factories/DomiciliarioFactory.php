@@ -21,7 +21,9 @@ class DomiciliarioFactory extends Factory
             'nombres_domiciliario' => $this->faker->name(),
             'apellidos_domiciliario' => $this->faker->lastName(),
             'celular_domiciliario' => $this->faker->unique(true)->numberBetween(1000000000, 9999999999),
-            'estado_domiciliario' => $this->faker->boolean()
+            'estado_domiciliario' => $this->faker->boolean(),
+            'created_at' => $this->faker->date(),
+            'updated_at' => $this->faker->date()
         ];
     }
 }

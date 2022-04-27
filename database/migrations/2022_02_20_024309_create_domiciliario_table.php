@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('apellidos_domiciliario', 30);
             $table->string('celular_domiciliario', 10)->unique();
             $table->boolean('estado_domiciliario')->default(1);
+            $table->timestamps();
         });
     }
 

@@ -50,6 +50,24 @@ $('.actualizar').on('click', function(e){
     })
 });
 
+$('.reporte').on('click', function(e){
+    e.preventDefault();
+    var form = event.target.form;
+
+    swalA.fire({
+        title: '¿Deseas generar el reporte?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    })
+});
+
 $('.cancelar').on('click', function(e){
     e.preventDefault();
     var form = event.target.form;
@@ -126,6 +144,14 @@ if(tipoAlerta == 'errorModificar')
 {
     swalA.fire(
         'Error al modificar ' + mensaje,
+        'Por favor revise si ingresó la información solicitada de forma correcta.',
+        'error'
+    )
+}
+if(tipoAlerta == 'errorInforme')
+{
+    swalA.fire(
+        'Error al generar el reporte',
         'Por favor revise si ingresó la información solicitada de forma correcta.',
         'error'
     )

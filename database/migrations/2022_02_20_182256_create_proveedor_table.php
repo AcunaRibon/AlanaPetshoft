@@ -17,6 +17,7 @@ return new class extends Migration
             $table->smallIncrements('id_proveedor');
             $table->string('nombre_proveedor', 30)->unique();
             $table->string('celular_proveedor', 10)->unique();
+            $table->timestamps();
         });
     }
 

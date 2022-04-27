@@ -18,7 +18,9 @@ class ProveedorFactory extends Factory
     {
         return [
             'nombre_proveedor' => $this->faker->unique()->name(),
-            'celular_proveedor' => $this->faker->unique()->numberBetween(1000000000, 9999999999)
+            'celular_proveedor' => $this->faker->unique()->numberBetween(1000000000, 9999999999),
+            'created_at' => $this->faker->date(),
+            'updated_at' => $this->faker->date()
         ];
     }
 }
