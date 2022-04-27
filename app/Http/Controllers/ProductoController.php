@@ -9,6 +9,7 @@ use App\Models\ImagenProducto;
 use App\Models\TipoProducto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Exports\ProductoExport;
 
 class ProductoController extends Controller
@@ -46,6 +47,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
 
+        $this->validator($request->all())->validate();
         $input = request()->all();
 
 
@@ -65,13 +67,23 @@ class ProductoController extends Controller
             
 
             if ($request->hasFile('url_imagen_producto')) {
-                $input['url_imagen_producto'] = $request->file('url_imagen_producto')->store('uploads', 'public');
-            }
 
-            ImagenProducto::create([
-                'url_imagen_producto' => $input['url_imagen_producto'],
-                'producto_id' =>  $producto
-            ]);
+              $imagenes =$request->file('url_imagen_producto');
+              foreach($imagenes as $imagen){
+                $Nombre=$imagen->getClientOriginalName();
+                $ruta = public_path().'/imagenes';
+                $imagen->move($ruta,$Nombre);
+
+                ImagenProducto::create([
+                    'url_imagen_producto' => $Nombre,
+                    'producto_id' =>  $producto
+                ]);
+                
+            }
+           
+           
+            }
+            
 
             DB::commit();
             return redirect("/producto")->with('status', '1');;
@@ -96,12 +108,22 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validator($request->all())->validate();
         $input = request()->all();
             
         try {
             DB::beginTransaction();
             
             
+           
+            
+            Producto::where('id_producto', '=', $id)->update([
+                "nombre_producto" => $input['nombre_producto'],
+                "precio_producto" => $input['precio_producto'],
+                "estado_producto" => $input['estado_producto'],
+                "tipo_producto_id" => $input['tipo_producto_id']
+            ]);
+
             if ($request->hasFile('url_imagen_producto')) {
                 $imgs = DB::table('imagen_producto')
                 ->where('producto_id', '=', $id)
@@ -116,13 +138,6 @@ class ProductoController extends Controller
                     'url_imagen_producto' => $input['url_imagen_producto']
                 ]);
             }
-            
-            Producto::where('id_producto', '=', $id)->update([
-                "nombre_producto" => $input['nombre_producto'],
-                "precio_producto" => $input['precio_producto'],
-                "estado_producto" => $input['estado_producto'],
-                "tipo_producto_id" => $input['tipo_producto_id']
-            ]);
                 
             DB::commit();
             return redirect("/producto")->with('status', '1');
@@ -154,5 +169,14 @@ class ProductoController extends Controller
             DB::rollBack();
             return redirect("/producto")->with('status', $e->getMessage());
         }
+    }
+
+    public function validator( array $input){
+        return Validator::make($input, [
+         'nombre_producto' => ['required', 'max:26'],
+        'precio_producto'=>['required', 'int','max:999999','min:50'],
+         'url_imagen_producto.*'=>['image','mimes:jpeg,png,jpg,gif,svg','max:2048']
+        
+    ]);
     }
 }
