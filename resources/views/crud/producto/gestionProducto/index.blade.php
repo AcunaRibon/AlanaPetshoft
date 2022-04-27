@@ -92,6 +92,47 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#ver_{{$producto->id_producto}}">
+                                            ver
+                                        </button>
+                                        <div class="modal fade" id="ver_{{$producto-> id_producto}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header ">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-ligth table-striped table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Imagenes</th>
+                                                                    <th>Acciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($imagenes as $imagen)
+                                                                <?php
+                                                                if ($producto->id_producto == $imagen->producto_id) {
+                                                                    ?>
+                                                                    <tr>
+                                                                        <td><img src="{{asset('../storage').'/app/public/'.$imagen->url_imagen_producto}}"  width="100px" height="100px"></td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <form action="{{ route('producto.destroy', $producto-> id_producto)}}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -118,9 +159,9 @@
                     <p class="fw-bold m-0">{{$Existencia}} </p>
                 </div>
             </div>
-            
-            <a href="{{route('producto.export')}}"  class="btn btn-warning">Generar reporte</a>
-            
+
+            <a href="{{route('producto.export')}}" class="btn btn-warning">Generar reporte</a>
+
             <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#productosInactivos">
                 productos cancelados
             </button>
@@ -181,40 +222,40 @@
 
         </div>
     </div>
-@endsection
+    @endsection
 
-@section('css')
-<link rel="dns-prefetch" href="//fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    @section('css')
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.css"/>
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-@stop
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.css" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stop
 
-@section('js')
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js" defer></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('js/tablas.js') }}" defer></script>
+    @section('js')
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js" defer></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/tablas.js') }}" defer></script>
 
-<input value="el producto" id="mensajeAlerta" hidden>
-<input value="Producto" id="mensajeAlerta1" hidden>
-<input value="El producto" id="mensajeAlerta2" hidden>
-@if (session('status'))
+    <input value="el producto" id="mensajeAlerta" hidden>
+    <input value="Producto" id="mensajeAlerta1" hidden>
+    <input value="El producto" id="mensajeAlerta2" hidden>
+    @if (session('status'))
     @if (session('status') == 'registrado')
-        <input value="registrado" id="tipoAlerta" hidden>
+    <input value="registrado" id="tipoAlerta" hidden>
     @elseif (session('status') == 'actualizado')
-        <input value="actualizado" id="tipoAlerta" hidden>
+    <input value="actualizado" id="tipoAlerta" hidden>
     @elseif (session('status') == 'listado')
-        <input value="listado" id="tipoAlerta" hidden>
+    <input value="listado" id="tipoAlerta" hidden>
     @else
-        <input value="error" id="tipoAlerta" hidden>
+    <input value="error" id="tipoAlerta" hidden>
     @endif
-@endif
-<script src="{{ asset('js/alertas.js') }}"></script>
-@stop
+    @endif
+    <script src="{{ asset('js/alertas.js') }}"></script>
+    @stop

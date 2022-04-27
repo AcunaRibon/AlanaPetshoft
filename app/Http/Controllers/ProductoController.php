@@ -23,6 +23,7 @@ class ProductoController extends Controller
     {
         $datos['tipoProductos'] = TipoProducto::all();
 
+        $datos['imagenes']=ImagenProducto::all();
         $datos['Existencia'] = Producto::select("*")
             ->where("estado_producto", "=", 1)
             ->count();
@@ -67,11 +68,14 @@ class ProductoController extends Controller
                 $imagenes = $request->file('url_imagen_producto');
                 foreach ($imagenes as $imagen) {
 
-                    $Nombre = Time() . '_' . $imagen->getClientOriginalName();
-                    Storage::put(public_path('storage'), $Nombre);
+                    
+                    
+                    $path=$imagen->store('uploads','public');
+
+                    
 
                     ImagenProducto::create([
-                        'url_imagen_producto' => $Nombre,
+                        'url_imagen_producto' => $path,
                         'producto_id' =>  $producto
                     ]);
                 }
@@ -85,9 +89,7 @@ class ProductoController extends Controller
             $imagenes = $request->file('url_imagen_producto');
             foreach ($imagenes as $imagen) {
 
-                $Nombre = Time() . '_' . $imagen->getClientOriginalName();
-              
-                Storage::delete($Nombre);
+                Storage::delete($imagen->getClientOriginalName());
                 
             }
 
@@ -115,7 +117,7 @@ class ProductoController extends Controller
                 $imagenes = $request->file('url_imagen_producto');
                 foreach ($imagenes as $imagen) {
                    
-                    $path=$request->file('imagen')->store('uploads','public');
+                    $path=$imagen->store('uploads','public');
                     ImagenProducto::create([
                         'url_imagen_producto' => $path,
                         'producto_id' =>  $id
@@ -127,11 +129,12 @@ class ProductoController extends Controller
             return redirect("/producto")->with('status', '1');
         } catch (\Exception $e) {
             DB::rollBack();
+            
             $imagenes = $request->file('url_imagen_producto');
             foreach ($imagenes as $imagen) {
 
-                $Nombre = Time() . '_' . $imagen->getClientOriginalName();
-                Storage::delete($Nombre);
+                Storage::delete($imagen->getClientOriginalName());
+                
             }
             return redirect("/producto")->with('status', $e->getMessage());
         }
