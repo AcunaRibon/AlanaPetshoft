@@ -6,7 +6,7 @@
             <th>Nombre</th>
             <th>Precio</th>
             <th>Existencia</th>
-            
+            <th>Tipo Producto</th>
         </tr>
         <tr>
 
@@ -14,7 +14,7 @@
             <td>{{$producto-> nombre_producto}}</td>
             <td>{{$producto-> precio_producto}}</td>
             <td>{{isset($producto-> existencia_producto)?$producto-> existencia_producto:0}}</td>
-
+            <td>{{$producto-> nombre_tipo_producto}}</td>
         </tr>
         <tr>
             <th>Calificación</th>

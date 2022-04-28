@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\ProductoExport;
-use PhpParser\Node\Stmt\TryCatch;
+
 
 class ProductoController extends Controller
 {
-    public function export()
+
+    public function export(Request $request)
     {
-        return Excel::download(new ProductoExport, 'productos.xlsx');
+        return Excel::download(new ProductoExport($request->columna, $request->orden), 'productos.xlsx');
     }
 
     public function index()
@@ -83,7 +84,7 @@ class ProductoController extends Controller
             }
 
             DB::commit();
-            return redirect("/producto")->with('status', '1');;
+            return redirect("/producto")->with('status', 'registrado');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -127,7 +128,7 @@ class ProductoController extends Controller
             }
 
             DB::commit();
-            return redirect("/producto")->with('status', '1');
+            return redirect("/producto")->with('status', 'actualizado');
         } catch (\Exception $e) {
             DB::rollBack();
             
@@ -144,22 +145,25 @@ class ProductoController extends Controller
 
     public function destroy($id)
     {
-
         try {
             DB::beginTransaction();
             $prod = Producto::find($id);
+        
             if ($prod->estado_producto == 0) {
                 Producto::where('id_producto', '=', $prod->id_producto)->update([
                     "estado_producto" => 1
                 ]);
+                $statusValidator ="restaurado";
+               
             } else if ($prod->estado_producto == 1) {
                 Producto::where('id_producto', '=', $prod->id_producto)->update([
                     "estado_producto" => 0
                 ]);
+                $statusValidator ="cancelado";
             }
 
             DB::commit();
-            return redirect("/producto")->with('status', '1');
+            return redirect("/producto")->with('status', $statusValidator);
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect("/producto")->with('status', $e->getMessage());
@@ -173,7 +177,7 @@ class ProductoController extends Controller
             ImagenProducto::where('id_imagen_producto','=',$id)->delete();
             Storage::delete('public/'.$imagen->url_imagen_producto);
             DB::commit();
-            return redirect("/producto")->with('status', '1');
+            return redirect("/producto")->with('status', 'actualizado');
         }catch(\Exception $e){
             DB::rollBack();
             return redirect("/producto")->with('status', $e->getMessage());
@@ -183,7 +187,7 @@ class ProductoController extends Controller
     public function validator(array $input)
     {
         return Validator::make($input, [
-            'nombre_producto' => ['required', 'max:26'],
+            'nombre_producto' => ['required', 'max:40'],
             'precio_producto' => ['required', 'int', 'max:999999', 'min:50'],
             'url_imagen_producto.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
 

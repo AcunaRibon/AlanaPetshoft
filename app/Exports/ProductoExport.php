@@ -8,13 +8,22 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class ProductoExport implements FromView
 {
+   
+    protected $columna;
+    protected $orden;
+
+    function __construct($columna, $orden){
+        $this->columna = $columna;
+        $this->orden = $orden;
+    }
     public function view(): View
     {
         return view('crud.producto.gestionProducto.postExcel', [
            'productos' => DB::table('producto')
-        ->where("estado_producto", "=",1)
+            ->where("estado_producto", "=",1)
             ->join('tipo_producto', 'producto.tipo_producto_id', '=', 'tipo_producto.id_tipo_producto')
-            ->select('producto.*',  'tipo_producto.nombre_tipo_producto', 'tipo_producto.id_tipo_producto')
+            ->select('producto.*',  'tipo_producto.nombre_tipo_producto')
+            ->orderBy($this->columna, $this->orden)
             ->get(),
         
             'calificaciones' => DB::table('calificacion_producto')

@@ -4,17 +4,7 @@
 
 @section('content')
 <div class="container pt-5">
-    @if (session('status'))
-    @if (session('status')==1)
-    <div class="alert alert-success">
-        meloooo
-    </div>
-    @else
-    <div class="alert alert-danger">
-        {{session('status')}}
-    </div>
-    @endif
-    @endif
+
     <div class="row">
         <div class="col-10">
             <div class="table-responsive p-2">
@@ -169,8 +159,57 @@
                     <p class="fw-bold m-0">{{$Existencia}} </p>
                 </div>
             </div>
+            <button class="btn btn-warning mb-2" title="Generar nuevo reporte de compras" data-bs-toggle="modal" data-bs-target="#informe">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-journal-plus me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
+                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                </svg>
+                Nuevo reporte
+            </button>
+            <div class="modal fade" id="informe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Generar reporte</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Cerrar ventana"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('producto.export') }}" method="get">
+                                @csrf
+                                <div class="row">
+                                    <p class="mb-4">Complete el siguiente formulario para la generación del reporte:</p>
 
-            <a href="{{route('producto.export')}}" class="btn btn-warning">Generar reporte</a>
+                                    <div class="col-6 mb-2">
+                                        <label for="columna" class="form-label">Ordenar por columna:</label>
+                                        <select name="columna" class="form-select" title="Seleccionar columna para ordenar los registros">
+                                            <option value="producto.id_producto" {{ old('columna') == 'producto.id_producto' ? 'selected' : '' }}>ID del producto</option>
+                                            <option value="producto.nombre_producto" {{ old('columna') == 'producto.nombre_producto' ? 'selected' : '' }}>Nombre</option>
+                                            <option value="producto.existencia_producto" {{ old('columna') == 'producto.existencia_producto' ? 'selected' : '' }}>Existencias</option>
+                                            <option value="producto.precio_producto" {{ old('columna') == 'producto.precio_producto' ? 'selected' : '' }}>Precio</option>
+                                            <option value="producto.estado_producto" {{ old('columna') == 'producto.estado_producto' ? 'selected' : '' }}>Estado del Producto</option>
+                                            <option value="producto.tipo_producto_id" {{ old('columna') == 'producto.tipo_producto_id' ? 'selected' : '' }}>Tipo</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <label for="orden" class="form-label">Orden de los registros:</label>
+                                        <select name="orden" class="form-select " title="Seleccionar el orden en el que se van a mostrar los registros">
+                                            <option value="asc" {{ old('orden') == 'asc' ? 'selected' : '' }}>Ascendente</option>
+                                            <option value="desc" {{ old('orden') == 'desc' ? 'selected' : '' }}>Descendente</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
+                            <button type="submit" class="btn btn-success reporte" title="Generar y descargar el reporte">Generar reporte</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#productosInactivos">
                 productos cancelados
@@ -261,8 +300,10 @@
     <input value="registrado" id="tipoAlerta" hidden>
     @elseif (session('status') == 'actualizado')
     <input value="actualizado" id="tipoAlerta" hidden>
-    @elseif (session('status') == 'listado')
-    <input value="listado" id="tipoAlerta" hidden>
+    @elseif (session('status') == 'cancelado')
+    <input value="cancelado" id="tipoAlerta" hidden>
+    @elseif (session('status') == 'restaurado')
+    <input value="restaurado" id="tipoAlerta" hidden>
     @else
     <input value="error" id="tipoAlerta" hidden>
     @endif
