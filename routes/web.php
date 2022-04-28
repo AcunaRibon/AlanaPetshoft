@@ -67,6 +67,7 @@ Route::put('/compra/{id_compra}/restore', [CompraController::class, 'restore'])-
 Route::get('/compra/report', [CompraController::class, 'report'])->name('compra.report');
 Route::get('/producto/export_excel', [ProductoController::class, 'export'])->name('producto.export');
 Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('venta.export');
+Route::delete('/producto/{id_imagen_producto}/destroyImg',[ProductoController::class, 'destroyImg'])->name('producto.destroyImg');
 Route::resource('compra', CompraController::class);
 Route::resource('domiciliario', DomiciliarioController::class);
 Route::resource('tipoProducto', TipoProductoController::class);
