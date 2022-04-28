@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\ProductoExport;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ProductoController extends Controller
 {
@@ -89,7 +90,7 @@ class ProductoController extends Controller
             $imagenes = $request->file('url_imagen_producto');
             foreach ($imagenes as $imagen) {
 
-                Storage::delete($imagen->getClientOriginalName());
+                Storage::delete('public/uploads'.$imagen->getClientOriginalName());
                 
             }
 
@@ -133,7 +134,7 @@ class ProductoController extends Controller
             $imagenes = $request->file('url_imagen_producto');
             foreach ($imagenes as $imagen) {
 
-                Storage::delete($imagen->getClientOriginalName());
+                Storage::delete('public/uploads'.$imagen->getClientOriginalName());
                 
             }
             return redirect("/producto")->with('status', $e->getMessage());
@@ -160,6 +161,20 @@ class ProductoController extends Controller
             DB::commit();
             return redirect("/producto")->with('status', '1');
         } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect("/producto")->with('status', $e->getMessage());
+        }
+    }
+
+    public function destroyImg($id){
+        $imagen=ImagenProducto::where('id_imagen_producto','=',$id)->first();
+        try{
+            DB::beginTransaction();
+            ImagenProducto::where('id_imagen_producto','=',$id)->delete();
+            Storage::delete('public/'.$imagen->url_imagen_producto);
+            DB::commit();
+            return redirect("/producto")->with('status', '1');
+        }catch(\Exception $e){
             DB::rollBack();
             return redirect("/producto")->with('status', $e->getMessage());
         }

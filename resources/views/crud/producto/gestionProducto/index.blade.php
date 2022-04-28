@@ -114,14 +114,24 @@
                                                                 @foreach($imagenes as $imagen)
                                                                 <?php
                                                                 if ($producto->id_producto == $imagen->producto_id) {
-                                                                    ?>
+                                                                ?>
                                                                     <tr>
-                                                                        <td><img src="{{asset('../storage').'/app/public/'.$imagen->url_imagen_producto}}"  width="100px" height="100px"></td>
-                                                                        <td></td>
+                                                                        <td><img src="{{asset('../storage').'/app/public/'.$imagen->url_imagen_producto}}" width="100px" height="100px"></td>
+                                                                        <td>
+                                                                            <div class='d-flex justify-content-evenly'>
+                                                                                <form action="{{ route('producto.destroyImg', $imagen->id_imagen_producto)}}" method="post">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit" class="btn btn-danger">
+                                                                                        Eliminar
+                                                                                    </button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </td>
                                                                     </tr>
                                                                 <?php
-                                                            }
-                                                            ?>
+                                                                }
+                                                                ?>
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
