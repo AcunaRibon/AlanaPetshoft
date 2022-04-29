@@ -267,7 +267,7 @@
                                     @csrf
                                     <div class="row">
                                         <p class="mb-4">Complete el siguiente formulario para la generación del reporte:</p>
-                                        <div class="col-6 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
                                             <input type="date" class="form-control" name="fecha_inicio" required title="Ingresar fecha de inicio" value="{{ old('fecha_inicio') }}">
                                             @error('fecha_inicio')
@@ -277,7 +277,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-6 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="fecha_fin" class="form-label">Fecha de fin</label>
                                             <input type="date" class="form-control" name="fecha_fin" required title="Ingresar fecha de fin" value="{{ old('fecha_fin') }}">
                                             @error('fecha_fin')
@@ -287,7 +287,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-6 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="columna" class="form-label">Ordenar por columna:</label>
                                             <select name="columna" class="form-select" title="Seleccionar columna para ordenar los registros">
                                                 <option value="compra.id_compra" {{ old('columna') == 'compra.id_compra' ? 'selected' : '' }}>ID de la compra</option>
@@ -304,7 +304,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-6 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="orden" class="form-label">Orden de los registros:</label>
                                             <select name="orden" class="form-select" title="Seleccionar el orden en el que se van a mostrar los registros">
                                                 <option value="asc" {{ old('orden') == 'asc' ? 'selected' : '' }}>Ascendente</option>
