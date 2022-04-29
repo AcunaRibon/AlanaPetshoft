@@ -8,21 +8,19 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-4 mb-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                             <label for="id_compra" class="form-label">ID Compra</label>
                             <input type="text" class="form-control" id="id_compra" name="id_compra" value="{{ isset($compras->id_compra)?$compras->id_compra:'' }}" readonly title="ID de la compra">
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                             <label for="fecha_pedido_compra" class="form-label">Fecha de pedido</label>
                             <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra" value="{{ isset($compras->fecha_pedido_compra)?$compras->fecha_pedido_compra:'' }}" readonly title="Fecha de pedido">
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                             <label for="fecha_entrega_compra" class="form-label">Fecha de entrega</label>
                             <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra" value="{{ isset($compras->fecha_entrega_compra)?$compras->fecha_entrega_compra:'' }}" readonly title="Fecha de entrega">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4 mb-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                             <label for="estado_pedido_compra" class="form-label">Estado</label>
                             @if(isset($compras->estado_pedido_compra))
                                 @if($compras->estado_pedido_compra == 'Entregado')
@@ -34,11 +32,11 @@
                                 @endif
                             @endif
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                             <label for="proveedor_id" class="form-label">Proveedor</label>
                             <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor" value="{{ isset($compras -> nombre_proveedor)?$compras -> nombre_proveedor:'' }}" readonly title="Proveedor">
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                             <label for="total_compra" class="form-label">Costo total</label>
                             <input type="text" class="form-control" id="total_compra" name="total_compra" value="{{ isset($compras->total_compra)?$compras->total_compra:'' }}" readonly title="Costo total de la compra">
                         </div>

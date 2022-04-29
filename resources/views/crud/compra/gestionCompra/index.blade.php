@@ -27,7 +27,7 @@
                                 <form action="{{ route('compra.store') }}" method="post">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-3 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="fecha_pedido_compra" class="form-label">Fecha de pedido</label>
                                             <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra" value="{{ old('fecha_pedido_compra') }}" required title="Ingresar fecha de pedido">
                                             @error('fecha_pedido_compra')
@@ -37,7 +37,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-3 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="fecha_entrega_compra" class="form-label">Fecha de entrega</label>
                                             <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra" value="{{ old('fecha_entrega_compra') }}" required title="Ingresar fecha de entrega">
                                             @error('fecha_entrega_compra')
@@ -47,7 +47,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-3 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="estado_pedido_compra" class="form-label">Estado</label>
                                             <select class="form-select" name="estado_pedido_compra" id="estado_pedido_compra" required title="Seleccionar estado de la compra">
                                                 <option hidden value="">Seleccione un estado</option>
@@ -61,7 +61,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-3 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="proveedor_id " class="form-label">Proveedor</label>
                                             <select class="form-select" name="proveedor_id" id="proveedor_id" required title="Seleccionar proveedor">
                                                 <option hidden value="">Seleccione un proveedor</option>
@@ -78,7 +78,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-5 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                                             <label for="producto_id " class="form-label">Productos</label>
                                             <select class="form-select" name="producto_id " id="producto_id" onchange="agregarPrecioProducto()" required title="Seleccionar productos">
                                                 <option hidden value="">Seleccione los productos</option>
@@ -93,7 +93,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-3 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="precio_producto" class="form-label">Precio producto</label>
                                             <input type="number" class="form-control" id="precio_producto" required readonly title="Precio del producto seleccionado">
                                             @error('precio_producto')
@@ -103,7 +103,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-2 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-2 col-xl-2 col-xxl-2 mb-2">
                                             <label for="cantidad_detalle_compra" class="form-label">Cantidad</label>
                                             <input type="text" class="form-control" id="cantidad_detalle_compra" required title="Ingresar cantidad de productos">
                                             @error('cantidad_detalle_compra')
@@ -113,7 +113,7 @@
                                                 </p>
                                             @enderror
                                         </div>
-                                        <div class="col-2 mb-2 text-white">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3 mb-2 text-white">
                                             <label class="form-label">Agregar producto</label>
                                             <button type="button" onclick="agregarProducto()" class="form-control btn btn-success" title="Agregar producto ingresado">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-lg me-1" viewBox="0 0 16 16">
@@ -124,7 +124,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-9 mb-2 table-responsive">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-xxl-9 mb-2 table-responsive">
                                             <label class="form-label" title="Tabla de productos a comprar">Lista de productos</label>
                                             <table class="table table-striped table-hover">
                                                 <thead class="table-dark">
@@ -142,7 +142,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="col-3 mb-2">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="total_compra" class="form-label">Costo total</label>
                                             <input type="text" class="form-control" id="total_compra" name="total_compra" required readonly title="Costo total de todos los productos">
                                             @error('total_compra')
