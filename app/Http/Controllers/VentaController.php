@@ -19,9 +19,15 @@ use Exception;
 class VentaController extends Controller
 {
 
-    public function export() 
+    public function export(Request $request) 
     {
-        return Excel::download(new VentasExport, 'ventas.xlsx');
+        $this->validatorExport($request->all())->validate();
+        try{
+        return Excel::download(new VentasExport($request->fecha_inicio,$request->fecha_fin,$request->columna, $request->orden), 'ventas.xlsx');
+        }catch(\Exception $e){
+            return redirect("/venta")->with('status', $e->getMessage());
+        }
+        
     }
     
     public function index()
@@ -66,13 +72,13 @@ class VentaController extends Controller
         try {
             DB::beginTransaction();
             $venta = venta::insertGetId([
-                "fecha_venta" => $input["fecha_venta"],
-                "descuento_venta" => $input["descuento_venta"],
-                "total_venta" => $this->calcular_precio($input["productos_id"], $input["cantidades"]),
+                "fecha_venta" => $input["fecha_venta1"],
+                "descuento_venta" => $input["descuento_venta1"],
+                "total_venta" => $this->calcular_precio($input["productos_id"], $input["cantidades"],$input["descuento_venta1"]),
                 "calificacion_servicio_venta" => $input["calificacion_servicio_venta"],
-                "cliente_id" => $input["cliente_id"],
-                "domiciliario_documento" => $input["domiciliario_documento"],
-                "estado_venta_id" => $input["estado_venta_id"]
+                "cliente_id" => $input["cliente_id1"],
+                "domiciliario_documento" => $input["domiciliario_documento1"],
+                "estado_venta_id" => $input["estado_venta_id1"]
             ]);
 
             foreach ($input["productos_id"] as $key => $producto) {
@@ -91,7 +97,7 @@ class VentaController extends Controller
             }
 
             DB::commit();
-            return redirect("/venta")->with('status', '1');
+            return redirect("/venta")->with('status', 'registrado');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect("/venta")->with('status', $e->getMessage());
@@ -102,20 +108,20 @@ class VentaController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validator($request->all())->validate();
+        $this->validatorUpdate($request->all())->validate();
         $input = $request->all();
 
 
         try {
             DB::beginTransaction();
             venta::where('id_venta', '=', $id)->update([
-                "fecha_venta" => $input["fecha_venta"],
-                "descuento_venta" => $input["descuento_venta"],
-                "total_venta" => $this->calcular_precio($input["productos_id"], $input["cantidades"]),
+                "fecha_venta" => $input["fecha_venta2"],
+                "descuento_venta" => $input["descuento_venta2"],
+                "total_venta" => $this->calcular_precio($input["productos_id"], $input["cantidades"],$input["descuento_venta2"]),
                 "calificacion_servicio_venta" => $input["calificacion_servicio_venta"],
-                "cliente_id" => $input["cliente_id"],
-                "domiciliario_documento" => $input["domiciliario_documento"],
-                "estado_venta_id" => $input["estado_venta_id"]
+                "cliente_id" => $input["cliente_id2"],
+                "domiciliario_documento" => $input["domiciliario_documento2"],
+                "estado_venta_id" => $input["estado_venta_id2"]
             ]);
 
             foreach ($input["productos_id"] as $key => $producto) {
@@ -184,7 +190,7 @@ class VentaController extends Controller
 
 
             DB::commit();
-            return redirect("/venta")->with('status', '1');
+            return redirect("/venta")->with('status', 'actualizado');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect("/venta")->with('status', $e->getMessage());
@@ -208,6 +214,7 @@ class VentaController extends Controller
             ->first();
 
             if ($estado->nombre_estado_venta != 'Cancelada') {
+
                 $Ds = DB::table('detalle_venta')
                     ->select('*')
                     ->where('venta_id', '=', $id)
@@ -224,6 +231,8 @@ class VentaController extends Controller
                 venta::where('id_venta', '=', $id)->update([
                     "estado_venta_id" => $cancelada->id_estado_venta
                 ]);
+                $statusValidator = "cancelado";
+                
             }else{
                 $Ds = DB::table('detalle_venta')
                     ->select('*')
@@ -239,17 +248,18 @@ class VentaController extends Controller
                 venta::where('id_venta', '=', $id)->update([
                     "estado_venta_id" => $habilitada->id_estado_venta
                 ]);
+                $statusValidator = "restaurado";
             }
 
             DB::commit();
-            return redirect("/venta")->with('status', '1');
+            return redirect("/venta")->with('status', $statusValidator);
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect("/venta")->with('status', $e->getMessage());
         }
     }
 
-    public function calcular_precio($productos, $cantidad)
+    public function calcular_precio($productos, $cantidad,$descuento)
     {
         $precio = 0;
         foreach ($productos as $key => $producto) {
@@ -257,21 +267,42 @@ class VentaController extends Controller
             $precio += ($P->precio_producto * $cantidad[$key]);
         }
 
+        $precio = $precio-($precio * ($descuento/100));
+
         return $precio;
     }
     //
 
     public function validator( array $input){
         return Validator::make($input, [
-         'fecha_venta' => ['required', 'date'],
-        'descuento_venta'=>['required', 'int','max:100','min:0'],
-         'cliente_id'=>['required'],
-        'domiciliario_documento'=>['required'],
-        'estado_venta_id'=>['required']
+         'fecha_venta1' => ['required', 'date'],
+        'descuento_venta1'=>['required', 'int','max:100','min:0'],
+         'cliente_id1'=>['required'],
+        'domiciliario_documento1'=>['required'],
+        'estado_venta_id1'=>['required'],
+      
     ]);
     }
+    public function validatorUpdate( array $input){
+        return Validator::make($input, [
+         'fecha_venta2' => ['required', 'date'],
+        'descuento_venta2'=>['required', 'int','max:100','min:0'],
+         'cliente_id2'=>['required'],
+        'domiciliario_documento2'=>['required'],
+        'estado_venta_id2'=>['required'],
+      
+    ]);
+    }
+
     
-   
+    
+    public function validatorExport( array $input){
+        return Validator::make($input, [
+         
+        'fecha_inicio' =>['required'],
+        'fecha_fin' =>['required','after_or_equal:fecha_inicio']
+    ]);
+    }
     
 
 
