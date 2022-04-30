@@ -6,6 +6,8 @@
 
             <th>Fecha de venta</th>
             <th>Costo Total</th>
+            <th>Descuento</th>
+            <th>Domicilario Documento</th>
             <th>Domicilario</th>
             <th>Cliente</th>
             <th>Estado</th>
@@ -16,6 +18,8 @@
 
             <td>{{$venta-> fecha_venta}}</td>
             <td>{{$venta-> total_venta}}</td>
+            <td>{{$venta-> descuento_venta}}</td>
+            <td>{{$venta-> domiciliario_documento}}</td>
             <td>{{$venta-> nombres_domiciliario}} {{$venta-> apellidos_domiciliario}}</td>
             <td>{{$venta-> nombres_cliente}} {{$venta-> apellidos_cliente}}</td>
             <td>{{$venta-> nombre_estado_venta}}</td>

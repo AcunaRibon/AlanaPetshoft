@@ -1,70 +1,73 @@
 <div class="row">
     <div class="col-4 mb-2">
         <label for="fecha_venta" class="form-label">Fecha de la venta:</label>
-        <input type="date" id="fecha_venta" name="fecha_venta" class="form-control @error('fecha_venta') is-invalid @enderror" value="{{isset($venta->fecha_venta)?$venta->fecha_venta:old('fecha_venta')}}" autocomplete="fecha_venta" autofocus>
-        @error('fecha_venta')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
+        <input type="date" id="fecha_venta{{$tipo}}" name="fecha_venta{{$tipo}}" class="form-control @error('fecha_venta'.$tipo) is-invalid @enderror" value="{{isset($venta->fecha_venta)?$venta->fecha_venta:old('fecha_venta')}}" autocomplete="fecha_venta" autofocus>
+        @error('fecha_venta'.$tipo)
+        <input value="{{$modo}}" id="tipoAlerta" hidden>
+        <p class="text-danger fw-bold">
+            * {{$message}}
+        </p>
         @enderror
     </div>
     <div class="col-4 mb-2">
         <label for="cliente_id" class="form-label">Cliente: </label>
-        <select name="cliente_id" id="cliente_id" class="form-select @error('cliente_id') is-invalid @enderror" autocomplete="cliente_id" autofocus>
+        <select name="cliente_id{{$tipo}}" id="cliente_id{{$tipo}}" class="form-select @error('cliente_id'.$tipo) is-invalid @enderror" autocomplete="cliente_id" autofocus>
 
             <?php
             if (isset($venta->cliente_id) == false) {
-                ?>
+            ?>
                 <option selected disabled>Selecciona una opción</option>
 
             <?php
-        }
-        ?>
+            }
+            ?>
 
             @foreach($Clientes as $cliente)
             <option <?php
                     if (isset($venta->cliente_id)) {
                         if ($cliente->id_cliente == $venta->cliente_id) {
-                            ?> selected <?php
-                                }
-                            } else if (old('cliente_id') == $cliente->id_cliente) {
-                                ?> selected <?php
+                    ?> selected <?php
+                                    }
+                                } else if (old('cliente_id') == $cliente->id_cliente) {
+                                        ?> selected <?php
                                         }
-                                        ?> value="{{$cliente->id_cliente}}">{{$cliente->nombres_cliente}} {{$cliente->apellidos_cliente}}</option>
+                                            ?> value="{{$cliente->id_cliente}}">{{$cliente->nombres_cliente}} {{$cliente->apellidos_cliente}}</option>
             @endforeach
         </select>
-        @error('cliente_id')
-        <span class="invalid-feedback" role="alert">
-            <strong>*{{ $message }}</strong>
-        </span>
+        @error('cliente_id'.$tipo)
+        <input value="{{$modo}}" id="tipoAlerta" hidden>
+        <p class="text-danger fw-bold">
+            * {{$message}}
+        </p>
         @enderror
     </div>
     <div class="col-4 mb-2">
         <label for="domiciliario_documento" class="form-label">Domiciliario: </label>
-        <select name="domiciliario_documento" id="domiciliario_documento" class="form-select  @error('domiciliario_documento') is-invalid @enderror" autocomplete="domiciliario_documento" autofocus>
+        <select name="domiciliario_documento{{$tipo}}" id="domiciliario_documento{{$tipo}}" class="form-select  @error('domiciliario_documento'.$tipo) is-invalid @enderror" autocomplete="domiciliario_documento" autofocus>
             <?php
             if (isset($venta->domiciliario_documento) == false) {
-                ?>
+            ?>
                 <option selected disabled>Selecciona una opción</option>
             <?php
-        }
-        ?>
+            }
+            ?>
             @foreach($Domiciliarios as $Domiciliario)
             <option <?php
                     if (isset($venta->domiciliario_documento)) {
                         if ($Domiciliario->documento_domiciliario == $venta->domiciliario_documento) {
-                            ?>selected <?php
-                                }
-                            } else if (old('domiciliario_documento') == $Domiciliario->documento_domiciliario) {
-                                ?> selected <?php
+                    ?>selected <?php
                                     }
-                                    ?> value="{{$Domiciliario->documento_domiciliario }}">{{$Domiciliario->nombres_domiciliario}} {{$Domiciliario->apellidos_domiciliario}}</option>
+                                } else if (old('domiciliario_documento') == $Domiciliario->documento_domiciliario) {
+                                        ?> selected <?php
+                                        }
+                                            ?> value="{{$Domiciliario->documento_domiciliario }}">{{$Domiciliario->nombres_domiciliario}} {{$Domiciliario->apellidos_domiciliario}}</option>
             @endforeach
         </select>
-        @error('domiciliario_documento')
-        <span class="invalid-feedback" role="alert">
-            <strong>*{{ $message }}</strong>
-        </span>
+        @error('domiciliario_documento'.$tipo)
+        <input value="{{$modo}}" id="tipoAlerta" hidden>
+        <p class="text-danger fw-bold">
+            * {{$message}}
+        </p>
         @enderror
     </div>
 </div>
@@ -95,31 +98,32 @@
 <div class="row">
     <div class="col-3 mb-2">
         <label for="estado_venta_id" class="form-label">Estado:</label>
-        <select name="estado_venta_id" id="estado_venta_id" class="form-select @error('estado_venta_id') is-invalid @enderror" autocomplete="estado_venta_id" autofocus>
+        <select name="estado_venta_id{{$tipo}}" id="estado_venta_id{{$tipo}}" class="form-select @error('estado_venta_id'.$tipo) is-invalid @enderror" autocomplete="estado_venta_id" autofocus>
             <?php
             if (isset($venta->estado_venta_id) == false) {
-                ?>
+            ?>
                 <option selected disabled>Selecciona una opción</option>
             <?php
-        }
-        ?>
+            }
+            ?>
             @foreach($estados as $estado)
             <option <?php
                     if (isset($venta->estado_venta_id)) {
                         if ($estado->id_estado_venta == $venta->estado_venta_id) {
-                            ?>selected <?php
-                                }
-                            } else if (old('estado_venta_id') == $estado->id_estado_venta) {
-                                ?> selected <?php
+                    ?>selected <?php
                                     }
-                                    ?>value="{{$estado->id_estado_venta}}">{{$estado->nombre_estado_venta}}</option>
+                                } else if (old('estado_venta_id') == $estado->id_estado_venta) {
+                                        ?> selected <?php
+                                        }
+                                            ?>value="{{$estado->id_estado_venta}}">{{$estado->nombre_estado_venta}}</option>
             @endforeach
             )
         </select>
-        @error('estado_venta_id')
-        <span class="invalid-feedback" role="alert">
-            <strong>*{{ $message }}</strong>
-        </span>
+        @error('estado_venta_id'.$tipo)
+        <input value="{{$modo}}" id="tipoAlerta" hidden>
+        <p class="text-danger fw-bold">
+            * {{$message}}
+        </p>
         @enderror
     </div>
     <div class="col-3 mb-2">
@@ -127,55 +131,56 @@
         <select name="calificacion_servicio_venta" id="calificacion_servicio_venta" class="form-control">
             <?php
             if (isset($venta->calificacion_servicio_venta) == false) {
-                ?>
+            ?>
                 <option selected>Selecciona una opción</option>
             <?php
-        }
-        ?>
+            }
+            ?>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta) {
-                            ?> selected <?php
+                    ?> selected <?php
+                                    }
                                 }
-                            }
-                            ?> value="1"> Pésima</option>
+                                        ?> value="1"> Pésima</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 2) {
-                            ?> selected <?php
+                    ?> selected <?php
+                                    }
                                 }
-                            }
-                            ?> value="2"> mala</option>
+                                        ?> value="2"> mala</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 3) {
-                            ?> selected <?php
+                    ?> selected <?php
+                                    }
                                 }
-                            }
-                            ?> value="3"> regular</option>
+                                        ?> value="3"> regular</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 3) {
-                            ?> selected <?php
+                    ?> selected <?php
+                                    }
                                 }
-                            }
-                            ?> value="4"> buena</option>
+                                        ?> value="4"> buena</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 5) {
-                            ?> selected <?php
+                    ?> selected <?php
+                                    }
                                 }
-                            }
-                            ?> value="5"> excelente</option>
+                                        ?> value="5"> excelente</option>
         </select>
     </div>
     <div class="col-3 mb-2">
         <label for="descuento_venta" class="form-label">Descuento: </label>
-        <input type="number" id="descuento_venta" name="descuento_venta" class="form-control @error('descuento_venta') is-invalid @enderror" autocomplete="descuento_venta" autofocus placeholder="00%" value="{{isset($venta->descuento_venta)?$venta->descuento_venta:old('descuento_venta')}}">
-        @error('descuento_venta')
-        <span class="invalid-feedback" role="alert">
-            <strong>*{{ $message }}</strong>
-        </span>
+        <input type="number" id="descuento_venta{{$tipo}}" name="descuento_venta{{$tipo}}" class="form-control @error('descuento_venta') is-invalid @enderror" autocomplete="descuento_venta" autofocus placeholder="00%" value="{{isset($venta->descuento_venta)?$venta->descuento_venta:old('descuento_venta')}}">
+        @error('descuento_venta'.$tipo)
+        <input value="{{$modo}}" id="tipoAlerta" hidden>
+        <p class="text-danger fw-bold">
+            * {{$message}}
+        </p>
         @enderror
     </div>
     <div class="col-3 mb-2">
@@ -205,13 +210,13 @@
                 if (isset($venta->id_venta)) {
 
 
-                    ?>
+                ?>
                     @foreach($detalles as $key => $detalle)
                     <?php
                     if ($venta->id_venta == $detalle->venta_id) {
 
 
-                        ?>
+                    ?>
                         <tr id="tr{{isset($venta->id_venta) ? $venta->id_venta : 0}}_{{$detalle->producto_id}}">
                             <td>
                                 <input type="hidden" name="productos_id[]" value="{{$detalle->producto_id}}" />
@@ -235,19 +240,14 @@
                             </td>
                         </tr>
                     <?php
-                }
-                ?>
+                    }
+                    ?>
                     @endforeach
                 <?php
-            }
-            ?>
+                }
+                ?>
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="submit" class="btn btn-success">Registrar</button>
-
-</div>
