@@ -33,19 +33,19 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <img src="{{ asset('ilustraciones/logo.png') }}" alt="" class="img-logo">
+                    <img src="{{ asset('images/logo.png') }}" alt="Alana Petshop">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mb-lg-0 d-flex align-items-center me-5">
-                            <li class="nav-item mx-3">
-                                <a class="nav-link" href="{{ url('/') }}">
-                                    <font color="#FFD4D4" class="fs-4"><b>ALANA PETSHOP</b></font>
+                        <ul class="navbar-nav mb-lg-0 d-flex align-items-center">
+                            <li class="nav-item ms-3">
+                                <a class="nav-link fs-4 fw-bolder text-success p-0 text-center" href="{{ url('/') }}">
+                                    ALANA PETSHOP
                                 </a>
                             </li>
-                            <li class="nav-item dropdown mx-1">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle fs-7" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle fw-bold fs-7 px-lg-5 px-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Catálogo
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
@@ -74,22 +74,17 @@
                             <input class="form-control me-2 " type="search" placeholder="¿Qué buscas?" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
-                        <ul class="navbar-nav ms-5 d-flex align-items-center">
+                        <ul class="navbar-nav d-flex align-items-center ps-lg-5">
                         @guest
-                            @if (Route::has('register'))
-                                <li class="nav-item mx-1">
-                                    <a class="nav-link fs-7" href="{{ route('register') }}">Crear<font color="#FFD4D4"> cuenta </font></a>
-                                </li>
-                            @endif
                             @if (Route::has('login'))
-                                <li class="nav-item mx-1">
-                                    <a class="nav-link fs-7" href="{{ route('login') }}">Iniciar<font color="#FFD4D4"> sesión </font></a>
+                                <li class="nav-item">
+                                    <a class="nav-link fs-7 text-center me-lg-3 fw-bold" href="{{ route('login') }}">Iniciar<font class="text-success"> sesión </font></a>
                                 </li>
                             @endif
                         @else
                             <div class="dropdown">
-                                <a class="dropdown-toggle nav-link fs-7" role="button" href="" id="menuAdmin" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                    {{ Auth::user()->name }} <font color="#FFD4D4">{{ Auth::user()->last_name }}</font>
+                                <a class="dropdown-toggle nav-link fs-7 fw-bold text-center me-lg-3" role="button" id="menuAdmin" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                    {{ Auth::user()->name }} <font class="text-success">{{ Auth::user()->last_name }}</font>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="menuAdmin">
                                     <li>
@@ -111,8 +106,8 @@
                                 </ul>
                             </div>
                         @endguest
-                            <li class="nav-item mx-1">
-                                <a class="nav-link fs-7" href="*">Mi<font color="#FFD4D4"> carrito </font></a>
+                            <li class="nav-item">
+                                <a class="nav-link fs-7 ms-lg-3 text-center fw-bold" href="*">Mi<font class="text-success"> carrito </font></a>
                             </li>
                         </ul>
                     </div>
@@ -147,9 +142,6 @@
                                     <a class="link-light text-decoration-none" href="">Ver perfil</a>
                                 </li>
                                 <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="">Administración</a>
-                                </li>
-                                <li class="py-1">
                                     <a class="link-light text-decoration-none" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
@@ -163,13 +155,13 @@
                         @else
                             <ul class="list-unstyled">
                                 <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="">Iniciar sesión</a>
+                                    <a class="link-light text-decoration-none" href="{{ route('login') }}">Iniciar sesión</a>
                                 </li>
                                 <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="">Crear cuenta</a>
+                                    <a class="link-light text-decoration-none" href="{{ route('register') }}">Crear cuenta</a>
                                 </li>
                                 <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="">Recuperar cuenta</a>
+                                    <a class="link-light text-decoration-none" href="{{ url('/') }}">Recuperar cuenta</a>
                                 </li>
                             </ul>
                         @endif
