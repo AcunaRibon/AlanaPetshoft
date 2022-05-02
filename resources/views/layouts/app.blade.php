@@ -13,7 +13,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js" defer></script>
-  
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -45,7 +44,7 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle fw-bold fs-7 px-lg-5 px-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white fw-bold fs-7 px-lg-5 px-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Catálogo
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
@@ -71,19 +70,19 @@
                             </li>
                         </ul>
                         <form class="d-flex flex-grow-1">
-                            <input class="form-control me-2 " type="search" placeholder="¿Qué buscas?" aria-label="Search">
+                            <input class="form-control me-2" type="search" placeholder="¿Qué buscas?" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
                         <ul class="navbar-nav d-flex align-items-center ps-lg-5">
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link fs-7 text-center me-lg-3 fw-bold" href="{{ route('login') }}">Iniciar<font class="text-success"> sesión </font></a>
+                                    <a class="nav-link fs-7 text-center text-white me-lg-3 fw-bold" href="{{ route('login') }}">Iniciar<font class="text-success"> sesión </font></a>
                                 </li>
                             @endif
                         @else
                             <div class="dropdown">
-                                <a class="dropdown-toggle nav-link fs-7 fw-bold text-center me-lg-3" role="button" id="menuAdmin" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                <a class="dropdown-toggle nav-link fs-7 text-white fw-bold text-center me-lg-3" role="button" id="menuAdmin" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     {{ Auth::user()->name }} <font class="text-success">{{ Auth::user()->last_name }}</font>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="menuAdmin">
@@ -92,7 +91,6 @@
                                             Ver perfil
                                         </a>
                                     </li>
-                                    <hr class="dropdown-divider">
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -107,7 +105,7 @@
                             </div>
                         @endguest
                             <li class="nav-item">
-                                <a class="nav-link fs-7 ms-lg-3 text-center fw-bold" href="*">Mi<font class="text-success"> carrito </font></a>
+                                <a class="nav-link fs-7 ms-lg-3 text-center text-white fw-bold" href="*">Mi<font class="text-success"> carrito </font></a>
                             </li>
                         </ul>
                     </div>
@@ -116,10 +114,13 @@
         <main>
             @yield('content')
         </main>
-        <footer class="bg-dark">
-            <div class="container px-3 pt-3 pb-1">
-                <div class="row text-white">
-                    <div class="col-6">
+        <footer class="bg-dark text-white pt-3 pb-1 px-2">
+            <div class="container-fluid row m-0">
+                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 pb-4">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                        <img src="{{ asset('images/logo.png') }}" alt="Alana Petshop" class="img-fluid" width="130" height="130">
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9 col-xl-9 col-xxl-9">
                         <h5>Alana Petshoft</h5>
                         <p>Atención vía WhatsApp</p>
                         <div class="img-fluid">
@@ -134,69 +135,69 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-2">
-                        <h5>Mi cuenta</h5>
-                        @if(Auth::user())
-                            <ul class="list-unstyled">
-                                <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="">Ver perfil</a>
-                                </li>
-                                <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Cerrar sesión') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-                        @else
-                            <ul class="list-unstyled">
-                                <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="{{ route('login') }}">Iniciar sesión</a>
-                                </li>
-                                <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="{{ route('register') }}">Crear cuenta</a>
-                                </li>
-                                <li class="py-1">
-                                    <a class="link-light text-decoration-none" href="{{ url('/') }}">Recuperar cuenta</a>
-                                </li>
-                            </ul>
-                        @endif
-                    </div>
-                    <div class="col-2">
-                        <h5>Categorías</h5>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 col-xxl-2 pb-2">
+                    <h5>Mi cuenta</h5>
+                    @if(Auth::user())
                         <ul class="list-unstyled">
                             <li class="py-1">
-                                <a class="link-light text-decoration-none" href="">Alimentos</a>
+                                <a class="link-light text-decoration-none" href="">Ver perfil</a>
                             </li>
                             <li class="py-1">
-                                <a class="link-light text-decoration-none" href="">Snacks</a>
-                            </li>
-                            <li class="py-1">
-                                <a class="link-light text-decoration-none" href="">Higiene</a>
-                            </li>
-                            <li class="py-1">
-                                <a class="link-light text-decoration-none" href="">Accesorios</a>
-                            </li>
-                            <li class="py-1">
-                                <a class="link-light text-decoration-none" href="">Juguetes</a>
-                            </li>
-                            <li class="py-1">
-                                <a class="link-light text-decoration-none" href="">Medicamentos</a>
+                                <a class="link-light text-decoration-none" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Cerrar sesión') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
-                    </div>
-                    <div class="col-2">
-                        <h5>Accesibilidad</h5>
+                    @else
                         <ul class="list-unstyled">
                             <li class="py-1">
-                                <a class="link-light text-decoration-none" href="{{ asset('files/manual_usuario_alana_petshop.pdf') }}" target="_blank">Manual de usuario</a>
+                                <a class="link-light text-decoration-none" href="{{ route('login') }}">Iniciar sesión</a>
+                            </li>
+                            <li class="py-1">
+                                <a class="link-light text-decoration-none" href="{{ route('register') }}">Crear cuenta</a>
+                            </li>
+                            <li class="py-1">
+                                <a class="link-light text-decoration-none" href="{{ url('/') }}">Recuperar cuenta</a>
                             </li>
                         </ul>
-                    </div>
+                    @endif
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 col-xxl-2 pb-2">
+                    <h5>Categorías</h5>
+                    <ul class="list-unstyled">
+                        <li class="py-1">
+                            <a class="link-light text-decoration-none" href="">Alimentos</a>
+                        </li>
+                        <li class="py-1">
+                            <a class="link-light text-decoration-none" href="">Snacks</a>
+                        </li>
+                        <li class="py-1">
+                            <a class="link-light text-decoration-none" href="">Higiene</a>
+                        </li>
+                        <li class="py-1">
+                            <a class="link-light text-decoration-none" href="">Accesorios</a>
+                        </li>
+                        <li class="py-1">
+                            <a class="link-light text-decoration-none" href="">Juguetes</a>
+                        </li>
+                        <li class="py-1">
+                            <a class="link-light text-decoration-none" href="">Medicamentos</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 col-xxl-2 pb-2 justify-content-sm-center">
+                    <h5>Accesibilidad</h5>
+                    <ul class="list-unstyled">
+                        <li class="py-1">
+                            <a class="link-light text-decoration-none" href="{{ asset('files/manual_usuario_alana_petshop.pdf') }}" target="_blank">Manual de usuario</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="text-center text-white py-1">
                     <h6>Alana Petshop © 2022 Copyright</h6>
