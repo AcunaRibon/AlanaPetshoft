@@ -48,7 +48,7 @@ class VentaController extends Controller
             ->where('estado_venta.nombre_estado_venta', '=', 'Cancelada')
             ->get();
 
-
+        $datos['totalventa']=venta::all()->count();
         $Clientes = Cliente::all();
         $Productos = Producto::where('estado_producto',1)
         ->select('*')
@@ -92,7 +92,7 @@ class VentaController extends Controller
                 if ($P->existencia_producto > $input["cantidades"][$key]) {
                     $P->update(["existencia_producto" => $P->existencia_producto - $input["cantidades"][$key]]);
                 } else {
-                    throw new Exception('Cantidad excedida.');
+                    throw new Exception('Cantidad excedida');
                 }
             }
 
@@ -143,7 +143,7 @@ class VentaController extends Controller
                             $P->update(["existencia_producto" => $P->existencia_producto - abs($cantidad_detalle[0]->cantidad_detalle_venta - $input["cantidades"][$key])]);
                         }
                     } else {
-                        throw new Exception('Cantidad excedida.');
+                        throw new Exception('Cantidad excedida');
                     }
                 } else {
                     $P->update(["existencia_producto" => $P->existencia_producto - $input["cantidades"][$key]]);

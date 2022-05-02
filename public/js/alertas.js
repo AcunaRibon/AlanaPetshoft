@@ -164,3 +164,12 @@ if(tipoAlerta == 'error')
         'error'
     )
 }
+
+if(tipoAlerta == 'Cantidad excedida')
+{
+    swalA.fire(
+        'Cantidad excedida',
+        'La cantidad que desea no se encuentra disponible',
+        'error'
+    )
+}
