@@ -13,7 +13,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js" defer></script>
-  
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -45,7 +44,7 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle fw-bold fs-7 px-lg-5 px-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white fw-bold fs-7 px-lg-5 px-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Catálogo
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
@@ -78,12 +77,12 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link fs-7 text-center me-lg-3 fw-bold" href="{{ route('login') }}">Iniciar<font class="text-success"> sesión </font></a>
+                                    <a class="nav-link fs-7 text-center text-white me-lg-3 fw-bold" href="{{ route('login') }}">Iniciar<font class="text-success"> sesión </font></a>
                                 </li>
                             @endif
                         @else
                             <div class="dropdown">
-                                <a class="dropdown-toggle nav-link fs-7 fw-bold text-center me-lg-3" role="button" id="menuAdmin" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                <a class="dropdown-toggle nav-link fs-7 text-white fw-bold text-center me-lg-3" role="button" id="menuAdmin" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     {{ Auth::user()->name }} <font class="text-success">{{ Auth::user()->last_name }}</font>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="menuAdmin">
@@ -92,7 +91,6 @@
                                             Ver perfil
                                         </a>
                                     </li>
-                                    <hr class="dropdown-divider">
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -107,7 +105,7 @@
                             </div>
                         @endguest
                             <li class="nav-item">
-                                <a class="nav-link fs-7 ms-lg-3 text-center fw-bold" href="*">Mi<font class="text-success"> carrito </font></a>
+                                <a class="nav-link fs-7 ms-lg-3 text-center text-white fw-bold" href="*">Mi<font class="text-success"> carrito </font></a>
                             </li>
                         </ul>
                     </div>
