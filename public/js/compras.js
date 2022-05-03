@@ -16,7 +16,20 @@ function agregarProducto()
 
     if (cantidadProducto > 0 && precioProducto > 0)
     {
-        $('#tablaProductos').append(`
+        let tablaProducto = document.getElementById("tablaRegistrar");
+        let validacion = true;
+
+        // for()
+        // {
+        //     if()
+        //     {
+        //         validacion = false;
+        //     }
+        // }
+
+        if(validacion == true)
+        {
+            $('#tablaProductos').append(`
             <tr id="producto-${idProducto}">
                 <td>
                     <input type="hidden" name="producto_id[]" value="${idProducto}" required></input>
@@ -24,9 +37,27 @@ function agregarProducto()
                     ${idProducto}
                 </td>
                 <td>${nombreProducto}</td>
-                <td>${cantidadProducto}</td>
-                <td>${precioProducto}</td>
                 <td>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0" id="cantidadProducto${idProducto}">
+                            ${cantidadProducto}
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary btn-sm m-1 p-1" onclick="agregarCantidad(${cantidadProducto}, ${precioProducto}, ${idProducto})" title="Agregar un producto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm m-1 p-1" onclick="quitarCantidad(${cantidadProducto}, ${precioProducto}, ${idProducto})" title="Quitar un producto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td>${precioProducto}</td>
+                <td id="precioProducto${idProducto}">
                     ${parseFloat(cantidadProducto) * parseFloat(precioProducto)}
                     <input type="hidden" name="precio_detalle_compra[]" value="${parseFloat(cantidadProducto) * parseFloat(precioProducto)}" required></input>
                 </td>
@@ -37,14 +68,52 @@ function agregarProducto()
                 </td>
             </tr>
             `);
-        let precioTotal = $("#total_compra").val() || 0;
-        $("#total_compra").val(parseFloat(precioTotal) + (parseFloat(cantidadProducto) * parseFloat(precioProducto)));
+            let precioTotal = $("#total_compra").val() || 0;
+            $("#total_compra").val(parseFloat(precioTotal) + (parseFloat(cantidadProducto) * parseFloat(precioProducto)));
+        }
+        else
+        {
+            swalA.fire(
+                'Acción denegada',
+                'Producto ya ingresado.',
+                'warning'
+            )
+        }
     }
     else
     {
         swalA.fire(
             'Acción denegada',
             'Debes ingresar una cantidad y/o precio válidos.',
+            'warning'
+        )
+    }
+}
+
+function agregarCantidad(cantidadProducto, precioProducto, idProducto)
+{
+    cantidadProducto = $("#cantidadProducto" + idProducto).text();
+    nuevaCantidad = $("#cantidadProducto" + idProducto).text(parseInt(cantidadProducto) + parseInt(1));
+    $("#precioProducto" + idProducto).text(parseFloat(precioProducto) * parseInt($("#cantidadProducto" + idProducto).text()));
+    let precioTotal = $("input[id=total_compra]").val() || 0;
+    $("input[id=total_compra]").val(parseFloat(precioTotal) + parseFloat(precioProducto));
+}
+
+function quitarCantidad(cantidadProducto, precioProducto, idProducto)
+{
+    cantidadProducto = $("#cantidadProducto" + idProducto).text();
+    if ((parseInt(cantidadProducto) - parseInt(1)) > 0)
+    {
+        $("#cantidadProducto" + idProducto).text(parseInt(cantidadProducto) - parseInt(1));
+        $("#precioProducto" + idProducto).text(parseFloat(precioProducto) * parseInt($("#cantidadProducto" + idProducto).text()));
+        let precioTotal = $("input[id=total_compra]").val() || 0;
+        $("input[id=total_compra]").val(parseFloat(precioTotal) - parseFloat(precioProducto));
+    }
+    else 
+    {
+        swalA.fire(
+            'Acción denegada',
+            'Debes ingresar una cantidad válida.',
             'warning'
         )
     }
