@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-12 mb-2">
                         <label for="name" class="form-label">Nombre</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus title="Ingrese su nombre">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-lg-6 col-sm-12 mb-2">
                         <label for="last_name" class="form-label">Apellido</label>
-                        <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                        <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus title="Ingrese su apellido">
                         @error('last_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-lg-6 col-sm-12 mb-2">
                         <label for="email" class="form-label">Correo Electrónico</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" title="Ingrese su correo electrónico">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-lg-6 col-sm-12 mb-2">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" title="Ingrese su contraseña">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -46,11 +46,11 @@
                     </div>
                     <div class="col-lg-6 col-sm-12 mb-2">
                         <label for="password-confirm" class="form-label">Confirmar Contraseña</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" title="Confirme la contraseña ingresada anteriormente">
                     </div>
                     <div class="col-lg-6 col-sm-12 mb-2">
                         <label for="cellphone" class="form-label">Celular</label>
-                        <input id="cellphone" type="text" class="form-control @error('cellphone') is-invalid @enderror" name="cellphone" value="{{ old('cellphone') }}" required autocomplete="cellphone" autofocus>
+                        <input id="cellphone" type="text" class="form-control @error('cellphone') is-invalid @enderror" name="cellphone" value="{{ old('cellphone') }}" required autocomplete="cellphone" autofocus title="Ingrese su número de celular">
                         @error('cellphone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label for="address" class="form-label">Dirección</label>
-                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
+                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus title="Ingrese su dirección de residencia">
                         @error('address')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <center>
-                            <button type="submit" class="btn btn-info">
+                            <button type="submit" class="btn btn-info" title="Crear cuenta">
                                 Registrarse
                             </button>
                         </center>
@@ -76,7 +76,7 @@
                     <div class="col-12 mb-3">
                         <center>
                             <span class="text-dark fw-bold">¿Ya tienes una cuenta? </span>
-                            <a class="text-secondary fw-bold" href="{{ url('/login') }}">
+                            <a class="text-secondary fw-bold" href="{{ url('/login') }}" title="Iniciar sesión">
                                 Iniciar sesión
                             </a>
                         </center>

@@ -9,7 +9,7 @@
                 @csrf
                 <div class="col-12 mb-2">
                     <label for="email" class="form-label">Correo Electrónico</label>
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus title="Ingrese su correo electrónico">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-12 mb-2">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" title="Ingrese su contraseña">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-12 mb-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} title="Recordar correo electrónico">
                         <label class="form-check-label" for="remember">
                             Recuérdame
                         </label>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-12 mb-3">
                     <center>
-                        <button type="submit" class="btn btn-info">
+                        <button type="submit" class="btn btn-info" title="Iniciar sesión">
                             Iniciar sesión
                         </button>
                     </center>
@@ -43,7 +43,7 @@
                 @if (Route::has('password.request'))
                     <div class="col-12 mb-3">
                         <center>
-                            <a class="text-secondary fw-bold" href="{{ route('password.request') }}">
+                            <a class="text-secondary fw-bold" href="{{ route('password.request') }}" title="Recupera tu cuenta">
                                 ¿Olvidaste tu contraseña?
                             </a>
                         </center>
@@ -53,7 +53,7 @@
             <div class="col-12 mb-3">
                 <center>
                     <span class="text-dark fw-bold">¿No tienes cuenta? </span>
-                    <a class="text-secondary fw-bold" href="{{ url('/register') }}">
+                    <a class="text-secondary fw-bold" href="{{ url('/register') }}" title="Registrarse">
                         Crea tu cuenta
                     </a>
                 </center>
