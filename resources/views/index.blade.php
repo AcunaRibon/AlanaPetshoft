@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 <section>
     <div id="carrusel" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -11,21 +10,21 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
-                <img src="{{ asset('ilustraciones/Fondo_landing.svg') }}" class="d-block w-100" alt="Regístrate">
+                <img src="{{ asset('images/Fondo_landing.svg') }}" class="d-block w-100" alt="Regístrate">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Regístrate ahora mismo</h5>
                     <p>Un espacio para las necesidades de tu mascota</p>
                 </div>
             </div>
             <div class="carousel-item" data-bs-interval="2000">
-                <img src="{{ asset('ilustraciones/Fondo_landing.svg') }}" class="d-block w-100" alt="...">
+                <img src="{{ asset('images/Fondo_landing.svg') }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
                     <p>Some representative placeholder content for the second slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('ilustraciones/Fondo_landing.svg') }}" class="d-block w-100" alt="...">
+                <img src="{{ asset('images/Fondo_landing.svg') }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>
@@ -51,8 +50,8 @@
                         <div class="row p-4">
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/petys.png') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/petys.png') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Jabón Petys</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$15000</p>
@@ -62,8 +61,8 @@
                             </div>
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/cama.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/cama.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Cama Perro</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$40000</p>
@@ -73,8 +72,8 @@
                             </div>
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/cobija.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/cobija.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Cobijita warm</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$30000</p>
@@ -84,8 +83,8 @@
                             </div>
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/perfume.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/perfume.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Perfume Harto</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$50000</p>
@@ -101,8 +100,8 @@
                         <div class="row p-4">
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/petys.png') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/petys.png') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Jabón Petys</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$15000</p>
@@ -112,8 +111,8 @@
                             </div>
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/cama.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/cama.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Cama Perro</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$40000</p>
@@ -123,8 +122,8 @@
                             </div>
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/cobija.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/cobija.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Cobijita warm</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$30000</p>
@@ -134,8 +133,8 @@
                             </div>
                             <div class="col-3">
                                 <div class="card">
-                                    <img src="{{ asset('ilustraciones/perfume.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white" style="background-color: #3E3E54;">
+                                    <img src="{{ asset('images/perfume.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
+                                    <div class="card-body text-center text-white bg-dark">
                                         <h4 class="card-title fw-bolder">Perfume Harto</h4>
                                         <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
                                         <p class="card-text fw-bold fs-5 mb-2">$50000</p>
@@ -163,15 +162,15 @@
         <div class="container">
             <div class="row mb-3">
                 <div class="col-4 text-center">
-                    <img class="rounded-circle circle-image" src="{{ asset('ilustraciones/domicilio.jpg') }}" alt="">
-                    <h3>domicilios</h3>
+                    <img class="rounded-circle circle-image" src="{{ asset('images/domicilio.jpg') }}" alt="Servicio a domicilio">
+                    <h3>Domicilios</h3>
                 </div>
                 <div class="col-4 text-center">
-                    <img class="rounded-circle circle-image" src="{{ asset('ilustraciones/servicios2.png') }}" alt="">
+                    <img class="rounded-circle circle-image" src="{{ asset('images/servicios2.png') }}" alt="Productos">
                     <h3>Productos</h3>
                 </div>
                 <div class="col-4 text-center">
-                    <img class="rounded-circle circle-image" src="{{ asset('ilustraciones/servicio3.png') }}" alt="">
+                    <img class="rounded-circle circle-image" src="{{ asset('images/servicio3.png') }}" alt="Recóge tu pedido">
                     <h3>Recoge tu pedido</h3>
                 </div>
             </div>
