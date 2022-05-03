@@ -70,8 +70,8 @@
                                 </div>
                             </li>
                         </ul>
-                        <form class="d-flex flex-grow-1">
-                            <input class="form-control me-2 " type="search" placeholder="¿Qué buscas?" aria-label="Search">
+                        <form class="d-flex flex-grow-1" action="/search">
+                            <input class="form-control me-2 " name="query" type="text" placeholder="¿Qué buscas?" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
                         <ul class="navbar-nav ms-5 d-flex align-items-center">
@@ -112,7 +112,7 @@
                             </div>
                         @endguest
                             <li class="nav-item mx-1">
-                                <a class="nav-link fs-7" href="*">Mi<font color="#FFD4D4"> carrito </font></a>
+                                <a class="nav-link fs-7" href="{{ url('cartlist') }}">Mi<font color="#FFD4D4"> carrito (0) </font></a>
                             </li>
                         </ul>
                     </div>

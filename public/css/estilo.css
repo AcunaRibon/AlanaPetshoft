@@ -267,4 +267,33 @@
         text-align: center;
     }
     
+    .btn-cancel {
+        background: none;
+        border: none;
+    }
+
+    .detail-ordernow {
+        padding: 4%;
+    }
+
+    .form-envio {
+        padding: 10%;
+        padding-top: 0%;
+    }
+
+    .star {
+        font-size: 30px;
+        color: #fcafaf;
+        display: inline-block;
+        
+    }
+
+    .h2pro {
+        padding: 0%;
+        margin: 0%;
+    }
+    
+    .title-search {
+        padding-left: 1%;
+    }
     

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\CalificacionProducto;
 use App\Models\ImagenProducto;
 use App\Models\TipoProducto;
@@ -74,12 +75,12 @@ class ShopController extends Controller
 
         if(Auth::id())
         {
-            $user=auth()->user();
+            
             $producto=Producto::find($id);
             $cart=new Cart;
 
-            
-            $cart->id_user=$user->id_user;
+
+            $cart->id_user=isset($request->session()->get('user')['id']);
             $cart->id_producto=$producto->id_producto;
             $cart->quantity=$request->quantity;
             $cart->save();
@@ -89,6 +90,7 @@ class ShopController extends Controller
         else {
             return redirect('/login');
         }
+        
     }
 
     public function cartlist()
@@ -122,16 +124,22 @@ class ShopController extends Controller
 
     public function search(Request $request)
     {
+        
+        /*
         $search=$request->search;
         $datos = Producto::
         where('nombre_producto', 'like', '%'.$search.'%')->get();
  
         return view('shop.search', ['producto'=>$datos]);
-
-        /*
-        return $datos = Producto::
-        where('nombre_producto', 'like', '%'.$request->input('query').'%')
+*/
+        
+        $datos = Producto::
+        join('imagen_producto', 'producto.id_producto', '=', 'imagen_producto.producto_id')
+        ->where('nombre_producto', 'like', '%'.$request->input('query').'%')
         ->get();
+
+        return view('shop.search', ['productos'=>$datos]);
+        /*
         return view('shop.search', ['producto'=>$datos]);
         */
     }
