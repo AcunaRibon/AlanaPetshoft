@@ -3,7 +3,7 @@
 @section('content')
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-md-5 border border-primary rounded-3 p-3 mx-2 bg-primary" style="--bs-bg-opacity: .23;">
+        <div class="col-md-5 col-lg-4 border border-primary rounded-3 p-3 mx-2 bg-primary" style="--bs-bg-opacity: .23;">
             <h4 class="text-center fw-bold mb-4">Iniciar Sesión</h4>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-12 mb-3">
                     <center>
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-info">
                             Iniciar sesión
                         </button>
                     </center>

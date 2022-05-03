@@ -151,6 +151,7 @@ return [
         'celular_proveedor' => 'celular',
         'nombre_proveedor_m' => 'nombre',
         'celular_proveedor_m' => 'celular',
+
         'fecha_pedido_compra' => 'fecha pedido',
         'fecha_entrega_compra' => 'fecha entrega',
         'estado_pedido_compra' => 'estado',
@@ -161,11 +162,20 @@ return [
         'estado_pedido_compra_m' => 'estado',
         'total_compra_m' => 'costo total',
         'producto_id' => 'producto',
+        'cantidad_detalle_compra' => 'cantidad',
+
         'fecha_inicio' => 'fecha de inicio',
         'fecha_fin' => 'fecha de fin',
         'columna' => 'ordenar por columna',
         'orden' => 'orden de los registros',
-        'cantidad_detalle_compra' => 'cantidad'
+
+        'email' => 'correo electrónico',
+        'password' => 'contraseña',
+        'name' => 'nombre',
+        'last_name' => 'apellido',
+        'cellphone' => 'celular',
+        'address' => 'dirección',
+        '' => ''
     ],
 
 ];

@@ -29,41 +29,41 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="fecha_pedido_compra" class="form-label">Fecha de pedido</label>
-                                            <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra" value="{{ old('fecha_pedido_compra') }}" required title="Ingresar fecha de pedido">
+                                            <input type="date" class="form-control @error('fecha_pedido_compra') is-invalid @enderror" id="fecha_pedido_compra" name="fecha_pedido_compra" value="{{ old('fecha_pedido_compra') }}" required title="Ingresar fecha de pedido">
                                             @error('fecha_pedido_compra')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="fecha_entrega_compra" class="form-label">Fecha de entrega</label>
-                                            <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra" value="{{ old('fecha_entrega_compra') }}" required title="Ingresar fecha de entrega">
+                                            <input type="date" class="form-control @error('fecha_entrega_compra') is-invalid @enderror" id="fecha_entrega_compra" name="fecha_entrega_compra" value="{{ old('fecha_entrega_compra') }}" required title="Ingresar fecha de entrega">
                                             @error('fecha_entrega_compra')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="estado_pedido_compra" class="form-label">Estado</label>
-                                            <select class="form-select" name="estado_pedido_compra" id="estado_pedido_compra" required title="Seleccionar estado de la compra">
+                                            <select class="form-select @error('estado_pedido_compra') is-invalid @enderror" name="estado_pedido_compra" id="estado_pedido_compra" required title="Seleccionar estado de la compra">
                                                 <option hidden value="">Seleccione un estado</option>
                                                 <option value="Entregado" {{ old('estado_pedido_compra') == 'Entregado' ? 'selected' : '' }}>Entregado</option>
                                                 <option value="No entregado" {{ old('estado_pedido_compra') == 'No entregado' ? 'selected' : '' }}>No entregado</option>
                                             </select>
                                             @error('estado_pedido_compra')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="proveedor_id " class="form-label">Proveedor</label>
-                                            <select class="form-select" name="proveedor_id" id="proveedor_id" required title="Seleccionar proveedor">
+                                            <select class="form-select @error('proveedor_id') is-invalid @enderror" name="proveedor_id" id="proveedor_id" required title="Seleccionar proveedor">
                                                 <option hidden value="">Seleccione un proveedor</option>
                                                 @foreach ($proveedor as $proveedores)
                                                     <option value="{{ $proveedores->id_proveedor }}" {{ old('proveedor_id') == $proveedores->id_proveedor ? 'selected' : '' }}>{{ $proveedores->nombre_proveedor }}</option>
@@ -71,16 +71,16 @@
                                             </select>
                                             @error('proveedor_id')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                                             <label for="producto_id " class="form-label">Productos</label>
-                                            <select class="form-select" name="producto_id " id="producto_id" onchange="agregarPrecioProducto()" required title="Seleccionar productos">
+                                            <select class="form-select @error('producto_id') is-invalid @enderror" name="producto_id" id="producto_id" onchange="agregarPrecioProducto()" required title="Seleccionar productos">
                                                 <option hidden value="">Seleccione los productos</option>
                                                 @foreach ($producto as $productos)
                                                     <option precio="{{ $productos->precio_producto }}" value="{{ $productos->id_producto }}">{{ $productos->nombre_producto }}</option>
@@ -88,29 +88,29 @@
                                             </select>
                                             @error('producto_id')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="precio_producto" class="form-label">Precio producto</label>
-                                            <input type="number" class="form-control" id="precio_producto" required readonly title="Precio del producto seleccionado">
+                                            <input type="number" class="form-control @error('precio_producto') is-invalid @enderror" id="precio_producto" required readonly title="Precio del producto seleccionado">
                                             @error('precio_producto')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-2 col-xl-2 col-xxl-2 mb-2">
                                             <label for="cantidad_detalle_compra" class="form-label">Cantidad</label>
-                                            <input type="text" class="form-control" id="cantidad_detalle_compra" required title="Ingresar cantidad de productos">
+                                            <input type="text" class="form-control @error('cantidad_detalle_compra') is-invalid @enderror" id="cantidad_detalle_compra" required title="Ingresar cantidad de productos">
                                             @error('cantidad_detalle_compra')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3 mb-2 text-white">
@@ -144,12 +144,12 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3 mb-2">
                                             <label for="total_compra" class="form-label">Costo total</label>
-                                            <input type="text" class="form-control" id="total_compra" name="total_compra" required readonly title="Costo total de todos los productos">
+                                            <input type="text" class="form-control @error('total_compra') is-invalid @enderror" id="total_compra" name="total_compra" required readonly title="Costo total de todos los productos">
                                             @error('total_compra')
                                                 <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                     </div>
@@ -269,27 +269,27 @@
                                         <p class="mb-4">Complete el siguiente formulario para la generación del reporte:</p>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
-                                            <input type="date" class="form-control" name="fecha_inicio" required title="Ingresar fecha de inicio" value="{{ old('fecha_inicio') }}">
+                                            <input type="date" class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio" required title="Ingresar fecha de inicio" value="{{ old('fecha_inicio') }}">
                                             @error('fecha_inicio')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="fecha_fin" class="form-label">Fecha de fin</label>
-                                            <input type="date" class="form-control" name="fecha_fin" required title="Ingresar fecha de fin" value="{{ old('fecha_fin') }}">
+                                            <input type="date" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" required title="Ingresar fecha de fin" value="{{ old('fecha_fin') }}">
                                             @error('fecha_fin')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="columna" class="form-label">Ordenar por columna:</label>
-                                            <select name="columna" class="form-select" title="Seleccionar columna para ordenar los registros">
+                                            <select name="columna" class="form-select @error('columna') is-invalid @enderror" title="Seleccionar columna para ordenar los registros">
                                                 <option value="compra.id_compra" {{ old('columna') == 'compra.id_compra' ? 'selected' : '' }}>ID de la compra</option>
                                                 <option value="compra.total_compra" {{ old('columna') == 'compra.total_compra' ? 'selected' : '' }}>Costo total</option>
                                                 <option value="compra.fecha_pedido_compra" {{ old('columna') == 'compra.fecha_pedido_compra' ? 'selected' : '' }}>Fecha de pedido</option>
@@ -299,22 +299,22 @@
                                             </select>
                                             @error('columna')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="orden" class="form-label">Orden de los registros:</label>
-                                            <select name="orden" class="form-select" title="Seleccionar el orden en el que se van a mostrar los registros">
+                                            <select name="orden" class="form-select @error('orden') is-invalid @enderror" title="Seleccionar el orden en el que se van a mostrar los registros">
                                                 <option value="asc" {{ old('orden') == 'asc' ? 'selected' : '' }}>Ascendente</option>
                                                 <option value="desc" {{ old('orden') == 'desc' ? 'selected' : '' }}>Descendente</option>
                                             </select>
                                             @error('orden')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                     </div>

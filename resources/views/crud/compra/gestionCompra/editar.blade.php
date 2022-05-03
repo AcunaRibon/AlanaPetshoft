@@ -17,27 +17,27 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                                 <label for="fecha_pedido_compra" class="form-label">Fecha de pedido</label>
-                                <input type="date" class="form-control" id="fecha_pedido_compra" name="fecha_pedido_compra_m" value="{{ old('fecha_pedido_compra_m', $compras->fecha_pedido_compra) }}" required title="Editar fecha de pedido">
+                                <input type="date" class="form-control @error('fecha_pedido_compra_m') is-invalid @enderror" id="fecha_pedido_compra" name="fecha_pedido_compra_m" value="{{ old('fecha_pedido_compra_m', $compras->fecha_pedido_compra) }}" required title="Editar fecha de pedido">
                                 @error('fecha_pedido_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
-                                    <p class="text-danger fw-bold">
-                                        * {{$message}}
-                                    </p>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                                 <label for="fecha_entrega_compra" class="form-label">Fecha de entrega</label>
-                                <input type="date" class="form-control" id="fecha_entrega_compra" name="fecha_entrega_compra_m" value="{{ old('fecha_entrega_compra_m', $compras->fecha_entrega_compra) }}" required title="Editar fecha de entrega">
+                                <input type="date" class="form-control @error('fecha_entrega_compra_m') is-invalid @enderror" id="fecha_entrega_compra" name="fecha_entrega_compra_m" value="{{ old('fecha_entrega_compra_m', $compras->fecha_entrega_compra) }}" required title="Editar fecha de entrega">
                                 @error('fecha_entrega_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
-                                    <p class="text-danger fw-bold">
-                                        * {{$message}}
-                                    </p>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                                 <label for="estado_pedido_compra" class="form-label">Estado</label>
-                                <select class="form-select" name="estado_pedido_compra_m" id="estado_pedido_compra" required title="Editar estado de la compra">
+                                <select class="form-select @error('estado_pedido_compra_m') is-invalid @enderror" name="estado_pedido_compra_m" id="estado_pedido_compra" required title="Editar estado de la compra">
                                     @if(isset($compras->estado_pedido_compra))
                                         @if($compras->estado_pedido_compra == 'Entregado')
                                             <option value="Entregado" {{ old('estado_pedido_compra_m') == 'Entregado' ? 'selected' : '' }}>Entregado</option>
@@ -56,9 +56,9 @@
                                 </select>
                                 @error('estado_pedido_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
-                                    <p class="text-danger fw-bold">
-                                        * {{$message}}
-                                    </p>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
@@ -77,12 +77,12 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-2">
                                 <label for="total_compra" class="form-label">Costo total</label>
-                                <input type="text" class="form-control" id="total_compra_{{ $compras->id_compra }}" name="total_compra_m" value="{{ isset($compras->total_compra)?$compras->total_compra:'' }}" readonly required title="Costo total de la compra">
+                                <input type="text" class="form-control @error('total_compra_m') is-invalid @enderror" id="total_compra_{{ $compras->id_compra }}" name="total_compra_m" value="{{ isset($compras->total_compra)?$compras->total_compra:'' }}" readonly required title="Costo total de la compra">
                                 @error('total_compra_m')
                                     <input value="errorModificar" id="tipoAlerta" hidden>
-                                    <p class="text-danger fw-bold">
-                                        * {{$message}}
-                                    </p>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>

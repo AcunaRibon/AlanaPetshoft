@@ -27,22 +27,22 @@
                                 @csrf
                                 <div class="mb-2">
                                     <label for="nombre_proveedor" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor" value="{{ old('nombre_proveedor', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Ingresar nombre">
+                                    <input type="text" class="form-control @error('nombre_proveedor') is-invalid @enderror" id="nombre_proveedor" name="nombre_proveedor" value="{{ old('nombre_proveedor', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Ingresar nombre">
                                     @error('nombre_proveedor')
                                         <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                        <p class="text-danger fw-bold">
-                                            * {{$message}}
-                                        </p>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                                 <div class="mb-2">
                                     <label for="celular_proveedor" class="form-label">Celular</label>
-                                    <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor" value="{{ old('celular_proveedor', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Ingresar celular">
+                                    <input type="number" class="form-control @error('celular_proveedor') is-invalid @enderror" id="celular_proveedor" name="celular_proveedor" value="{{ old('celular_proveedor', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Ingresar celular">
                                     @error('celular_proveedor')
                                         <input value="errorRegistrar" id="tipoAlerta" hidden>
-                                        <p class="text-danger fw-bold">
-                                            * {{$message}}
-                                        </p>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                         </div>
@@ -99,22 +99,22 @@
                                                         @method('PUT')
                                                         <div class="mb-2">
                                                             <label for="nombre_proveedor" class="form-label">Nombre</label>
-                                                            <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor_m" value="{{ old('nombre_proveedor_m', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Editar nombre">
+                                                            <input type="text" class="form-control @error('nombre_proveedor_m') is-invalid @enderror" id="nombre_proveedor" name="nombre_proveedor_m" value="{{ old('nombre_proveedor_m', isset($proveedores -> nombre_proveedor)?$proveedores -> nombre_proveedor:'') }}" required title="Editar nombre">
                                                             @error('nombre_proveedor_m')
                                                                 <input value="errorModificar" id="tipoAlerta" hidden>
-                                                                <p class="text-danger fw-bold">
-                                                                    * {{$message}}
-                                                                </p>
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
                                                             @enderror
                                                         </div>
                                                         <div class="mb-2">
                                                             <label for="celular_proveedor" class="form-label">Celular</label>
-                                                            <input type="number" class="form-control" id="celular_proveedor" name="celular_proveedor_m" value="{{ old('celular_proveedor_m', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Editar celular">
+                                                            <input type="number" class="form-control @error('celular_proveedor_m') is-invalid @enderror" id="celular_proveedor" name="celular_proveedor_m" value="{{ old('celular_proveedor_m', isset($proveedores -> celular_proveedor)?$proveedores -> celular_proveedor:'') }}" required title="Editar celular">
                                                             @error('celular_proveedor_m')
                                                                 <input value="errorModificar" id="tipoAlerta" hidden>
-                                                                <p class="text-danger fw-bold">
-                                                                    * {{$message}}
-                                                                </p>
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
                                                             @enderror
                                                         </div>
                                                 </div>
@@ -167,27 +167,27 @@
                                         <p class="mb-4">Complete el siguiente formulario para la generación del reporte:</p>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
-                                            <input type="date" class="form-control" name="fecha_inicio" required title="Ingresar fecha de inicio" value="{{ old('fecha_inicio') }}">
+                                            <input type="date" class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio" required title="Ingresar fecha de inicio" value="{{ old('fecha_inicio') }}">
                                             @error('fecha_inicio')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="fecha_fin" class="form-label">Fecha de fin</label>
-                                            <input type="date" class="form-control" name="fecha_fin" required title="Ingresar fecha de fin" value="{{ old('fecha_fin') }}">
+                                            <input type="date" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" required title="Ingresar fecha de fin" value="{{ old('fecha_fin') }}">
                                             @error('fecha_fin')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="columna" class="form-label">Ordenar por columna:</label>
-                                            <select name="columna" class="form-select" title="Seleccionar columna para ordenar los registros">
+                                            <select name="columna" class="form-select @error('columna') is-invalid @enderror" title="Seleccionar columna para ordenar los registros">
                                                 <option value="proveedor.id_proveedor" {{ old('columna') == 'proveedor.id_proveedor' ? 'selected' : '' }}>ID del proveedor</option>
                                                 <option value="proveedor.nombre_proveedor" {{ old('columna') == 'proveedor.nombre_proveedor' ? 'selected' : '' }}>Nombre</option>
                                                 <option value="proveedor.celular_proveedor" {{ old('columna') == 'proveedor.celular_proveedor' ? 'selected' : '' }}>Celular</option>
@@ -196,22 +196,22 @@
                                             </select>
                                             @error('columna')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-2">
                                             <label for="orden" class="form-label">Orden de los registros:</label>
-                                            <select name="orden" class="form-select" title="Seleccionar el orden en el que se van a mostrar los registros">
+                                            <select name="orden" class="form-select @error('orden') is-invalid @enderror" title="Seleccionar el orden en el que se van a mostrar los registros">
                                                 <option value="asc" {{ old('orden') == 'asc' ? 'selected' : '' }}>Ascendente</option>
                                                 <option value="desc" {{ old('orden') == 'desc' ? 'selected' : '' }}>Descendente</option>
                                             </select>
                                             @error('orden')
                                                 <input value="errorInforme" id="tipoAlerta" hidden>
-                                                <p class="text-danger fw-bold">
-                                                    * {{$message}}
-                                                </p>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                     </div>
