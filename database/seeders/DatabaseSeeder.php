@@ -29,13 +29,13 @@ class DatabaseSeeder extends Seeder
         $this->call(EstadoVentaSeeder::class);
         User::factory(20)->create();
         Cliente::factory(20)->create();
-        Domiciliario::factory(20)->create();
+        Domiciliario::factory(10)->create();
         TipoProducto::factory(10)->create();
         Producto::factory(100)->create();
-        Venta::factory(40)->create();
-        DetalleVenta::factory(200)->create();
+        Venta::factory(50)->create();
+        DetalleVenta::factory(150)->create();
         Proveedor::factory(20)->create();
-        Compra::factory(40)->create();
-        DetalleCompra::factory(200)->create();
+        Compra::factory(50)->create();
+        DetalleCompra::factory(150)->create();
     }
 }

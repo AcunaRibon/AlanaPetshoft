@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-xxl-9 mb-2 table-responsive">
                         <label class="form-label" title="Tabla de productos a comprar">Lista de productos</label>
-                        <table id="tablaRegistrar" class="table table-striped table-hover">
+                        <table class="table table-striped table-hover">
                             <thead class="table-dark">
                                 <tr>
                                     <th>ID</th>

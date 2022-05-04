@@ -93,7 +93,7 @@
                                 <hr>
                                 <div class="table-responsive p-2">
                                     @if(count($detalleCompra) > 0)
-                                        <table class="table table-striped table-hover">
+                                        <table id="tabla" class="table table-striped table-hover">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th>ID Detalle</th>

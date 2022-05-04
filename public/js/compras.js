@@ -43,7 +43,8 @@ function agregarProducto()
             <tr id="producto-${idProducto}">
                 <td>
                     <input type="hidden" class="producto_id" name="producto_id[]" value="${idProducto}" required></input>
-                    <input type="hidden" name="cantidad_detalle_compra[]" value="${cantidadProducto}" required></input>
+                    <input type="hidden" id="cantidad_producto_${idProducto}" name="cantidad_detalle_compra[]" value="${cantidadProducto}" required></input>
+                    <input type="hidden" id="precio_detalle_${idProducto}" name="precio_detalle_compra[]" value="${parseFloat(cantidadProducto) * parseFloat(precioProducto)}" required></input>
                     ${idProducto}
                 </td>
                 <td>${nombreProducto}</td>
@@ -69,10 +70,9 @@ function agregarProducto()
                 <td>${precioProducto}</td>
                 <td id="precioProducto${idProducto}">
                     ${parseFloat(cantidadProducto) * parseFloat(precioProducto)}
-                    <input type="hidden" name="precio_detalle_compra[]" value="${parseFloat(cantidadProducto) * parseFloat(precioProducto)}" required></input>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-danger" onclick="eliminarProducto(${idProducto}, ${parseFloat(cantidadProducto) * parseFloat(precioProducto)})" title="Quitar producto">
+                    <button type="button" class="btn btn-danger" onclick="eliminarProducto(${idProducto})" title="Quitar producto">
                         Eliminar
                     </button>
                 </td>
@@ -104,10 +104,12 @@ function agregarProducto()
 function agregarCantidad(cantidadProducto, precioProducto, idProducto)
 {
     cantidadProducto = $("#cantidadProducto" + idProducto).text();
-    nuevaCantidad = $("#cantidadProducto" + idProducto).text(parseInt(cantidadProducto) + parseInt(1));
+    $("#cantidadProducto" + idProducto).text(parseInt(cantidadProducto) + parseInt(1));
     $("#precioProducto" + idProducto).text(parseFloat(precioProducto) * parseInt($("#cantidadProducto" + idProducto).text()));
     let precioTotal = $("input[id=total_compra]").val() || 0;
     $("input[id=total_compra]").val(parseFloat(precioTotal) + parseFloat(precioProducto));
+    $('#cantidad_producto_' + idProducto).val(parseInt(cantidadProducto) + parseInt(1));
+    $('#precio_detalle_' + idProducto).val(parseFloat(precioProducto) * parseInt($("#cantidadProducto" + idProducto).text()));
 }
 
 function quitarCantidad(cantidadProducto, precioProducto, idProducto)
@@ -119,6 +121,8 @@ function quitarCantidad(cantidadProducto, precioProducto, idProducto)
         $("#precioProducto" + idProducto).text(parseFloat(precioProducto) * parseInt($("#cantidadProducto" + idProducto).text()));
         let precioTotal = $("input[id=total_compra]").val() || 0;
         $("input[id=total_compra]").val(parseFloat(precioTotal) - parseFloat(precioProducto));
+        $('#cantidad_producto_' + idProducto).val(parseInt(cantidadProducto) - parseInt(1));
+        $('#precio_detalle_' + idProducto).val(parseFloat(precioProducto) * parseInt($("#cantidadProducto" + idProducto).text()));
     }
     else 
     {
@@ -130,11 +134,12 @@ function quitarCantidad(cantidadProducto, precioProducto, idProducto)
     }
 }
 
-function eliminarProducto(idProducto, subtotalProducto)
+function eliminarProducto(idProducto)
 {
+    let subtotal = $("#precioProducto" + idProducto).text();
     $("#producto-" + idProducto).remove();
     let precioTotal = $("input[id=total_compra]").val() || 0;
-    $("input[id=total_compra]").val(parseFloat(precioTotal) - parseFloat(subtotalProducto));
+    $("input[id=total_compra]").val(parseFloat(precioTotal) - parseFloat(subtotal));
 }
 
 // Modificar
