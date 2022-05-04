@@ -7,6 +7,8 @@ function agregarPrecioProducto()
     
 }
 
+let validar = false;
+
 function agregarProducto()
 {
     let idProducto = $("#producto_id option:selected").val();
@@ -16,23 +18,31 @@ function agregarProducto()
 
     if (cantidadProducto > 0 && precioProducto > 0)
     {
-        let tablaProducto = document.getElementById("tablaRegistrar");
         let validacion = true;
 
-        // for()
-        // {
-        //     if()
-        //     {
-        //         validacion = false;
-        //     }
-        // }
+        if(validar == true)
+        {
+            var productos = new Array();
+            var inputs = document.getElementsByClassName("producto_id"),
+            inputsProductos = [].map.call(inputs, function(valores){
+                productos.push(valores.value);
+            });
+
+            productos.forEach(function(valor){
+                if(idProducto == valor)
+                {
+                    validacion = false;
+                }
+                console.log(valor);
+            });
+        }
 
         if(validacion == true)
         {
             $('#tablaProductos').append(`
             <tr id="producto-${idProducto}">
                 <td>
-                    <input type="hidden" name="producto_id[]" value="${idProducto}" required></input>
+                    <input type="hidden" class="producto_id" name="producto_id[]" value="${idProducto}" required></input>
                     <input type="hidden" name="cantidad_detalle_compra[]" value="${cantidadProducto}" required></input>
                     ${idProducto}
                 </td>
@@ -70,12 +80,13 @@ function agregarProducto()
             `);
             let precioTotal = $("#total_compra").val() || 0;
             $("#total_compra").val(parseFloat(precioTotal) + (parseFloat(cantidadProducto) * parseFloat(precioProducto)));
+            validar = true;
         }
         else
         {
             swalA.fire(
                 'Acción denegada',
-                'Producto ya ingresado.',
+                'Producto ya ingresado, si deseas modificarlo, busca el producto en la lista para hacer cambios.',
                 'warning'
             )
         }
@@ -187,30 +198,56 @@ function agregarProductoDetalle(idCompra)
 
     if (cantidadProducto > 0 && precioProducto > 0)
     {
-        $('#tablaProductosEditar' + idCompra).append(`
-            <tr id="nuevoProducto-${idProducto}">
-                <td>
-                    <input type="hidden" name="producto_id_${idCompra}[]" value="${idProducto}" required></input>
-                    <input type="hidden" name="cantidad_detalle_compra_${idCompra}[]" value="${cantidadProducto}" required></input>
-                    ${idProducto}
-                </td>
-                <td>${nombreProducto}</td>
-                <td>${cantidadProducto}</td>
-                <td>${precioProducto}</td>
-                <td>
-                    ${parseFloat(cantidadProducto) * parseFloat(precioProducto)}
-                    <input type="hidden" name="precio_detalle_compra_${idCompra}[]" value="${parseFloat(cantidadProducto) * parseFloat(precioProducto)}" required></input>
-                </td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-danger" onclick="eliminarProductoDetalle(${idProducto}, ${parseFloat(cantidadProducto) * parseFloat(precioProducto)}, ${idCompra})" title="Quitar producto">
-                        Eliminar
-                    </button>
-                </td>
-            </tr>
+        let validacion = true;
+
+        var productos = new Array();
+        var inputs = document.getElementsByClassName("producto_id_detalle"),
+        inputsProductos = [].map.call(inputs, function(valores){
+            productos.push(valores.value);
+        });
+
+        productos.forEach(function(valor){
+            if(idProducto == valor)
+            {
+                validacion = false;
+            }
+            console.log(valor);
+        });
+
+        if(validacion == true)
+        {
+            $('#tablaProductosEditar' + idCompra).append(`
+                <tr id="nuevoProducto-${idProducto}">
+                    <td>
+                        <input type="hidden" class="producto_id_detalle" name="producto_id_${idCompra}[]" value="${idProducto}" required></input>
+                        <input type="hidden" name="cantidad_detalle_compra_${idCompra}[]" value="${cantidadProducto}" required></input>
+                        ${idProducto}
+                    </td>
+                    <td>${nombreProducto}</td>
+                    <td>${cantidadProducto}</td>
+                    <td>${precioProducto}</td>
+                    <td>
+                        ${parseFloat(cantidadProducto) * parseFloat(precioProducto)}
+                        <input type="hidden" name="precio_detalle_compra_${idCompra}[]" value="${parseFloat(cantidadProducto) * parseFloat(precioProducto)}" required></input>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-danger" onclick="eliminarProductoDetalle(${idProducto}, ${parseFloat(cantidadProducto) * parseFloat(precioProducto)}, ${idCompra})" title="Quitar producto">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
             `);
-        let precioTotal = $("input[id=total_compra_" + idCompra + "]").val() || 0;
-        $("input[id=total_compra_" + idCompra + "]").val(parseFloat(precioTotal) + (parseFloat(cantidadProducto) * parseFloat(precioProducto)));
-        // $("#costo_adicional").val(parseFloat(cantidadProducto) * parseFloat(precioProducto));
+            let precioTotal = $("input[id=total_compra_" + idCompra + "]").val() || 0;
+            $("input[id=total_compra_" + idCompra + "]").val(parseFloat(precioTotal) + (parseFloat(cantidadProducto) * parseFloat(precioProducto)));
+        }
+        else
+        {
+            swalA.fire(
+                'Acción denegada',
+                'Producto ya ingresado, si deseas modificarlo, busca el producto en las listas para hacer cambios.',
+                'warning'
+            )
+        }
     }
     else
     {
