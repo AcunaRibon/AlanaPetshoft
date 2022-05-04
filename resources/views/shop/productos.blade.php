@@ -16,7 +16,7 @@
                 <img
                     title="{{$producto-> nombre_producto}}"
                     class="card-img-top"
-                    src="{{$producto->url_imagen_producto}}"
+                    src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}"
                     height="250px" width="200px"
                     >
                     <div class="b-card">
