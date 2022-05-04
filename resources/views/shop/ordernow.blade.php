@@ -13,7 +13,7 @@
                     <h5>TU PEDIDO</h5>
                         <table class="table">
                             <tr>
-                                <td><b>SUBTOTAL</b></td>
+                                <td><b>TOTAL</b></td>
                             </tr>
                             <tr>
                                 <td><p>${{$total}}</p></td>
