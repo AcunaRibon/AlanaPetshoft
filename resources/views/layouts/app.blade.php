@@ -71,9 +71,9 @@
                                 </div>
                             </li>
                         </ul>
-                        <form class="d-flex flex-grow-1">
-                            <input class="form-control me-2" type="search" placeholder="¿Qué buscas?" aria-label="Search" title="Buscar un producto">
-                            <button class="btn btn-outline-success" type="submit" title="Buscar">Buscar</button>
+                        <form class="d-flex flex-grow-1" action="/search">
+                            <input class="form-control me-2"  placeholder="¿Qué buscas?" aria-label="Search" title="Buscar un producto">
+                            <button class="btn btn-outline-success" type="submit" name="query" title="Buscar">Buscar</button>
                         </form>
                         <ul class="navbar-nav d-flex align-items-center ps-lg-5">
                         @guest
@@ -107,7 +107,7 @@
                             </div>
                         @endguest
                             <li class="nav-item">
-                                <a class="nav-link fs-7 ms-lg-3 text-center text-white fw-bold" href="*" title="Ver mi carrito">Mi<font class="text-success"> carrito </font></a>
+                                <a class="nav-link fs-7 ms-lg-3 text-center text-white fw-bold" href="{{url('/cartlist')}}" title="Ver mi carrito">Mi<font class="text-success"> carrito </font></a>
                             </li>
                         </ul>
                     </div>
