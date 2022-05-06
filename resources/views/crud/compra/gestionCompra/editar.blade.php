@@ -93,7 +93,7 @@
                                 <hr>
                                 <div class="table-responsive p-2">
                                     @if(count($detalleCompra) > 0)
-                                        <table class="table table-striped table-hover">
+                                        <table id="tabla" class="table table-striped table-hover">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th>ID Detalle</th>
@@ -117,7 +117,10 @@
                                                             <input type="hidden" name="compra_id[]" value="{{ $valor->compra_id }}"></input>
                                                             <input type="hidden" id="llave_detalle_compra_{{ $valor->id_detalle_compra }}" name="llave_eliminar[]" value="true"></input>
                                                         </td>
-                                                        <td>{{ $valor->producto_id }}</td>
+                                                        <td>
+                                                            {{ $valor->producto_id }}
+                                                            <input type="hidden" class="producto_id_detalle" value="{{ $valor->producto_id }}"></input>
+                                                        </td>
                                                         <td>{{ $valor->nombre_producto }}</td>
                                                         <td>{{ $valor->precio_producto }}</td>
                                                         <td>

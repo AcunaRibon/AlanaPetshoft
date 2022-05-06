@@ -72,20 +72,28 @@ class ShopController extends Controller
 
     public function addcart(Request $request, $id)
     {
+    
 
-        if(Auth::id())
+        if(Auth::check())
         {
-            
-            $producto=Producto::find($id);
-            $cart=new Cart;
+            try
+            {
 
-
-            $cart->id_user=isset($request->session()->get('user')['id']);
-            $cart->id_producto=$producto->id_producto;
-            $cart->quantity=$request->quantity;
-            $cart->save();
-
+                $cart=new Cart;
+                $cart->id_user= Auth::user()->id;
+                $cart->id_producto= $id;
+                $cart->quantity=$request->quantity;
+                $cart->save();
+           
             return redirect()->back();
+            }
+            
+            catch (\Exception $e) 
+            {
+                DB::rollBack();
+                return redirect("/detalle")->with('status', $e->getMessage());
+            }
+            
         }
         else {
             return redirect('/login');
@@ -96,11 +104,11 @@ class ShopController extends Controller
     public function cartlist()
     {
 
-        $user=auth()->user();
+        $user=Auth::user()->id;
         $cart = DB::table('carts')
         ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
         ->join('imagen_producto', 'carts.id_producto', '=', 'imagen_producto.producto_id')
-        ->where('carts.id_user', $user->id_user)
+        ->where('carts.id_user', '=', $user)
         ->select('producto.*', 'carts.id as cart_id', 'imagen_producto.url_imagen_producto', 'carts.quantity')
         ->get();
 
@@ -110,10 +118,10 @@ class ShopController extends Controller
 
     public function ordernow()
     {
-        $user=auth()->user();
+        $user=Auth::id();
         $total = $cart = DB::table('carts')
         ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
-        ->where('carts.id_user', $user->id_user)
+        ->where('carts.id_user', '=', $user)
         ->select('producto.nombre_producto')
         ->sum('producto.precio_producto');
 
@@ -198,6 +206,5 @@ class ShopController extends Controller
             return redirect("/cartlist")->with('status', $e->getMessage());
         }
     }
-    
 }
 

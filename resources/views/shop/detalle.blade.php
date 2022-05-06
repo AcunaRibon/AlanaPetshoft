@@ -10,15 +10,11 @@
 @if (session('status'))
         @if (session('status')==1)
             <div class="alert alert-success">
-                meloooo
+                Producto agregado al carrito
             </div>
-        @else
-            <div class="alert alert-danger">
-                {{session('status')}}
-            </div>
-        @endif
+            @endif
     @endif
-    <div class="row datos_productos">
+</div>
     <?php foreach($productos as $producto ) { ?>
         <div class="col-sm-6">
         <img class="detalle_img" width="auto" height="auto" src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}" alt="" >

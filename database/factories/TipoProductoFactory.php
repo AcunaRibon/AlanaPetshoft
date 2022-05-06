@@ -17,7 +17,7 @@ class TipoProductoFactory extends Factory
     public function definition()
     {
         return [
-            'nombre_tipo_producto' => $this->faker->realTextBetween(5, 30)
+            'nombre_tipo_producto' => $this->faker->realTextBetween(3, 30)
         ];
     }
 }

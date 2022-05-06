@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Domiciliario;
+use App\Models\EstadoVenta;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +25,7 @@ class VentaFactory extends Factory
             'calificacion_servicio_venta' => $this->faker->numberBetween(1, 5),
             'cliente_id' => $this->faker->numberBetween(1, 20),
             'domiciliario_documento' => $this->faker->randomElement(Domiciliario::select('domiciliario.documento_domiciliario')->get()),
-            'estado_venta_id' => $this->faker->randomElement(['1', '2'])
+            'estado_venta_id' => $this->faker->randomElement(EstadoVenta::select('estado_venta.id_estado_venta')->get())
         ];
     }
 }

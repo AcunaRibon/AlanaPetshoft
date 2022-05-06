@@ -5,6 +5,7 @@
 <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
 <section class="container1-card-products">
 <div class="card">
+<div>
 @if (session('status'))
         @if (session('status')==1)
             <div class="alert alert-success">
@@ -12,13 +13,14 @@
             </div>
             @endif
     @endif
+</div>
   <div class="card-body">
     <div class="table-responsive-sm">
       <form>
         <table class="table table-sm">
         @foreach($cart as $carts )
           <tr>
-            <td><center><img width="100px" height="100px" src="{{$carts->url_imagen_producto}}"></center></td>
+            <td><center><img width="100px" height="100px" src="{{ asset('../storage').'/app/public/'.$carts->url_imagen_producto }}"></center></td>
             <td><h5>{{$carts->nombre_producto}}</h5><p>Descripcion corta del producto</p></td>
             <td><input type="number" value="{{$carts->quantity}}" min="1" class="form-control" style="width:100px" name="quantity"></td>
             <td>$ {{$carts->precio_producto}}</td>

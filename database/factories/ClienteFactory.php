@@ -17,7 +17,7 @@ class ClienteFactory extends Factory
     public function definition()
     {
         return [
-            'nombres_cliente' => $this->faker->name(),
+            'nombres_cliente' => $this->faker->firstName(),
             'apellidos_cliente' => $this->faker->lastName(),
             'correo_electronico_cliente' => $this->faker->unique()->safeEmail(),
             'celular_cliente' => $this->faker->unique(true)->numberBetween(1000000000, 9999999999),
