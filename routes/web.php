@@ -11,6 +11,7 @@ use App\Http\Controllers\EstadoVentaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\MiDomicilioController;
 
 
 
@@ -52,6 +53,7 @@ Route::resource('producto', ProductoController::class);
 Route::resource('venta', VentaController::class);
 Route::resource('estadoVenta', EstadoVentaController::class);
 Route::resource('tipoUsuario', TipoUsuarioController::class);
+Route::resource('miDomicilio', MiDomicilioController::class);
 });
 
 
@@ -74,6 +76,7 @@ Route::resource('producto', ProductoController::class);
 Route::resource('venta', VentaController::class);
 Route::resource('estadoVenta', EstadoVentaController::class);
 Route::resource('tipoUsuario', TipoUsuarioController::class);
+Route::resource('miDomicilio', MiDomicilioController::class);
 });
 
 
