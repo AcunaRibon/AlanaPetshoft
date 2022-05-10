@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Domiciliario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DomiciliarioController extends Controller
 {
@@ -14,9 +15,16 @@ class DomiciliarioController extends Controller
      */
     public function index()
     {
+        try
+        {
         $domiciliarios = Domiciliario::all();
         $total = Domiciliario::count();
-        return view('crud.venta.domiciliario.index', compact('domiciliarios', 'total'));
+        return view('crud.venta.domiciliario.index', compact('domiciliarios', 'total'))->with('status', 'listado');
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/domiciliario')->with('status', $e->getMessage());
+        }
 
     }
 
@@ -38,9 +46,17 @@ class DomiciliarioController extends Controller
      */
     public function store(Request $request)
     {
-        $datosDomiciliario = request()->except('_token');
-        Domiciliario::insert($datosDomiciliario);
-        return redirect()->route('domiciliario.index');
+        try
+        {
+            $datosDomiciliario = request()->except('_token');
+            Domiciliario::insert($datosDomiciliario);
+            return redirect()->route('domiciliario.index')->with('status', 'registrado');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect('/domiciliario')->with('status', $e->getMessage());
+        }
     }
 
     /**
@@ -74,9 +90,19 @@ class DomiciliarioController extends Controller
      */
     public function update(Request $request,  $documento_domiciliario)
     {
-        $datosDomiciliario = request()->except('_token','_method');
-        Domiciliario::where('documento_domiciliario','=',$documento_domiciliario)->update($datosDomiciliario);
-        return redirect()->route('domiciliario.index');
+
+        try
+        {
+            $datosDomiciliario = request()->except('_token','_method');
+            Domiciliario::where('documento_domiciliario','=',$documento_domiciliario)->update($datosDomiciliario);
+            
+            return redirect()->route('domiciliario.index')->with('status', 'actualizado');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect('/domiciliario')->with('status', $e->getMessage());
+        }
     }
 
     /**

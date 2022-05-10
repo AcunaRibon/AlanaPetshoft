@@ -20,37 +20,38 @@ class MiDomicilioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
+    {
+        try {
+            $authUser = Auth::user()->id;
 
+            $estadosVentas = DB::table('estado_venta')
+                ->select('*')
+                ->get();
 
-        
-        $authUser = Auth::user()->id;
-
-        $estadosVentas = DB::table('estado_venta')
-        ->select('*')
-        ->get();
-
-        $Activados = DB::table('venta')
-        ->select(DB::raw('count(id_venta) as Contador'),'estado_venta_id')
-        ->groupBy('estado_venta_id')
-        ->get();
-        
+            $Activados = DB::table('venta')
+                ->select(DB::raw('count(id_venta) as Contador'), 'estado_venta_id')
+                ->groupBy('estado_venta_id')
+                ->get();
 
 
 
-        $datos['detalleDomicilio'] = DB::table('detalle_venta')
-            ->join('producto' , 'detalle_venta.producto_id','=', 'producto.id_producto' )
-            ->join('venta' , 'detalle_venta.venta_id','=', 'venta.id_venta' )
-            ->select('venta.id_venta' ,'detalle_venta.*', 'producto.nombre_producto', 'producto.precio_producto')
-            ->get();
 
-        $misDomicilios = DB::table('venta')
-        ->select('venta.id_venta','venta.fecha_venta','venta.descuento_venta','venta.total_venta', 'domiciliario.nombres_domiciliario')
-        ->join('domiciliario','venta.domiciliario_documento' , '=' ,'domiciliario.documento_domiciliario')
-        ->where('venta.cliente_id', '=', $authUser)
-        ->get();
+            $datos['detalleDomicilio'] = DB::table('detalle_venta')
+                ->join('producto', 'detalle_venta.producto_id', '=', 'producto.id_producto')
+                ->join('venta', 'detalle_venta.venta_id', '=', 'venta.id_venta')
+                ->select('venta.id_venta', 'detalle_venta.*', 'producto.nombre_producto', 'producto.precio_producto')
+                ->get();
 
-        return view('crud.venta.miDomicilio.index',compact('misDomicilios','estadosVentas','Activados'), $datos);
+            $misDomicilios = DB::table('venta')
+                ->select('venta.id_venta', 'venta.fecha_venta', 'venta.descuento_venta', 'venta.total_venta', 'domiciliario.nombres_domiciliario')
+                ->join('domiciliario', 'venta.domiciliario_documento', '=', 'domiciliario.documento_domiciliario')
+                ->where('venta.cliente_id', '=', $authUser)
+                ->get();
+                return view('crud.venta.miDomicilio.index', compact('misDomicilios', 'estadosVentas', 'Activados'), $datos)->with('status', 'listado');
+        } catch (\Exception $e) {
+            return redirect('/miDomicilio')->with('status', $e->getMessage());
+        }
+
 
 
     }
@@ -117,7 +118,7 @@ class MiDomicilioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(MiDomicilio $miDomicilio)
-    
+
     {
         //
     }
