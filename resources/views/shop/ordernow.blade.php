@@ -8,12 +8,22 @@
     <h1>Detalle de pedido</h1>
         <br><br>
             <div class="row table-pago">
-                <div class="col-6">
-                    <form class="form-envio">
+                <div class="col-8">
+                    <form class="form-envio" action="orderplace" method="POST">
+                        @csrf
+                        <div style="float: left" class="form-group mb-2 col-5">
+                            <label for="">Dirección:</label>
+                            <input type="text" name="address" id="address" class="form-control" value="{{isset($usuario->address)?$usuario->address:''}}">
+                        </div>
+                        <div style="float: right" class="form-group mb-2 col-6">
+                            <label for="">Celular:</label>
+                            <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{isset($usuario->cellphone)?$usuario->cellphone:''}}">
+                        </div>
+                        <p style="padding-top: 15%;">Tipo de entrega:</p>
                         <div class="form-check">
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">                           
+                                    <input class="form-check-input" type="radio" name="Recoger en tienda" id="flexRadioDefault1">                           
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Recoger en tienda
                                     </label>
@@ -23,19 +33,19 @@
                         <div class="form-check">
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>                            
+                                    <input class="form-check-input" type="radio" name="Domicilio" id="flexRadioDefault2" checked>                            
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Domicilio
                                     </label>
                                 </td>
                             </tr>
                         </div>
-                        <a href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
+                        <button href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
                             Finalizar compra
-                        </a>
+                        </button>
                     </form> 
                 </div>
-                <div class="col-6" style="">
+                <div class="col-4" style="">
                     <table class="table table-bordered" >
                         <thead>
                             <tr>

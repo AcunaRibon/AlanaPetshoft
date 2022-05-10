@@ -76,9 +76,6 @@ class ShopController extends Controller
 
         if(Auth::check())
         {
-            try
-            {
-
                 $cart=new Cart;
                 $cart->id_user= Auth::user()->id;
                 $cart->id_producto= $id;
@@ -86,13 +83,6 @@ class ShopController extends Controller
                 $cart->save();
            
             return redirect()->back();
-            }
-            
-            catch (\Exception $e) 
-            {
-                DB::rollBack();
-                return redirect("/detalle")->with('status', $e->getMessage());
-            }
             
         }
         else {
@@ -133,23 +123,18 @@ class ShopController extends Controller
     public function search(Request $request)
     {
         
-        /*
-        $search=$request->search;
-        $datos = Producto::
-        where('nombre_producto', 'like', '%'.$search.'%')->get();
- 
-        return view('shop.search', ['producto'=>$datos]);
-*/
-        
         $datos = Producto::
         join('imagen_producto', 'producto.id_producto', '=', 'imagen_producto.producto_id')
         ->where('nombre_producto', 'like', '%'.$request->input('query').'%')
         ->get();
 
         return view('shop.search', ['productos'=>$datos]);
-        /*
-        return view('shop.search', ['producto'=>$datos]);
-        */
+
+    }
+
+    public function orderPlace(Request $request){
+
+        return $request->input();
     }
 
     

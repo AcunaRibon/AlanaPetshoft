@@ -108,8 +108,7 @@
                             </div>
                         @endguest
                             <li class="nav-item mx-1">
-                                <a class="nav-link fs-7" href="{{ url('cartlist') }}">Mi<font color="#FFD4D4"> carrito (0) </font></a>
-
+                                <strong><a class="nav-link fs-7 text-white" href="{{ url('cartlist') }}">Mi<font color="#FFD4D4"> carrito (0) </font></a></strong>
                             </li>
                         </ul>
                     </div>

@@ -9,4 +9,5 @@ class Cart extends Model
 {
     use HasFactory; 
     public $table="carts";
+    public $timestamps = false;
 }
