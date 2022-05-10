@@ -15,7 +15,6 @@
                 <a  href="detalle/{{$producto->id_producto}}">
                 <img
                     title="{{$producto-> nombre_producto}}"
-                    class="card-img-top"
                     src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}"
                     height="250px" width="200px"
                     >

@@ -374,3 +374,10 @@ color: #3E3E54;
         padding-left: 1%;
     }
     
+    .table-bordered {
+        border-top: #3E3E54;
+        border-left: #3E3E54;
+        
+        
+        
+    }
