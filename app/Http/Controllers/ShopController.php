@@ -93,22 +93,29 @@ class ShopController extends Controller
 
     public function cartlist()
     {
-        if(Auth::check())
+        try
         {
-        $user=Auth::user()->id;
-        $cart = DB::table('carts')
-        ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
-        ->join('imagen_producto', 'carts.id_producto', '=', 'imagen_producto.producto_id')
-        ->where('carts.id_user', '=', $user)
-        ->select('producto.*', 'carts.id as cart_id', 'imagen_producto.url_imagen_producto', 'carts.quantity')
-        ->get();
+            if(Auth::check())
+            {
+            $user=Auth::user()->id;
+            $cart = DB::table('carts')
+            ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
+            ->join('imagen_producto', 'carts.id_producto', '=', 'imagen_producto.producto_id')
+            ->where('carts.id_user', '=', $user)
+            ->select('producto.*', 'carts.id as cart_id', 'imagen_producto.url_imagen_producto', 'carts.quantity')
+            ->get();
+    
+            return view('shop.cartlist', ['cart'=>$cart])->with('status', 'listado');
+            }
+            else {
+                return redirect('/login');
+            }
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/productos')->with('status', $e->getMessage());
+        }
 
-        return view('shop.cartlist', ['cart'=>$cart]);
-        }
-        else {
-            return redirect('/login');
-        }
-        
     }
 
     public function ordernow()
