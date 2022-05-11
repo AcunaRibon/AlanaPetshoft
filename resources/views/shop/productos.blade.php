@@ -3,6 +3,7 @@
 @section('content')
 
 <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
+<script src="{{ asset('js/shop.js') }}" defer></script>
 <section class="container1-card-products">
     
     <h1>Catálogo</h1>
@@ -34,9 +35,29 @@
                         <input type="hidden" name="cantidadProducto" id="cantidadProducto" value="{{$producto-> existencia_producto}}">
 
                         <input type="hidden" value="1" min="1" class="form-control" style="width:100px" name="quantity">
-                        <button class=" btn-card" name="btnAccion" value="Agregar" type="submit">Agregar al carrito</button>
+                        <button class="btn-card" data-toggle="modal" data-target="#myModal" name="btnAccion" value="Agregar" type="submit">Agregar al carrito</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                         </form>
-                    
                     </div> 
                 </div>
             </div>

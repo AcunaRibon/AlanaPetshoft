@@ -5,7 +5,7 @@
 <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
 
 <section class="detail-ordernow">
-    <h1>Detalle de pedido</h1>
+    <h2 style="padding-left: 6.5%">Detalle de pedido</h2>
         <br><br>
             <div class="row table-pago">
                 <div class="col-8">
@@ -19,7 +19,7 @@
                             <label for="">Celular:</label>
                             <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{isset($usuario->cellphone)?$usuario->cellphone:''}}">
                         </div>
-                        <p style="padding-top: 15%;">Tipo de entrega:</p>
+                        <p style="padding-top: 15%; border-collapse: collapse;">Tipo de entrega:</p>
                         <div class="form-check">
                             <tr>
                                 <td>

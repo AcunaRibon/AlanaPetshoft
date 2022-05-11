@@ -93,7 +93,8 @@ class ShopController extends Controller
 
     public function cartlist()
     {
-
+        if(Auth::check())
+        {
         $user=Auth::user()->id;
         $cart = DB::table('carts')
         ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
@@ -103,6 +104,10 @@ class ShopController extends Controller
         ->get();
 
         return view('shop.cartlist', ['cart'=>$cart]);
+        }
+        else {
+            return redirect('/login');
+        }
         
     }
 

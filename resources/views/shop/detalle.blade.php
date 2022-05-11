@@ -4,22 +4,15 @@
 
 <div class="container-detalle">
 <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
-<script src="{{ asset('js/calificaciones.js') }}" defer></script>
+<script src="{{ asset('js/shop.js') }}" defer></script>
 
-
-@if (session('status'))
-        @if (session('status')==1)
-            <div class="alert alert-success">
-                Producto agregado al carrito
-            </div>
-            @endif
-    @endif
 </div>
     <?php foreach($productos as $producto ) { ?>
-        <div class="col-sm-6">
-        <img class="detalle_img" width="auto" height="auto" src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}" alt="" >
+    <div class="row" style="padding: 5%; padding-top: 0%;">
+        <div class="col-6">
+            <img class="detalle_img" width="auto" height="auto" src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}" alt="" >
         </div>
-        <div class="col-sm-6">
+        <div class="col-6">
             <a href="{{ url('/productos') }}">Go back</a>
             <h2 class="h2pro">{{$producto->nombre_producto}}</h2>
             <div class="rw-ui-container"></div>
