@@ -120,6 +120,7 @@ class ShopController extends Controller
 
     public function ordernow()
     {
+        
         $user=Auth::id();
         $total = $cart = DB::table('carts')
         ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
@@ -128,8 +129,23 @@ class ShopController extends Controller
         ->sum('producto.precio_producto');
 
         return view('shop.ordernow', ['total'=>$total]);
-
+        
     }
+
+    /*
+    public function calcular_precio($productos, $cantidad,$descuento)
+    {
+        $precio = 0;
+        foreach ($productos as $key => $producto) {
+            $P = Cart::find($producto);
+            $precio += ($P->precio_producto * $cantidad[$key]);
+        }
+
+        $precio = $precio-($precio * ($descuento/100));
+
+        return view('shop.ordernow', ['precio'=>$precio]);
+    }
+    */
 
 
     public function search(Request $request)
@@ -188,7 +204,6 @@ class ShopController extends Controller
         try
         
         {
-           
                 $datos = Cart::find($cart_id);
                 $datos->delete();
 
