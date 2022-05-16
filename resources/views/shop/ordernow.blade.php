@@ -9,7 +9,7 @@
         <br><br>
             <div class="row table-pago">
                 <div class="col-8">
-                    <form class="form-envio" action="orderplace" method="POST">
+                    <form class="form-envio" action="{{url('envioOrden')}}" method="POST">
                         @csrf
                         <div style="float: left" class="form-group mb-2 col-5">
                             <label for="">Dirección:</label>
@@ -23,7 +23,7 @@
                         <div class="form-check">
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="radio" name="Recoger en tienda" id="flexRadioDefault1">                           
+                                    <input class="form-check-input" type="radio" name="TipoEntrega" id="Recoger en tienda">                           
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Recoger en tienda
                                     </label>
@@ -33,14 +33,14 @@
                         <div class="form-check">
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="radio" name="Domicilio" id="flexRadioDefault2" checked>                            
+                                    <input class="form-check-input" type="radio" name="TipoEntrega" id="Domicilio" checked>                            
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Domicilio
                                     </label>
                                 </td>
                             </tr>
                         </div>
-                        <button href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
+                        <button  class="btn btn-success" style="float: right;">
                             Finalizar compra
                         </button>
                     </form> 

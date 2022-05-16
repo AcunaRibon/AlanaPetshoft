@@ -14,11 +14,12 @@
             <div class="col-3 cd-size" width="auto" height="auto"> 
                 <div class="card {{$producto->id_producto==1?'active':''}}">
                 <a  href="detalle/{{$producto->id_producto}}">
+                <center>
                 <img
                     title="{{$producto-> nombre_producto}}"
                     src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}"
                     height="250px" width="200px"
-                    >
+                    ></center>
                     <div class="b-card">
                    
                         <a class="card-title title-tj1">{{$producto-> nombre_producto}}</a>
@@ -35,28 +36,8 @@
                         <input type="hidden" name="cantidadProducto" id="cantidadProducto" value="{{$producto-> existencia_producto}}">
 
                         <input type="hidden" value="1" min="1" class="form-control" style="width:100px" name="quantity">
-                        <button class="btn-card" data-toggle="modal" data-target="#myModal" name="btnAccion" value="Agregar" type="submit">Agregar al carrito</button>
+                        <button class="btn-card" data-toggle="modal" value="Agregar" type="submit">Agregar al carrito</button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
                         </form>
                     </div> 
                 </div>
@@ -66,3 +47,40 @@
 
 <br><br><br>
 @endsection
+
+
+@section('css')
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.css" />
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+@stop
+
+@section('js')
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/tablas.js') }}" defer></script>
+
+<input value="el producto" id="mensajeAlerta" hidden>
+<input value="Producto" id="mensajeAlerta1" hidden>
+<input value="El producto" id="mensajeAlerta2" hidden>
+@if (session('status'))
+@if (session('status') == 'registrado')
+<input value="registrado" id="tipoAlerta" hidden>
+@elseif (session('status') == 'actualizado')
+<input value="actualizado" id="tipoAlerta" hidden>
+@elseif (session('status') == 'listado')
+<input value="listado" id="tipoAlerta" hidden>
+@else
+<input value="error" id="tipoAlerta" hidden>
+@endif
+@endif
+<script src="{{ asset('js/alertas.js') }}"></script>
+@stop

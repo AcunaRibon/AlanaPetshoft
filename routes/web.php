@@ -13,6 +13,9 @@ use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\MiDomicilioController;
 
+use App\Mail\MailOrderDetailMailable;
+use Illuminate\Support\Facades\Mail;
+
 
 
 /*
@@ -102,3 +105,10 @@ Route::get('/ordernow', [ShopController::class, 'ordernow']);
 
 Route::post('/orderplace', [ShopController::class, 'orderPlace']);
 
+Route::post('envioOrden', function () {
+
+    $correo = new MailOrderDetailMailable;
+    Mail::to('macyjlemosv@gmail.com')->send($correo);
+
+    return "Mensaje enviado";
+});
