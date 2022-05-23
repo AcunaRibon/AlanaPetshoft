@@ -88,3 +88,12 @@ function starRate(e){
     }(document, new Date(), "script", "rating-widget.com/"));
 
     var btn = document.getElementById("btn-card");
+
+    function mostrarform() {
+      document.getElementById('form-send').style.display = 'block';
+      document.getElementById('btn-send').style.display = 'block';
+    }
+
+    function ocultarform() {
+      document.getElementById('form-send').style.display = 'none';
+    }

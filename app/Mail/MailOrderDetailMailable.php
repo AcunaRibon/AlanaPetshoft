@@ -12,14 +12,19 @@ class MailOrderDetailMailable extends Mailable
     use Queueable, SerializesModels;
 
     public $subject = "Información de envío de la orden";
+
+    public $msg;
+
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($msg)
     {
-        //
+        $this->msg = $msg;
+        
     }
 
     /**

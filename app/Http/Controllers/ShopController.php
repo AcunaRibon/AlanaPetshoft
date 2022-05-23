@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Producto;
+use App\Mail\MailOrderDetailMailable;
 use App\Models\Cart;
+use App\Models\Producto;
 use App\Models\User;
 use App\Models\CalificacionProducto;
 use App\Models\ImagenProducto;
 use App\Models\TipoProducto;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Producto as GlobalProducto;
@@ -129,6 +131,21 @@ class ShopController extends Controller
         ->sum('producto.precio_producto');
 
         return view('shop.ordernow', ['total'=>$total]);
+        
+    }
+
+    public function enviorden(Request $request) {
+
+        $message = request()->validate([
+            'address' => 'required',
+            'rate' => 'required',
+            'cellphone' => 'required',
+            'typeSend' => 'required'
+        ]);
+
+        Mail::to('macyjlemosv@gmail.com')->send(new MailOrderDetailMailable($message));
+        
+        return 'Mensaje enviado';
         
     }
 

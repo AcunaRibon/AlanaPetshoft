@@ -105,10 +105,4 @@ Route::get('/ordernow', [ShopController::class, 'ordernow']);
 
 Route::post('/orderplace', [ShopController::class, 'orderPlace']);
 
-Route::post('envioOrden', function () {
-
-    $correo = new MailOrderDetailMailable;
-    Mail::to('macyjlemosv@gmail.com')->send($correo);
-
-    return "Mensaje enviado";
-});
+Route::post('envioOrden', [ShopController::class, 'enviorden']);

@@ -175,6 +175,7 @@ return [
         'last_name' => 'apellido',
         'cellphone' => 'celular',
         'address' => 'dirección',
+        'rate' => 'calificación',
         '' => ''
     ],
 

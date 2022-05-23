@@ -15,7 +15,8 @@
     @endif
 </div>
   <div class="card-body">
-    <div class="table-responsive-sm">
+    <div class="row">
+    <div class="col-8">
       <form>
         <table class="table table-sm">
         @foreach($cart as $carts )
@@ -35,10 +36,41 @@
           </tr>
           @endforeach
         </table>
-        <a href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
+        </form>
+        </div>
+        <div class="col-4" style="float: right" >  
+                    <table class="table table-bordered" >
+                        <thead>
+                            <tr>
+                                <th scope="col"><strong>Resumen</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td><strong>$</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Descuento</td>
+                                <td>-$0</td>
+                            </tr>
+                            <tr>
+                                <td>Costo de domicilio</td>
+                                <td style="color: green;">¡Gratis!</td>
+                            </tr>
+                            <tr>
+                                <td><h5><strong>Total</strong></h5></td>
+                                <td><h5><strong>$</strong></h5></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>         
+        
+    <button href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
           Confirmar pedido
-        </a>
-      </form>
+        </button>
+      
     </div>
   </div>
 </div>

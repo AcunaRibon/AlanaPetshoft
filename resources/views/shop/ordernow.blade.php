@@ -3,27 +3,21 @@
 @section('content')
 
 <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
+<script src="{{ asset('js/shop.js') }}" defer></script>
 
 <section class="detail-ordernow">
-    <h2 style="padding-left: 6.5%">Detalle de pedido</h2>
+    <h2 style="padding-left: 15%; padding-top: 3%;">Detalle de pedido</h2>
         <br><br>
-            <div class="row table-pago">
-                <div class="col-8">
+            <div class="row table-pago" style="float: center;">
+                <div style="padding-left: 15%" class="col-4">
                     <form class="form-envio" action="{{url('envioOrden')}}" method="POST">
                         @csrf
-                        <div style="float: left" class="form-group mb-2 col-5">
-                            <label for="">Dirección:</label>
-                            <input type="text" name="address" id="address" class="form-control" value="{{isset($usuario->address)?$usuario->address:''}}">
-                        </div>
-                        <div style="float: right" class="form-group mb-2 col-6">
-                            <label for="">Celular:</label>
-                            <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{isset($usuario->cellphone)?$usuario->cellphone:''}}">
-                        </div>
-                        <p style="padding-top: 15%; border-collapse: collapse;">Tipo de entrega:</p>
+                        <p style=" border-collapse: collapse;">Tipo de entrega:</p>
+
                         <div class="form-check">
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="radio" name="TipoEntrega" id="Recoger en tienda">                           
+                                    <input onclick="ocultarform();" class="form-check-input" type="radio" name="typeSend" id="typeSend" value="RecogerEnTienda">                          
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Recoger en tienda
                                     </label>
@@ -33,46 +27,43 @@
                         <div class="form-check">
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="radio" name="TipoEntrega" id="Domicilio" checked>                            
+                                    <input onclick="mostrarform();" class="form-check-input" type="radio" name="typeSend" id="typeSend" value="Domicilio">                            
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Domicilio
                                     </label>
                                 </td>
                             </tr>
                         </div>
-                        <button  class="btn btn-success" style="float: right;">
+                        <br>
+                </div>
+                        <div  id="form-send" class="col-6" style="float: left; padding-left: 10%">
+                            
+                        <div style="float: left" class="form-group mb-2 col-5">
+                            <label for="">Dirección:</label>
+                            <input type="text" name="address" id="address" class="form-control" value="{{ old('address')}}">
+                            {!! $errors->first('address', '<small>:message</small>') !!}
+                        </div>
+                        <div style="float: right" class="form-group mb-2 col-6">
+                            <label for="">Celular:</label>
+                            <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{ old('cellphone')}}">
+                            {!! $errors->first('cellphone', '<small>:message</small>') !!}
+                        </div>
+                        <div style="float: left" class="form-group mb-2 col-5">
+                            <label for="">Calificación:</label>
+                            <input type="number" min="1" max="5" name="rate" id="rate" class="form-control" value="{{ old('rate')}}">
+                            {!! $errors->first('rate', '<small>:message</small>') !!}
+                        </div>
+                        </div>
+                        <div id="btn-send" style=" padding: 15%; padding-top: 2%">
+                        <button class="btn btn-success" style="float:right;">
                             Finalizar compra
                         </button>
+                        </div>
+                        
+                        
                     </form> 
-                </div>
-                <div class="col-4" style="">
-                    <table class="table table-bordered" >
-                        <thead>
-                            <tr>
-                                <th scope="col"><strong>Resumen</strong></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Subtotal</td>
-                                <td><strong>${{$total}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Descuento</td>
-                                <td>-$0</td>
-                            </tr>
-                            <tr>
-                                <td>Costo de domicilio</td>
-                                <td style="color: green;">¡Gratis!</td>
-                            </tr>
-                            <tr>
-                                <td><h5><strong>Total</strong></h5></td>
-                                <td><h5><strong>${{$total}}</strong></h5></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>         
+            </div>   
+                
 </section>
 
 
