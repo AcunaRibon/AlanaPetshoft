@@ -39,6 +39,8 @@
         </form>
         </div>
         <div class="col-4" style="float: right" >  
+        <form class="form-resume">
+
                     <table class="table table-bordered" >
                         <thead>
                             <tr>
@@ -63,16 +65,48 @@
                                 <td><h5><strong>$</strong></h5></td>
                             </tr>
                         </tbody>
-                    </table>
+                   </table>
                 </div>
             </div>         
-        
-    <button href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
+    <button type="submit" href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
           Confirmar pedido
         </button>
-      
+        </form>
     </div>
   </div>
 </div>
         <br><br><br>
+@endsection
+
+@section('js')
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+$('.form-resume').submit(function(e){
+  e.preventDefault();
+});
+
+
+Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+
+
+</script>
+
 @endsection
