@@ -145,7 +145,7 @@ class ShopController extends Controller
 
         Mail::to('macyjlemosv@gmail.com')->send(new MailOrderDetailMailable($message));
         
-        return 'Mensaje enviado';
+        return view('shop.thanks');
         
     }
 

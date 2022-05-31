@@ -14,7 +14,7 @@
             @endif
     @endif
 </div>
-  <div class="card-body">
+  <div class="card-body" id="form-send-cartlist">
     <div class="row">
     <div class="col-8">
       <form>
@@ -65,13 +65,14 @@
                                 <td><h5><strong>$</strong></h5></td>
                             </tr>
                         </tbody>
-                   </table>
+                    </table> 
                 </div>
-            </div>         
-    <button type="submit" href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
-          Confirmar pedido
-        </button>
-        </form>
+            </div>        
+
+          <a href="{{url('ordernow')}}" class="btn btn-success confirmarbtn" data-name="{{$carts->nombre_producto}}" style="float: right;">
+                Confirmar pedido
+          </a>
+
     </div>
   </div>
 </div>
@@ -81,32 +82,30 @@
 @section('js')
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 
-$('.form-resume').submit(function(e){
-  e.preventDefault();
-});
+    const panel = document.querySelector('#form-send-cartlist');
 
+    panel.addEventListener('click', correcto);
 
-Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  }
-})
-
-
+    function correcto(e) {
+        if(e.target.classList.contains('confirmarbtn')) {
+            e.preventDefault();
+            const pronom = e.target.dataset.name;
+            Swal.fire({
+            title: '¿Deseas confirmar tu pedido?',
+            showDenyButton: true,
+            confirmButtonText: 'Si',
+            
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.replace('ordernow');
+            } 
+          })
+        }
+    }
+    
 </script>
 
 @endsection

@@ -41,25 +41,23 @@
                         <div style="float: left" class="form-group mb-2 col-5">
                             <label for="">Dirección:</label>
                             <input type="text" name="address" id="address" class="form-control" value="{{ old('address')}}">
-                            {!! $errors->first('address', '<small style="color: red;">:message</small>') !!}
-                            <br>
+                            {!! $errors->first('address', '<small style="color: red">:message</small>') !!}
                         </div>
                         <br>
                         <div style="float: right" class="form-group mb-2 col-6">
                             <label for="">Celular:</label>
                             <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{ old('cellphone')}}">
-                            {!! $errors->first('cellphone', '<small style="color: red;">:message</small>') !!}
+                            {!! $errors->first('cellphone', '<small style="color: red">:message</small>') !!}
                         </div>
 
                         <div style="float: left" class="form-group mb-2 col-5">
                             <label for="">Calificación:</label>
                             <input type="number" min="1" max="5" name="rate" id="rate" class="form-control" value="{{ old('rate')}}">
-                            {!! $errors->first('rate', '<small style="color: red;">:message</small>') !!}
-                            <br>
+                            {!! $errors->first('rate', '<small style="color: red">:message</small>') !!}
                         </div>
                         </div>
                         <div id="btn-send" style=" padding: 15%; padding-top: 2%">
-                        <button class="btn btn-success" style="float:right;">
+                        <button class="btn btn-success finalizarbtn" style="float:right;">
                             Finalizar compra
                         </button>
                         </div>
@@ -72,3 +70,4 @@
 
 
 @endsection
+
