@@ -14,7 +14,7 @@
             @endif
     @endif
 </div>
-  <div class="card-body">
+  <div class="card-body" id="form-send-cartlist">
     <div class="row">
     <div class="col-8">
       <form>
@@ -63,16 +63,47 @@
                                 <td><h5><strong>$</strong></h5></td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> 
                 </div>
-            </div>         
-        
-    <button href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
-          Confirmar pedido
-        </button>
-      
+            </div>        
+
+          <a href="{{url('ordernow')}}" class="btn btn-success confirmarbtn" data-name="{{$carts->nombre_producto}}" style="float: right;">
+                Confirmar pedido
+          </a>
+
     </div>
   </div>
 </div>
         <br><br><br>
+@endsection
+
+@section('js')
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+    const panel = document.querySelector('#form-send-cartlist');
+
+    panel.addEventListener('click', correcto);
+
+    function correcto(e) {
+        if(e.target.classList.contains('confirmarbtn')) {
+            e.preventDefault();
+            const pronom = e.target.dataset.name;
+            Swal.fire({
+            title: '¿Deseas confirmar tu pedido?',
+            showDenyButton: true,
+            confirmButtonText: 'Si',
+            
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.replace('ordernow');
+            } 
+          })
+        }
+    }
+    
+</script>
+
 @endsection
