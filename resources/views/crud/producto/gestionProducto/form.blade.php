@@ -1,6 +1,6 @@
 <div class="form-group mb-2">
     <label for="nombre_producto">Nombre:</label>
-    <input type="text" name="nombre_producto{{$tipo}}" id="nombre_producto{{$tipo}}" class="form-control @error('nombre_producto'.$tipo) is-invalid @enderror" value="{{isset($producto->nombre_producto)?$producto->nombre_producto:''}}">
+    <input type="text" name="nombre_producto{{$tipo}}" id="nombre_producto{{$tipo}}" class="form-control @error('nombre_producto'.$tipo) is-invalid @enderror" value="{{isset($producto->nombre_producto)?$producto->nombre_producto:old('nombre_producto'.$tipo)}}">
     @error('nombre_producto'.$tipo)
     <input value="{{$modo}}" id="tipoAlerta" hidden>
     <p class="text-danger fw-bold">
