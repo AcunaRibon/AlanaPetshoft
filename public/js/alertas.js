@@ -87,6 +87,25 @@ $('.cancelar').on('click', function(e){
     })
 });
 
+$('.habilitar').on('click', function(e){
+    e.preventDefault();
+    var form = event.target.form;
+
+    swalA.fire({
+        title: '¿Deseas habilitar ' + mensaje + '?',
+        text: "Si lo haces, se tendrá en cuenta para procesos del negocio.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    })
+});
+
 // Alertas luego de confirmar envío
 
 var tipoAlerta = $('#tipoAlerta').val();
