@@ -17,7 +17,7 @@
                         <div class="form-check">
                             <tr>
                                 <td>
-                                    <input onclick="ocultarform();" class="form-check-input" type="radio" name="typeSend" id="typeSend" value="RecogerEnTienda">                          
+                                    <input onclick="ocultarform();" class="form-check-input" type="radio" name="typeSend" id="typeSend1" value="RecogerEnTienda">                          
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Recoger en tienda
                                     </label>
@@ -36,7 +36,7 @@
                         </div>
                         <br>
                 </div>
-                        <div  id="form-send" class="col-6" style="float: left; padding-left: 10%">
+                        <div  id="form-send" class="col-6" style="float: left; padding-left: 10%; ">
                             
                         <div style="float: left" class="form-group mb-2 col-5">
                             <label for="">Dirección:</label>
@@ -44,7 +44,7 @@
                             {!! $errors->first('address', '<small style="color: red">:message</small>') !!}
                         </div>
                         <br>
-                        <div style="float: right" class="form-group mb-2 col-6">
+                        <div style="float: right" class="form-group mb-2 col-5">
                             <label for="">Celular:</label>
                             <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{ old('cellphone')}}">
                             {!! $errors->first('cellphone', '<small style="color: red">:message</small>') !!}
@@ -55,15 +55,22 @@
                             <input type="number" min="1" max="5" name="rate" id="rate" class="form-control" value="{{ old('rate')}}">
                             {!! $errors->first('rate', '<small style="color: red">:message</small>') !!}
                         </div>
+                        <br><br><br>
+                        <div style="padding-top: 10%">
+                            <button class="btn btn-success finalizarbtn" style="float:right;">
+                                Finalizar compra
+                            </button>
                         </div>
-                        <div id="btn-send" style=" padding: 15%; padding-top: 2%">
-                        <button class="btn btn-success finalizarbtn" style="float:right;">
-                            Finalizar compra
-                        </button>
+                        <br><br><br>
                         </div>
-                        
-                        
                     </form> 
+                    
+                    <div id="btnRecoger" style="padding-right: 20%">
+                        <a href="{{ url('thanks') }}" class="btn btn-success" style="float:right;">
+                            Finalizar compra
+                        </a>
+                    </div>
+                    <br><br><br>
             </div>   
                 
 </section>

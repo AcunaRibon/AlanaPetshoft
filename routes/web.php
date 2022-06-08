@@ -103,6 +103,8 @@ Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
 
 Route::get('/ordernow', [ShopController::class, 'ordernow']);
 
+Route::get('/thanks', [ShopController::class, 'RecogerTienda']);
+
 Route::post('/orderplace', [ShopController::class, 'orderPlace']);
 
 Route::post('envioOrden', [ShopController::class, 'enviorden']);
