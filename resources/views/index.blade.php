@@ -22,7 +22,7 @@
         <img class="card-img-top" src="images/petfood.png" alt="" >
         <div class="card-block">
             <h4 class="card-title title-landing">Alimentos</h4>
-            <p class="card-text text-landing">En AlanaPetshoft encontrarás los mejores precios en alimentos para tus peludos</p>
+            <p class="card-text text-landing">Encontrarás los mejores precios en alimentos, aporta energía para el desarrollo de las actividades del día a día de tu mascota</p>
             
         </div>
     </div>
@@ -42,17 +42,23 @@
         <img class="card-img-top" src="images/medicina.svg" alt="" >
         <div class="card-block">
             <h4 class="card-title title-landing">Medicina</h4>
-            <p class="card-text text-landing">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text text-landing">
+            Medicamentos biológicos,
+veterinarios e insumos hospitalarios, especializada en animales
+de compañía comprometida con el servicio a sus clientes
+            </p>
             
         </div>
     </div>
 </div>
 <div class="col-sm-6">
     <div class="card">
-        <img class="card-imimages/accesorios.svg" alt="" >
+        <img class="card-img-top" src="images/accesorios.svg" alt="" >
         <div class="card-block">
             <h4 class="card-title title-landing">Accesorios</h4>
-            <p class="card-text text-landing">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text text-landing">
+            Camas, correas , collares, pecheras y accesorios para ellos. La comodidad en tu mascota es fundamental para el desarrollo y relacionamiento de ellos.
+            </p>
             
         </div>
     </div>
