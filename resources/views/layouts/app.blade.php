@@ -51,16 +51,10 @@
                                 </a>
                             
                         </ul>
-<<<<<<< HEAD
-                        <form class="d-flex flex-grow-1" action="/search">
-                            <input class="form-control me-2"  placeholder="¿Qué buscas?" aria-label="Search" title="Buscar un producto">
-                            <button class="btn btn-outline-success" type="submit" name="query" title="Buscar">Buscar</button>
-=======
                         <form class="d-flex flex-grow-1" action="search">
                             <input class="form-control me-2 " name="query" type="text" placeholder="¿Qué buscas?" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
 
->>>>>>> 7ba8a7cae929d302b8f62a6f88d873a3abe09c72
                         </form>
                         <ul class="navbar-nav d-flex align-items-center ps-lg-5">
                         @guest
@@ -93,13 +87,8 @@
                                 </ul>
                             </div>
                         @endguest
-<<<<<<< HEAD
                             <li class="nav-item">
                                 <a class="nav-link fs-7 ms-lg-3 text-center text-white fw-bold" href="{{url('/cartlist')}}" title="Ver mi carrito">Mi<font class="text-success"> carrito </font></a>
-=======
-                            <li class="nav-item mx-1">
-                                <strong><a class="nav-link fs-7 text-white" href="{{ url('cartlist') }}">Mi<font color="#FFD4D4"> carrito</font></a></strong>
->>>>>>> 7ba8a7cae929d302b8f62a6f88d873a3abe09c72
                             </li>
                         </ul>
                     </div>
