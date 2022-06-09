@@ -134,8 +134,20 @@ class DomiciliarioController extends Controller
      */
     public function destroy($documento_domiciliario)
     {
-        Domiciliario::destroy($documento_domiciliario);
-        return redirect()->route('domiciliario.index');
+    
+       
+        try
+        {
+            DB::beginTransaction();
+            Domiciliario::destroy($documento_domiciliario);
+            DB::commit();
+            return redirect()->route('domiciliario.index')->with('status', 'cancelado');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect('/domiciliario')->with('status', $e->getMessage());
+        }
     }
 
     public function validator( array $input){

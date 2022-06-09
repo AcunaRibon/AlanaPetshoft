@@ -21,9 +21,10 @@
         <table class="table table-sm">
         @foreach($cart as $carts )
           <tr>
+            <td></td>
             <td><center><img width="100px" height="100px" src="{{ asset('../storage').'/app/public/'.$carts->url_imagen_producto }}"></center></td>
             <td><h5>{{$carts->nombre_producto}}</h5><p>Descripcion corta del producto</p></td>
-            <td><input type="number" value="{{$carts->quantity}}" min="1" class="form-control" style="width:100px" name="quantity"></td>
+            <td><input type="number" value="{{$carts->quantity}}" min="1" class="form-control" style="width:100px" name="quantity[]"></td>
             <td>$ {{$carts->precio_producto}}</td>
             <td>
               <a class="btn-cancel" href="{{url('delete', $carts->cart_id)}}">
@@ -50,7 +51,7 @@
                         <tbody>
                             <tr>
                                 <td>Subtotal</td>
-                                <td><strong>$</strong></td>
+                                <td><strong>${{$total}}</strong></td>
                             </tr>
                             <tr>
                                 <td>Descuento</td>
@@ -62,7 +63,7 @@
                             </tr>
                             <tr>
                                 <td><h5><strong>Total</strong></h5></td>
-                                <td><h5><strong>$</strong></h5></td>
+                                <td><h5><strong>${{$total}}</strong></h5></td>
                             </tr>
                         </tbody>
                     </table> 

@@ -91,9 +91,10 @@ function starRate(e){
 
     function mostrarform() {
       document.getElementById('form-send').style.display = 'block';
-      document.getElementById('btn-send').style.display = 'block';
+      document.getElementById('btnRecoger').style.display = 'none';
     }
 
     function ocultarform() {
       document.getElementById('form-send').style.display = 'none';
+      document.getElementById('btnRecoger').style.display = 'block';
     }
