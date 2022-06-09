@@ -164,10 +164,14 @@ class ShopController extends Controller
                     "precio_detalle_venta" => ($P->precio_producto * $producto->quantity),
                     "venta_id" => $venta,
                     "producto_id" => $producto->id_producto
+
+                    
                 ]);
                 if ($P->existencia_producto > $producto->quantity) {
                     $P->update(["existencia_producto" => $P->existencia_producto - $producto->quantity]);
                 }
+
+                Cart::where('id_user', $user)->delete();
             }
             DB::commit();
             return view('shop.ordernow');
