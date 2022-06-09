@@ -49,7 +49,7 @@ function agregar_producto(k){
                     <td>${precio}</td>
                     <td id="st${k}_${producto_id}">${parseInt(cantidad) * parseInt(precio)}</td>
                     <td>
-                    <button type="button" class="btn btn-danger" onclick="eliminar_producto(${producto_id},${parseInt(cantidad) * parseInt(precio)},${k})">
+                    <button type="button" title="Quitar producto" class="btn btn-danger" onclick="eliminar_producto(${producto_id},${parseInt(cantidad) * parseInt(precio)},${k})">
                     x
                     </button>
                     </td>

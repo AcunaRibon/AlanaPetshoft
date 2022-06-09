@@ -45,35 +45,22 @@
                                     ALANA PETSHOP
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white fw-bold fs-7 px-lg-5 px-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre title="Ver catálogo de productos">
+                        
+                                <a id="navbarDropdown" href="{{ url('/productos') }}" class="nav-link text-white fw-bold fs-7 px-lg-5 px-3 text-center"  aria-haspopup="true" aria-expanded="false" v-pre title="Ver catálogo de productos">
                                     Catálogo
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/productos') }}">
-                                        Alimentos
-                                    </a>
-                                    <a class="dropdown-item" href="">
-                                        Snacks
-                                    </a>
-                                    <a class="dropdown-item" href="">
-                                        Higiene
-                                    </a>
-                                    <a class="dropdown-item" href="">
-                                        Accesorios
-                                    </a>
-                                    <a class="dropdown-item" href="">
-                                        Juguetes
-                                    </a>
-                                    <a class="dropdown-item" href="">
-                                        Medicamentos
-                                    </a>
-                                </div>
-                            </li>
+                            
                         </ul>
+<<<<<<< HEAD
                         <form class="d-flex flex-grow-1" action="/search">
                             <input class="form-control me-2"  placeholder="¿Qué buscas?" aria-label="Search" title="Buscar un producto">
                             <button class="btn btn-outline-success" type="submit" name="query" title="Buscar">Buscar</button>
+=======
+                        <form class="d-flex flex-grow-1" action="search">
+                            <input class="form-control me-2 " name="query" type="text" placeholder="¿Qué buscas?" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+
+>>>>>>> 7ba8a7cae929d302b8f62a6f88d873a3abe09c72
                         </form>
                         <ul class="navbar-nav d-flex align-items-center ps-lg-5">
                         @guest
@@ -106,8 +93,13 @@
                                 </ul>
                             </div>
                         @endguest
+<<<<<<< HEAD
                             <li class="nav-item">
                                 <a class="nav-link fs-7 ms-lg-3 text-center text-white fw-bold" href="{{url('/cartlist')}}" title="Ver mi carrito">Mi<font class="text-success"> carrito </font></a>
+=======
+                            <li class="nav-item mx-1">
+                                <strong><a class="nav-link fs-7 text-white" href="{{ url('cartlist') }}">Mi<font color="#FFD4D4"> carrito</font></a></strong>
+>>>>>>> 7ba8a7cae929d302b8f62a6f88d873a3abe09c72
                             </li>
                         </ul>
                     </div>

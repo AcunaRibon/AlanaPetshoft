@@ -11,6 +11,10 @@ use App\Http\Controllers\EstadoVentaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\MiDomicilioController;
+
+use App\Mail\MailOrderDetailMailable;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -53,6 +57,7 @@ Route::resource('producto', ProductoController::class);
 Route::resource('venta', VentaController::class);
 Route::resource('estadoVenta', EstadoVentaController::class);
 Route::resource('tipoUsuario', TipoUsuarioController::class);
+Route::resource('miDomicilio', MiDomicilioController::class);
 });
 
 
@@ -76,6 +81,7 @@ Route::resource('producto', ProductoController::class);
 Route::resource('venta', VentaController::class);
 Route::resource('estadoVenta', EstadoVentaController::class);
 Route::resource('tipoUsuario', TipoUsuarioController::class);
+Route::resource('miDomicilio', MiDomicilioController::class);
 });
 
 
@@ -96,3 +102,9 @@ Route::get('/cartlist', [ShopController::class, 'cartlist']);
 Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
 
 Route::get('/ordernow', [ShopController::class, 'ordernow']);
+
+Route::get('/thanks', [ShopController::class, 'RecogerTienda']);
+
+Route::post('/orderplace', [ShopController::class, 'orderPlace']);
+
+Route::post('envioOrden', [ShopController::class, 'enviorden']);

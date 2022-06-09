@@ -14,15 +14,17 @@
             @endif
     @endif
 </div>
-  <div class="card-body">
-    <div class="table-responsive-sm">
+  <div class="card-body" id="form-send-cartlist">
+    <div class="row">
+    <div class="col-8">
       <form>
         <table class="table table-sm">
         @foreach($cart as $carts )
           <tr>
+            <td></td>
             <td><center><img width="100px" height="100px" src="{{ asset('../storage').'/app/public/'.$carts->url_imagen_producto }}"></center></td>
             <td><h5>{{$carts->nombre_producto}}</h5><p>Descripcion corta del producto</p></td>
-            <td><input type="number" value="{{$carts->quantity}}" min="1" class="form-control" style="width:100px" name="quantity"></td>
+            <td><input type="number" value="{{$carts->quantity}}" min="1" class="form-control" style="width:100px" name="quantity[]"></td>
             <td>$ {{$carts->precio_producto}}</td>
             <td>
               <a class="btn-cancel" href="{{url('delete', $carts->cart_id)}}">
@@ -35,12 +37,76 @@
           </tr>
           @endforeach
         </table>
-        <a href="{{url('ordernow')}}" class="btn btn-success" style="float: right;">
-          Confirmar pedido
-        </a>
-      </form>
+        </form>
+        </div>
+        <div class="col-4" style="float: right" >  
+        <form class="form-resume">
+
+                    <table class="table table-bordered" >
+                        <thead>
+                            <tr>
+                                <th scope="col"><strong>Resumen</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td><strong>${{$total}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Descuento</td>
+                                <td>-$0</td>
+                            </tr>
+                            <tr>
+                                <td>Costo de domicilio</td>
+                                <td style="color: green;">¡Gratis!</td>
+                            </tr>
+                            <tr>
+                                <td><h5><strong>Total</strong></h5></td>
+                                <td><h5><strong>${{$total}}</strong></h5></td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>        
+
+          <a href="{{url('ordernow')}}" class="btn btn-success confirmarbtn" data-name="{{$carts->nombre_producto}}" style="float: right;">
+                Confirmar pedido
+          </a>
+
     </div>
   </div>
 </div>
         <br><br><br>
+@endsection
+
+@section('js')
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+    const panel = document.querySelector('#form-send-cartlist');
+
+    panel.addEventListener('click', correcto);
+
+    function correcto(e) {
+        if(e.target.classList.contains('confirmarbtn')) {
+            e.preventDefault();
+            const pronom = e.target.dataset.name;
+            Swal.fire({
+            title: '¿Deseas confirmar tu pedido?',
+            showDenyButton: true,
+            confirmButtonText: 'Si',
+            
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.replace('ordernow');
+            } 
+          })
+        }
+    }
+    
+</script>
+
 @endsection

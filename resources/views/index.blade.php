@@ -1,180 +1,75 @@
 @extends('layouts.app')
 
+
 @section('content')
 <section>
-    <div id="carrusel" class="carousel carousel-dark slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-                <img src="{{ asset('images/Fondo_landing.svg') }}" class="d-block w-100" alt="Regístrate">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Regístrate ahora mismo</h5>
-                    <p>Un espacio para las necesidades de tu mascota</p>
-                </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                <img src="{{ asset('images/Fondo_landing.svg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('images/Fondo_landing.svg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+<div id="carrusel" class="carousel carousel-dark slide" data-bs-ride="carousel">
 
-    <div>
-        <h1 class="m-0 text-center my-4">Ofertas</h1>
-        <div id="productos" class="carousel carousel-dark slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="container">
-                        <div class="row p-4">
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/petys.png') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Jabón Petys</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$15000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/cama.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Cama Perro</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$40000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/cobija.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Cobijita warm</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$30000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/perfume.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Perfume Harto</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$50000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                <div class="container">
-                        <div class="row p-4">
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/petys.png') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Jabón Petys</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$15000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/cama.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Cama Perro</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$40000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/cobija.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Cobijita warm</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$30000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ asset('images/perfume.jpg') }}" width="100" height="200" class="card-img-top" alt="...">
-                                    <div class="card-body text-center text-white bg-dark">
-                                        <h4 class="card-title fw-bolder">Perfume Harto</h4>
-                                        <p class="card-text fw-bold fs-6 mb-0">⭐⭐⭐⭐⭐</p>
-                                        <p class="card-text fw-bold fs-5 mb-2">$50000</p>
-                                        <a href="#" class="btn btn-primary">Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#productos" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#productos" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+<div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+        <img src="{{ asset('images/landing.svg') }}" class="d-block w-100"  alt="Regístrate">
     </div>
+</div>
+</div>
 
-    <div class="m-0 p-1" style="background: linear-gradient(90deg, #EE9CA7 0%, #FFDDE1 100%);">
-        <h1 class="text-center my-4">Servicios</h1>
-        <div class="container">
-            <div class="row mb-3">
-                <div class="col-4 text-center">
-                    <img class="rounded-circle circle-image" src="{{ asset('images/domicilio.jpg') }}" alt="Servicio a domicilio">
-                    <h3>Domicilios</h3>
-                </div>
-                <div class="col-4 text-center">
-                    <img class="rounded-circle circle-image" src="{{ asset('images/servicios2.png') }}" alt="Productos">
-                    <h3>Productos</h3>
-                </div>
-                <div class="col-4 text-center">
-                    <img class="rounded-circle circle-image" src="{{ asset('images/servicio3.png') }}" alt="Recóge tu pedido">
-                    <h3>Recoge tu pedido</h3>
-                </div>
-            </div>
+
+<h1 class="m-0 text-center my-4 title-ofertas">El mejor sitio para comprarle a tu mascota</h1>
+
+<div class="container">
+<div class="row">
+<div class="col-sm-6">
+    <div class="card ">
+        <img class="card-img-top" src="images/petfood.png" alt="" >
+        <div class="card-block">
+            <h4 class="card-title title-landing">Alimentos</h4>
+            <p class="card-text text-landing">En AlanaPetshoft encontrarás los mejores precios en alimentos para tus peludos</p>
+            
         </div>
     </div>
+</div>
+<div class="col-sm-6">
+    <div class="card">
+        <img class="card-img-top" src="images/juguete.svg" alt="" >
+        <div class="card-block">
+            <h4 class="card-title title-landing">Juguetes</h4>
+            <p class="card-text text-landing">Encuentra aquí juguetes para perros a domicilio en Medellín, son divertidos y estimulantes para que tu amigo este entretenido</p>
+            
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="card">
+        <img class="card-img-top" src="images/medicina.svg" alt="" >
+        <div class="card-block">
+            <h4 class="card-title title-landing">Medicina</h4>
+            <p class="card-text text-landing">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="card">
+        <img class="card-imimages/accesorios.svg" alt="" >
+        <div class="card-block">
+            <h4 class="card-title title-landing">Accesorios</h4>
+            <p class="card-text text-landing">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+<div class="" style="background: linear-gradient(90deg, #EE9CA7 0%, #FFDDE1 100%);">
+<footer class="" style="background: linear-gradient(90deg, #EE9CA7 0%, #FFDDE1 100%);">
+        <img src="images/Vector.svg" alt="">
+        
+            <img src="images/footerwave.svg" class="d-block w-100" alt="">
+        </footer>
+</div>
 </section>
 @endsection
