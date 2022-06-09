@@ -51,7 +51,7 @@
                                 </a>
                             
                         </ul>
-                        <form class="d-flex flex-grow-1" action="/search">
+                        <form class="d-flex flex-grow-1" action="search">
                             <input class="form-control me-2 " name="query" type="text" placeholder="¿Qué buscas?" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
 

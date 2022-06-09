@@ -177,11 +177,11 @@ class ShopController extends Controller
         }
 
 
-        $datos = Cart::all;
+        /*$datos = Cart::all;
         $datos->delete();
 
         DB::commit();
-        return redirect()->back();
+        return redirect()->back();*/
         
         
     }
@@ -216,21 +216,6 @@ class ShopController extends Controller
         
     }
 
-    /*
-    public function calcular_precio($productos, $cantidad,$descuento)
-    {
-        $precio = 0;
-        foreach ($productos as $key => $producto) {
-            $P = Cart::find($producto);
-            $precio += ($P->precio_producto * $cantidad[$key]);
-        }
-
-        $precio = $precio-($precio * ($descuento/100));
-
-        return view('shop.ordernow', ['precio'=>$precio]);
-    }
-    */
-
 
     public function search(Request $request)
     {
@@ -241,7 +226,7 @@ class ShopController extends Controller
         ->get();
 
         return view('shop.search', ['productos'=>$datos]);
-
+        
     }
 
     public function orderPlace(Request $request){
