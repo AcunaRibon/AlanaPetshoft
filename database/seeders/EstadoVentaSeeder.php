@@ -22,5 +22,9 @@ class EstadoVentaSeeder extends Seeder
         DB::table('estado_venta')->insert([
             'nombre_estado_venta' => 'Cancelada'
         ]);
+
+        DB::table('estado_venta')->insert([
+            'nombre_estado_venta' => 'Pedido'
+        ]);
     }
 }
