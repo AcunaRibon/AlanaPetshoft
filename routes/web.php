@@ -99,6 +99,8 @@ Route::post('/addcart/{id_producto}', [ShopController::class, 'addcart']);
 
 Route::get('/cartlist', [ShopController::class, 'cartlist']);
 
+Route::get('/cartout', [ShopController::class, 'cartlist']);
+
 Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
 
 Route::get('/ordernow', [ShopController::class, 'ordernow']);

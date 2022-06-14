@@ -114,9 +114,10 @@ class ShopController extends Controller
             $datos['total'] = $this->calcular_precio($datos['cart']);
     
             return view('shop.cartlist', $datos)->with('status', 'listado');
+
             }
             else {
-                return redirect('/login');
+                return view('shop.cartout');
             }
     
 
