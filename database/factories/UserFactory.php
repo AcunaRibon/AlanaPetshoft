@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$.wgPujABuJitma/ywowfbOYz9szYBP2bdGBLN.ApuT7o81iw4EdUS',
+            'password' => bcrypt('1234567890'),
             'cellphone' => $this->faker->unique(true)->numberBetween(1000000000, 9999999999),
             'address' => $this->faker->address(),
             'user_status' => $this->faker->boolean(),

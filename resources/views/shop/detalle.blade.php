@@ -4,24 +4,15 @@
 
 <div class="container-detalle">
 <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
-<script src="{{ asset('js/calificaciones.js') }}" defer></script>
+<script src="{{ asset('js/shop.js') }}" defer></script>
 
-
-    <div class="row datos_productos">
-    <div>
-@if (session('status'))
-        @if (session('status')==1)
-            <div class="alert alert-success">
-                Producto agregado al carrito
-            </div>
-            @endif
-    @endif
 </div>
     <?php foreach($productos as $producto ) { ?>
-        <div class="col-sm-6">
-        <img class="detalle_img" width="auto" height="auto" src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}" alt="" >
+    <div id="panel-control" class="row" style="padding: 5%; padding-top: 0%;">
+        <div class="col-6">
+            <img class="detalle_img" width="auto" height="auto" src="{{ asset('../storage').'/app/public/'.$producto->url_imagen_producto }}" alt="" >
         </div>
-        <div class="col-sm-6">
+        <div class="col-6">
             <a href="{{ url('/productos') }}">Go back</a>
             <h2 class="h2pro">{{$producto->nombre_producto}}</h2>
             <div class="rw-ui-container"></div>
@@ -36,11 +27,14 @@
             @csrf
                 <input type="number" value="1" min="1" class="form-control" style="width:100px" name="quantity">                <br>
                 
-                <button class="btn btn-success addcartbtn">Agregar al carrito</button>
+                <button class="btn btn-success addcartbtn" data-id="{{$producto->id_producto}}" data-name="{{$producto->nombre_producto}}">Agregar al carrito</button>
             </form>
         </div>
     </div>
 </div>
 <?php } ?>
 @endsection
+
+
+
 

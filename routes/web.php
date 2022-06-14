@@ -20,6 +20,9 @@ use App\Http\Controllers\ProfileadminController;
 
 
 
+use App\Mail\MailOrderDetailMailable;
+use Illuminate\Support\Facades\Mail;
+
 
 
 /*
@@ -99,6 +102,5 @@ Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('ven
 Route::resource('venta', VentaController::class);
 Route::resource('estadoVenta', EstadoVentaController::class);
 Route::resource('domiciliario', DomiciliarioController::class);
-
 
 });

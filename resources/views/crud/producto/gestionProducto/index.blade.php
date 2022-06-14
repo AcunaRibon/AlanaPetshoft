@@ -11,7 +11,7 @@
             <div class="table-responsive p-2">
                 <div class="d-flex justify-content-between">
                     <h2 class="text-center">Productos</h2>
-                    <button type="button" class="btn btn-dark mb-2" data-bs-toggle="modal" data-bs-target="#registrar">
+                    <button type="button" class="btn btn-dark mb-2" data-bs-toggle="modal" data-bs-target="#registrar" title="Registrar un producto">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-lg me-1" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                         </svg>
@@ -33,8 +33,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-dark " data-bs-dismiss="modal">Cerrar</button>
-                                <input type="submit" value="Registrar" class="btn btn-primary registrar">
+                                <button type="button" class="btn btn-dark " data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
+                                <input type="submit" value="Registrar" class="btn btn-primary registrar" title="Enviar formulario">
                                 </form>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
 
                                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                                                 <li>
-                                                    <button type="button" class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#ver_{{$producto->id_producto}}">
+                                                    <button type="button" class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#ver_{{$producto->id_producto}}" title="Ver imágenes">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye me-1" viewBox="0 0 16 16">
                                                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                                                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
@@ -76,7 +76,7 @@
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button type="button" class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#editar_{{$producto->id_producto}}">
+                                                    <button type="button" class="dropdown-item fw-bold" data-bs-toggle="modal" data-bs-target="#editar_{{$producto->id_producto}}" title="Editar producto">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pen me-1" viewBox="0 0 16 16">
                                                             <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
                                                         </svg>
@@ -87,7 +87,7 @@
                                                     <form action="{{ route('producto.destroy', $producto-> id_producto)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="dropdown-item cancelar fw-bold" title="Cancelar venta">
+                                                        <button type="submit" class="dropdown-item cancelar fw-bold" title="Cancelar producto">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg me-1" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
                                                                 <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
@@ -118,8 +118,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-                                                        <input type="submit" value="actualizar" class="btn btn-primary actualizar">
+                                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
+                                                        <input type="submit" value="actualizar" class="btn btn-primary actualizar" title="Actualizar información">
                                                         </form>
                                                     </div>
                                                 </div>
@@ -153,7 +153,7 @@
                                                                                 <form action="{{ route('producto.destroyImg', $imagen->id_imagen_producto)}}" method="post">
                                                                                     @csrf
                                                                                     @method('DELETE')
-                                                                                    <button type="submit" class="btn btn-danger cancelar">
+                                                                                    <button type="submit" class="btn btn-danger cancelar" title="Eliminar imagen">
                                                                                         Eliminar
                                                                                     </button>
                                                                                 </form>
@@ -168,7 +168,7 @@
                                                         </table>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" title="cerrar ventana">Cerrar</button>
 
                                                     </div>
                                                 </div>
@@ -246,7 +246,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#productosInactivos">
+            <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#productosInactivos" title="Ver productos cancelados">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-lg me-1" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
                     <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
@@ -257,7 +257,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                     <div class="modal-content">
                         <div class="modal-header ">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Productos Cancelados</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -286,7 +286,7 @@
                                                     <form action="{{ route('producto.destroy', $producto-> id_producto)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">
+                                                        <button type="submit" class="btn btn-danger habilitar" title="Habilitar producto">
                                                             Habilitar
                                                         </button>
                                                     </form>
@@ -299,8 +299,7 @@
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-                                <input type="submit" value="Modificar" class="btn btn-primary">
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal" title="Cerrar ventana">Cerrar</button>
                                 </form>
                             </div>
                         </div>
