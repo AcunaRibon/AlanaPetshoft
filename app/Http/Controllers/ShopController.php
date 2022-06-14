@@ -102,6 +102,7 @@ class ShopController extends Controller
 
             if(Auth::check())
             {
+                if(Cart::where('id_user','=',Auth::user()->id)->first()!==null){
             $user=Auth::user()->id;
             $datos['cart'] = DB::table('carts')
             ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
@@ -114,6 +115,9 @@ class ShopController extends Controller
             $datos['total'] = $this->calcular_precio($datos['cart']);
     
             return view('shop.cartlist', $datos)->with('status', 'listado');
+                }else{
+                    return view('shop.cartout'); 
+                }
 
             }
             else {
