@@ -17,11 +17,11 @@
     </div>
     <div class="form-group mb-2 col-4">
         <label for="">Contraseña:</label>
-        <input type="password" name="password" id="password" class="form-control" value="{{isset($usuario->password)?$usuario->password:''}}">
+        <input type="password" name="password" id="password" class="form-control" value="">
     </div>
     <div class="form-group mb-2 col-4">
         <label for="">Confirmar contraseña:</label>
-        <input type="password" name="password" id="password" class="form-control" value="{{isset($usuario->password)?$usuario->password:''}}">
+        <input type="password" name="password" id="password" class="form-control" value="">
     </div>
     <div class="form-group mb-2 col-6">
         <label for="">Dirección:</label>

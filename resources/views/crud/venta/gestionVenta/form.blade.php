@@ -2,7 +2,7 @@
     <div class="col-4 mb-2">
         <label for="fecha_venta" class="form-label">Fecha de la venta:</label>
         <input type="date" id="fecha_venta{{$tipo}}" name="fecha_venta{{$tipo}}" class="form-control @error('fecha_venta'.$tipo) is-invalid @enderror" value="{{isset($venta->fecha_venta)?$venta->fecha_venta:old('fecha_venta')}}" autocomplete="fecha_venta" autofocus>
-        @error('fecha_venta'.$tipo)
+        @error('fecha_venta'.$tipo)v
         <input value="{{$modo}}" id="tipoAlerta" hidden>
         <p class="text-danger fw-bold">
             * {{$message}}

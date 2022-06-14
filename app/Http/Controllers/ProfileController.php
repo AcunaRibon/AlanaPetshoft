@@ -7,28 +7,26 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
-use App\Exports\UsersExport;
-use Maatwebsite\Excel\Facades\Excel;
 
-class UserController extends Controller
+
+class ProfileController extends Controller
 {
-
+  
     public function index()
     {
         $usuarios['users']=User::all();
-        $total = User::count();
-        return view('crud.usuario.usuario.index',$usuarios, compact('usuarios', 'total'));
+        return view('crud.usuario.profile.index',$usuarios);
     }
 
     public function create()
     {
-        return view('usuario.index');
+        return view('profile.index');
     }
 
     public function edit($id)
     {
 
-        return view('usuario.form');
+        return view('profile.form');
     }
 
     public function update(Request $request, $id)
@@ -42,18 +40,18 @@ class UserController extends Controller
 
             DB::commit();
 
-            return redirect('/usuario')->with('status', 'actualizado');
+            return redirect('/profile')->with('status', 'actualizado');
         }
         catch (\Exception $e) 
         {
             DB::rollBack();
-            return redirect("/usuario")->with('status', $e->getMessage());
+            return redirect("/profile")->with('status', $e->getMessage());
         }
     }
 
     public function show()
     {
-        return view('usuario.form');
+        return view('profile.form');
     }
     
 
@@ -81,12 +79,12 @@ class UserController extends Controller
             ]);
 
             DB::commit();
-            return redirect("/usuario")->with('status', 'registrado');;
+            return redirect("/profile")->with('status', 'registrado');;
         } 
         catch (\Exception $e) 
         {
             DB::rollBack();
-            return redirect("/usuario")->with('status', $e->getMessage());
+            return redirect("/profile")->with('status', $e->getMessage());
         }
     } 
 
@@ -95,12 +93,5 @@ class UserController extends Controller
 
     }
 
-    public function report()
-    {
-        return Excel::download(new UsersExport, 'users.xlsx');
-    }
-
-    public function adminlte_profile_url(){
-        return 'profile/username';
-    }
+  
 }

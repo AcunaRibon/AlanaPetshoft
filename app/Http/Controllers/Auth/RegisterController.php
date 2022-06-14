@@ -41,6 +41,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        return redirect()->to('/');
     }
 
     /**
@@ -60,6 +61,8 @@ class RegisterController extends Controller
             'cellphone' => ['required', 'string', 'min:10', 'max:10'],
             'address' => ['required', 'string', 'max:70']
         ]);
+
+  
     }
 
     /**
@@ -89,7 +92,10 @@ class RegisterController extends Controller
             'cellphone' => $data['cellphone'],
             'address' => $data['address']
         ]);
+
+       
     }
+
 
     
 }

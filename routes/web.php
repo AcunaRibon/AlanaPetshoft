@@ -1,6 +1,8 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DomiciliarioController;
@@ -12,6 +14,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\MiDomicilioController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileadminController;
+
+
+
 
 
 
@@ -32,70 +39,66 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-->name('home');
+Route::group(['middleware' => 'auth.admin'], function () {
 
-
-Route::group(['middleware' => 'emp'], function () {
-Route::get('/emp', [App\Http\Controllers\UserController::class, 'index']);
-Route::resource('usuario',UserController::class);
-Route::get('/usuario/report/', [UserController::class, 'report'])->name('usuario.report');
-Route::get('/proveedor/report', [ProveedorController::class, 'report'])->name('proveedor.report');
-Route::resource('proveedor', ProveedorController::class);
-Route::put('/compra/{id_compra}/restore', [CompraController::class, 'restore'])->name('compra.restore');
-Route::get('/compra/report', [CompraController::class, 'report'])->name('compra.report');
-Route::get('/producto/export_excel', [ProductoController::class, 'export'])->name('producto.export');
-Route::delete('/producto/{id_imagen_producto}/destroyImg',[ProductoController::class, 'destroyImg'])->name('producto.destroyImg');
-Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('venta.export');
-Route::resource('compra', CompraController::class);
-Route::resource('domiciliario', DomiciliarioController::class);
-Route::resource('tipoProducto', TipoProductoController::class);
-Route::resource('producto', ProductoController::class);
+    Route::resource('usuario', UserController::class);
+    Route::get('/admin/report/', [UserController::class, 'report'])->name('usuario.report');
+    Route::get('/proveedor/report', [ProveedorController::class, 'report'])->name('proveedor.report');
+    Route::resource('proveedor', ProveedorController::class);
+    Route::put('/compra/{id_compra}/restore', [CompraController::class, 'restore'])->name('compra.restore');
+    Route::get('/compra/report', [CompraController::class, 'report'])->name('compra.report');
+    Route::get('/producto/export_excel', [ProductoController::class, 'export'])->name('producto.export');
+    Route::delete('/producto/{id_imagen_producto}/destroyImg', [ProductoController::class, 'destroyImg'])->name('producto.destroyImg');
+    Route::resource('compra', CompraController::class);
+    Route::resource('tipoProducto', TipoProductoController::class);
+    Route::resource('producto', ProductoController::class);
+    Route::resource('tipoUsuario', TipoUsuarioController::class);
+    Route::resource('profileadmin', ProfileadminController::class);
+    Route::put('/profileadmin/{id}/update', [ProfileadminController::class, 'update']);
+    Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('venta.export');
 Route::resource('venta', VentaController::class);
 Route::resource('estadoVenta', EstadoVentaController::class);
-Route::resource('tipoUsuario', TipoUsuarioController::class);
-Route::resource('miDomicilio', MiDomicilioController::class);
+Route::resource('domiciliario', DomiciliarioController::class);
+    
 });
 
 
 
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'auth.emp'], function () {
 
-Route::get('/admin', [App\Http\Controllers\UserController::class, 'index']);
-Route::resource('usuario',UserController::class);
-Route::get('/admin/report/', [UserController::class, 'report'])->name('admin.report');
-Route::get('/proveedor/report', [ProveedorController::class, 'report'])->name('proveedor.report');
-Route::resource('proveedor', ProveedorController::class);
-Route::put('/compra/{id_compra}/restore', [CompraController::class, 'restore'])->name('compra.restore');
-Route::get('/compra/report', [CompraController::class, 'report'])->name('compra.report');
-Route::get('/producto/export_excel', [ProductoController::class, 'export'])->name('producto.export');
-Route::delete('/producto/{id_imagen_producto}/destroyImg',[ProductoController::class, 'destroyImg'])->name('producto.destroyImg');
-Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('venta.export');
-Route::resource('compra', CompraController::class);
-Route::resource('domiciliario', DomiciliarioController::class);
-Route::resource('tipoProducto', TipoProductoController::class);
-Route::resource('producto', ProductoController::class);
-Route::resource('venta', VentaController::class);
-Route::resource('estadoVenta', EstadoVentaController::class);
-Route::resource('tipoUsuario', TipoUsuarioController::class);
-Route::resource('miDomicilio', MiDomicilioController::class);
+    Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('venta.export');
+    Route::resource('venta', VentaController::class);
+    Route::resource('estadoVenta', EstadoVentaController::class);
+     Route::resource('profileadmin', ProfileadminController::class);
+    Route::put('/profileadmin/{id}/update', [ProfileadminController::class, 'update']);
+    Route::resource('domiciliario', DomiciliarioController::class);
 });
 
 
+Route::group(['middleware' => 'auth.cliente'], function () {
+
+    
+    Route::resource('profile', ProfileController::class);
+    Route::put('/profile/{id}/update', [ProfileController::class, 'update']);
+    Route::resource('miDomicilio', MiDomicilioController::class);
+    Route::get('/redirect', [ShopController::class, 'redirect']);
+    Route::get('/productos', [ShopController::class, 'index']);
+    Route::get('detalle/{id_producto}', [ShopController::class, 'detalle']);
+    Route::get('/search', [ShopController::class, 'search']);
+    Route::post('/addcart/{id_producto}', [ShopController::class, 'addcart']);
+    Route::get('/cartlist', [ShopController::class, 'cartlist']);
+    Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
+    Route::get('/ordernow', [ShopController::class, 'ordernow']);
+    });
 
 
-Route::get('/redirect', [ShopController::class, 'redirect']);
+Route::group(['middleware' => 'auth'], function () {
+Route::resource('profileadmin', ProfileadminController::class);
+Route::put('/profileadmin/{id}/update', [ProfileadminController::class, 'update']);
+Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('venta.export');
+Route::resource('venta', VentaController::class);
+Route::resource('estadoVenta', EstadoVentaController::class);
+Route::resource('domiciliario', DomiciliarioController::class);
 
-Route::get('/productos', [ShopController::class,'index']);
 
-Route::get('detalle/{id_producto}', [ShopController::class, 'detalle']);
-
-Route::get('/search', [ShopController::class, 'search']);
-
-Route::post('/addcart/{id_producto}', [ShopController::class, 'addcart']);
-
-Route::get('/cartlist', [ShopController::class, 'cartlist']);
-
-Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
-
-Route::get('/ordernow', [ShopController::class, 'ordernow']);
+});

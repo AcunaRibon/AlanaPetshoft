@@ -82,21 +82,31 @@
                                     <a class="nav-link fs-7 text-center text-white me-lg-3 fw-bold" href="{{ route('login') }}" title="Iniciar sesión">Iniciar<font class="text-success"> sesión </font></a>
                                 </li>
                             @endif
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link fs-7 text-center text-white me-lg-3 fw-bold" href="{{ route('register') }}" title="Registro">Registrarse</a>
+                                </li>
+                            @endif
                         @else
                             <div class="dropdown">
                                 <a class="dropdown-toggle nav-link fs-7 text-white fw-bold text-center me-lg-3" role="button" id="menuAdmin" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" title="Ver opciones">
                                     {{ Auth::user()->name }} <font class="text-success">{{ Auth::user()->last_name }}</font>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="menuAdmin">
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-light" aria-labelledby="menuAdmin">
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('profile.index') }}" title="Ver mis datos">
                                             Ver perfil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('miDomicilio.index') }}" title="Ver mis domicilios">
+                                            Mis domicilios
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                                        document.getElementById('logout-form').submit();" title="Cerrar cuenta">
                                             {{ __('Cerrar sesión') }}
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -116,7 +126,7 @@
         <main>
             @yield('content')
         </main>
-        <footer class="bg-dark text-white pt-3 pb-1 px-2">
+        <footer class="bg-dark text-white pt-3 pb-1 px-2" >
             <div class="container-fluid row m-0">
                 <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 pb-4">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
@@ -126,7 +136,8 @@
                     </div>
                     <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9 col-xl-9 col-xxl-9">
                         <h5>Alana Petshoft</h5>
-                        <p>Atención vía WhatsApp (1111111111)</p>
+                        <p>Contacto: <i>soporte.alana.petshop@outlook.es</i></p>
+                        
                         <div class="img-fluid">
                             <a href="https://es-la.facebook.com/" class="link-light text-decoration-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-facebook me-3" viewBox="0 0 16 16">
@@ -173,7 +184,7 @@
                                 <a class="link-light text-decoration-none" href="{{ route('register') }}">Crear cuenta</a>
                             </li>
                             <li class="py-1">
-                                <a class="link-light text-decoration-none" href="{{ url('/') }}">Recuperar cuenta</a>
+                                <a class="link-light text-decoration-none"  href="{{ route('password.request') }}">Recuperar cuenta</a>
                             </li>
                         </ul>
                     @endif

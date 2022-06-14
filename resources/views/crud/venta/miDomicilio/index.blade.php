@@ -1,8 +1,10 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Mi Domciilio')
+@section('title', 'Mi perfil')
 
-@section('content')
+@section('content') 
+
+
 <div class="container pt-5">
 
     <div class="row">
