@@ -91,6 +91,7 @@ Route::group(['middleware' => 'auth.cliente'], function () {
     Route::get('/cartlist', [ShopController::class, 'cartlist']);
     Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
     Route::get('/ordernow', [ShopController::class, 'ordernow']);
+    Route::get('/thanks', [ShopController::class, 'RecogerTienda']);
     Route::get('/home', function () {
         return view('index');
     });
