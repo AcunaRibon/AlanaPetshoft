@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 use App\Models\User;
 
@@ -62,6 +63,15 @@ public function authenticated($request){
         return redirect()->route('usuario.index') ;
     }else if(auth()->user()->tipo_usuario_id=='2'){
         return redirect()->route('venta.index') ;
+    }else if (auth()->user()->user_status=='0'){
+        Auth::guard()->logout();
+
+        // invalidamos su sesión
+        $request->session()->invalidate();
+    
+        // redireccionamos a donde queremos
+        return back();
+    
     }else{
         return redirect()->to('/') ;
     }

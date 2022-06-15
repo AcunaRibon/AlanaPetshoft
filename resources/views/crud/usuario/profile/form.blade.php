@@ -16,15 +16,12 @@
         <label for="">Celular:</label>
         <input type="number" name="cellphone" id="cellphone" class="form-control" value="{{ Auth::user()->cellphone }}">
     </div>
-    <div class="form-group mb-2 col-4">
-        <label for="">Contraseña:</label>
-        <input type="password" name="password" id="password" class="form-control" value="">
-    </div>
+
     <div class="form-group mb-2 col-4">
         <label for="">Confirmar contraseña:</label>
         <input type="password" name="password" id="password" class="form-control" value="">
     </div>
-    <div class="form-group mb-2 col-6">
+    <div class="form-group mb-2 col-4">
         <label for="">Dirección:</label>
         <input type="text" name="address" id="address" class="form-control" value="{{ Auth::user()->address }}">
     </div>

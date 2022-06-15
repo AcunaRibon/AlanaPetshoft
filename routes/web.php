@@ -16,7 +16,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\MiDomicilioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileadminController;
-
+use App\Http\Controllers\Auth\LoginController;
 
 
 
@@ -92,6 +92,10 @@ Route::group(['middleware' => 'auth.cliente'], function () {
     Route::get('/cartlist', [ShopController::class, 'cartlist']);
     Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
     Route::get('/ordernow', [ShopController::class, 'ordernow']);
+    Route::get('/home', function () {
+        return view('index');
+    });
+
     });
 
 
@@ -102,5 +106,10 @@ Route::get('/venta/export_excel', [VentaController::class, 'export'])->name('ven
 Route::resource('venta', VentaController::class);
 Route::resource('estadoVenta', EstadoVentaController::class);
 Route::resource('domiciliario', DomiciliarioController::class);
+Route::get('/home', function () {
+    return view('index');
+});
 
 });
+
+

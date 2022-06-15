@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
@@ -11,87 +12,46 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-  
+
     public function index()
     {
-        $usuarios['users']=User::all();
-        return view('crud.usuario.profile.index',$usuarios);
-    }
-
-    public function create()
-    {
-        return view('profile.index');
-    }
-
-    public function edit($id)
-    {
-
-        return view('profile.form');
+        $usuarios['users'] = User::all();
+        return view('crud.usuario.profile.index', $usuarios);
     }
 
     public function update(Request $request, $id)
     {
-        try
-        {
-            DB::beginTransaction();
 
-            $usuarios=request()->except(['_token','_method']);
-            User::where('id','=',$id)->update($usuarios);
+        $usuarios = $request->all();
 
-            DB::commit();
+        $cliente = Cliente::where('correo_electronico_cliente', '=', $usuarios['email'])->first();
 
-            return redirect('/profile')->with('status', 'actualizado');
-        }
-        catch (\Exception $e) 
-        {
-            DB::rollBack();
-            return redirect("/profile")->with('status', $e->getMessage());
-        }
+
+
+        DB::beginTransaction();
+        User::where('id', '=', $id)->update([
+
+            "name" => $usuarios['name'],
+            "last_name" => $usuarios['last_name'],
+            "email" => $usuarios['email'],
+            'password' => Hash::make($usuarios['password']),
+            "cellphone" => $usuarios['cellphone'],
+            "address" => $usuarios['address'],
+
+
+
+        ]);
+        Cliente::where('id_cliente', '=', $cliente->id_cliente)->update([
+            'nombres_cliente' => $usuarios['name'],
+            'apellidos_cliente' => $usuarios['last_name'],
+            'correo_electronico_cliente' => $usuarios['email'],
+            'celular_cliente' => $usuarios['cellphone'],
+            'direccion_cliente' => $usuarios['address']
+
+        ]);
+
+        DB::commit();
+
+        return redirect("/profile")->with('status', 'actualizado');
     }
-
-    public function show()
-    {
-        return view('profile.form');
-    }
-    
-
-    public function store(Request $request)
-    {
-        $input = request()->all();
-
-        try 
-        {
-
-            DB::beginTransaction();
-
-            $usuarios = User::create([
-                "name" => $input['name'],
-                "last_name" => $input['last_name'],
-                "email" => $input['email'],
-                'password' => Hash::make($input['password']),
-                "cellphone" => $input['cellphone'],
-                "address" => $input['address'],
-                "user_status" => $input['user_status'],
-                "tipo_usuario_id" => $input['tipo_usuario_id']
-
-                
-
-            ]);
-
-            DB::commit();
-            return redirect("/profile")->with('status', 'registrado');;
-        } 
-        catch (\Exception $e) 
-        {
-            DB::rollBack();
-            return redirect("/profile")->with('status', $e->getMessage());
-        }
-    } 
-
-    public function destroy($id)
-    {
-
-    }
-
-  
 }
