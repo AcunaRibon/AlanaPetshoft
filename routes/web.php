@@ -79,7 +79,6 @@ Route::group(['middleware' => 'auth.emp'], function () {
 
 
 Route::group(['middleware' => 'auth.cliente'], function () {
-
     
     Route::resource('profile', ProfileController::class);
     Route::put('/profile/{id}/update', [ProfileController::class, 'update']);
@@ -95,6 +94,7 @@ Route::group(['middleware' => 'auth.cliente'], function () {
     Route::get('/home', function () {
         return view('index');
     });
+
 
     });
 

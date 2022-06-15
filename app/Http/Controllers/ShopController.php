@@ -102,6 +102,7 @@ class ShopController extends Controller
 
             if(Auth::check())
             {
+                if(Cart::where('id_user','=',Auth::user()->id)->first()!==null){
             $user=Auth::user()->id;
             $datos['cart'] = DB::table('carts')
             ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
@@ -114,9 +115,13 @@ class ShopController extends Controller
             $datos['total'] = $this->calcular_precio($datos['cart']);
     
             return view('shop.cartlist', $datos)->with('status', 'listado');
+                }else{
+                    return view('shop.cartout'); 
+                }
+
             }
             else {
-                return redirect('/login');
+                return view('shop.cartout');
             }
     
 
@@ -223,14 +228,18 @@ class ShopController extends Controller
 
     public function search(Request $request)
     {
-        
+        if(Producto::where('nombre_producto', 'like', '%'.$request->input('query').'%')->first()!== null) {
+
         $datos = Producto::
         join('imagen_producto', 'producto.id_producto', '=', 'imagen_producto.producto_id')
         ->where('nombre_producto', 'like', '%'.$request->input('query').'%')
         ->get();
 
         return view('shop.search', ['productos'=>$datos]);
-        
+        }
+        else {
+            return view('shop.searchout');
+        }
     }
 
     public function orderPlace(Request $request){
