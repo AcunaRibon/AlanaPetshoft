@@ -95,6 +95,8 @@ Route::get('detalle/{id_producto}', [ShopController::class, 'detalle']);
 
 Route::get('/search', [ShopController::class, 'search']);
 
+Route::get('/searchout', [ShopController::class, 'search']);
+
 Route::post('/addcart/{id_producto}', [ShopController::class, 'addcart']);
 
 Route::get('/cartlist', [ShopController::class, 'cartlist']);

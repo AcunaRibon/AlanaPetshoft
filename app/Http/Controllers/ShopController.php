@@ -228,14 +228,18 @@ class ShopController extends Controller
 
     public function search(Request $request)
     {
-        
+        if(Producto::where('nombre_producto', 'like', '%'.$request->input('query').'%')->first()!== null) {
+
         $datos = Producto::
         join('imagen_producto', 'producto.id_producto', '=', 'imagen_producto.producto_id')
         ->where('nombre_producto', 'like', '%'.$request->input('query').'%')
         ->get();
 
         return view('shop.search', ['productos'=>$datos]);
-        
+        }
+        else {
+            return view('shop.searchout');
+        }
     }
 
     public function orderPlace(Request $request){
