@@ -274,6 +274,7 @@ return [
                 ],
             ],
         ],
+        
         [
             'text'    => 'Ventas',
             'icon'    => 'fas fa-fw fa-coins',

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 use App\Models\User;
 
 class LoginController extends Controller
@@ -51,20 +54,28 @@ class LoginController extends Controller
             return back()->withErrors([
                 'message' =>'El correo o la contraseña son incorrectos. Intenta de nuevo',
             ]);
-    } else {
-        if(auth()->user()->tipo_usuario_id =='1')
-        {
-        return redirect()->route('usuario.index');
-        }
+    } 
+    }
+
     
-        if(auth()->user()->tipo_usuario_id =='2')
-        {
-        return redirect()->route('usuario.index');
-        }
-        
-        else{
-            return redirect()->to('/');
-        }
+public function authenticated($request){
+    if(auth()->user()->tipo_usuario_id=='1'){
+        return redirect()->route('usuario.index') ;
+    }else if(auth()->user()->tipo_usuario_id=='2'){
+        return redirect()->route('venta.index') ;
+    }else if (auth()->user()->user_status=='0'){
+        Auth::guard()->logout();
+
+        // invalidamos su sesión
+        $request->session()->invalidate();
+    
+        // redireccionamos a donde queremos
+        return back();
+    
+    }else{
+        return redirect()->to('/') ;
     }
 }
+
 }
+

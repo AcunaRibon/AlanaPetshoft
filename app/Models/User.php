@@ -49,11 +49,19 @@ class User extends Authenticatable
     ];
 
     public function adminlte_desc(){
-        return "Administrador";
+
+        if(auth()->user()->tipo_usuario_id=='1'){
+            return "Administrador";
+        }else if(auth()->user()->tipo_usuario_id=='2'){
+            return "Empleado";
+        }
     }
+
+       
+    
 
     public function adminlte_profile_url(){
-        return 'profile/username';
-    }
+        return route('profileadmin.index');
 }
 
+}
