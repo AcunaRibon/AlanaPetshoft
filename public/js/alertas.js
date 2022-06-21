@@ -192,3 +192,13 @@ if(tipoAlerta == 'Cantidad excedida')
         'error'
     )
 }
+
+if(tipoAlerta == 'Producto Agregado')
+{
+    swalA.fire(
+        'El producto ya está agregado',
+        'El producto ya se ha agregado al carrito',
+        'error'
+    )
+}
+

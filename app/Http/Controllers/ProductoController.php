@@ -189,9 +189,9 @@ class ProductoController extends Controller
     public function validator(array $input)
     {
         return Validator::make($input, [
-            'nombre_producto1' => ['required', 'alpha','max:40','min:3'],
+            'nombre_producto1' => ['required','max:40','min:3'],
             'precio_producto1' => ['required', 'int', 'max:999999', 'min:50'],
-            'url_imagen_producto1.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'url_imagen_producto1.*' => ['required','image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'tipo_producto_id1' => ['required','not_in:null'],
             'estado_producto1'=>['required','not_in:null']
         ]);
@@ -200,9 +200,9 @@ class ProductoController extends Controller
     {
         return Validator::make($input, [
            
-            'nombre_producto2' => ['required', 'alpha','max:40','min:3'],
+            'nombre_producto2' => ['required','max:40','min:3'],
             'precio_producto2' => ['required', 'int', 'max:999999', 'min:50'],
-            'url_imagen_producto2.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'url_imagen_producto2.*' => ['required','image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'tipo_producto_id2' => ['required','not_in:null'],
             'estado_producto2'=>['required','not_in:null']
         ]);

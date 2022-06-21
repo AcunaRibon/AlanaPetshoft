@@ -84,15 +84,16 @@ Route::group(['middleware' => 'auth.cliente'], function () {
     Route::put('/profile/{id}/update', [ProfileController::class, 'update']);
     Route::resource('miDomicilio', MiDomicilioController::class);
     Route::get('/redirect', [ShopController::class, 'redirect']);
-    Route::get('/productos', [ShopController::class, 'index']);
+    Route::get('/productos', [ShopController::class, 'index'])->name('shop.index');
     Route::get('detalle/{id_producto}', [ShopController::class, 'detalle']);
     Route::get('/search', [ShopController::class, 'search']);
-    Route::post('/addcart/{id_producto}', [ShopController::class, 'addcart']);
+    Route::post('/addcart/{id_producto}', [ShopController::class, 'addcart'])->name('shop.addcart');
+    Route::post('/orderPlace/{id_producto}', [ShopController::class, 'orderPlace'])->name('shop.order');
     Route::get('/cartlist', [ShopController::class, 'cartlist']);
     Route::get('/delete/{id}', [ShopController::class, 'deletecart']);
-    Route::get('/ordernow', [ShopController::class, 'ordernow']);
-    Route::get('/thanks', [ShopController::class, 'RecogerTienda']);
-    Route::post('/envioOrden', [ShopController::class, 'enviorden']);
+    Route::post('/envioOrden', [ShopController::class, 'enviorden'])->name('shop.export');
+    
+  
     Route::get('/home', function () {
         return view('index');
     });
@@ -100,7 +101,7 @@ Route::group(['middleware' => 'auth.cliente'], function () {
 
     });
 
-
+   
 Route::group(['middleware' => 'auth'], function () {
 Route::resource('profileadmin', ProfileadminController::class);
 Route::put('/profileadmin/{id}/update', [ProfileadminController::class, 'update']);

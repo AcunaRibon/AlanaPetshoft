@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\MailOrderDetailMailable;
 use App\Models\Cart;
 use App\Models\Domiciliario;
 use App\Models\Producto;
 use App\Models\detalleVenta;
 use App\Models\Cliente;
 use App\Models\venta;
-use App\Models\User;
 use App\Models\CalificacionProducto;
-use App\Models\ImagenProducto;
-use App\Models\TipoProducto;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use Session;
-use Producto as GlobalProducto;
+
+use Exception;
+
 
 class ShopController extends Controller
 {
@@ -32,21 +28,30 @@ class ShopController extends Controller
     public function index()
     {
         $datos['productos']= DB::table('producto')
-        ->join('imagen_producto', 'producto.id_producto', '=', 'imagen_producto.producto_id')
-        ->select('producto.*', 'imagen_producto.url_imagen_producto')
+        ->where('existencia_producto','>',0)
+        ->where('estado_producto','!=',0)
+        ->select('producto.*')
         ->get();
-
+        $datos['imagenes']= array();
+        foreach($datos['productos'] as $producto){
+            array_push($datos['imagenes'],DB::table('imagen_producto')->select('producto_id','url_imagen_producto')->where('producto_id','=',$producto->id_producto)->first());
+        }
+      
         return view('shop.productos', $datos); 
     }
 
 
     public function detalle($id_producto)
     {
-        $datos['productos']= DB::table('producto')
+       
+        
+        $datos['producto']= DB::table('producto')
         ->where('id_producto','=',$id_producto)
-        ->join('imagen_producto', 'producto.id_producto', '=', 'imagen_producto.producto_id')
-        ->select('producto.*', 'imagen_producto.url_imagen_producto')
+        ->select('producto.*')
         ->get();
+        $datos['imagenes']= DB::table('imagen_producto')->select('producto_id','url_imagen_producto')->get();
+        
+
         
 
         return view('shop.detalle', $datos);
@@ -54,18 +59,7 @@ class ShopController extends Controller
     
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
 
     public function redirect()
     {
@@ -78,59 +72,93 @@ class ShopController extends Controller
 
     public function addcart(Request $request, $id)
     {
-    
+        $user=Auth::user()->id;
+        $datoscart = DB::table('carts')
+        ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
+        ->where('carts.id_user', '=', $user)
+        ->select('producto.*', 'carts.id as cart_id', 'carts.quantity')
+        ->get();
 
+        $validator = false;
+        foreach($datoscart as $dato){ 
+            if($dato->id_producto == $id){
+                $validator=true;
+            }
+        }
+
+        try{
+            DB::beginTransaction();
         if(Auth::check())
         {
-                $cart=new Cart;
-                $cart->id_user= Auth::user()->id;
-                $cart->id_producto= $id;
-                $cart->quantity=$request->quantity;
-                $cart->save();
+            if(!$validator){
+               
+               
+                Cart::create([
+                    "id_producto" => $id,
+                    "id_user"=>$user,
+                    "quantity"=>$request->quantity
+
+                    ]);
+                    DB::commit();
+                return redirect("/productos")->with('status', 'registrado');
+            }else{
+               
+             
+                throw new Exception('Producto Agregado');
+            }
            
-            return redirect()->back();
+            
             
         }
         else {
             return redirect('/login');
         }
-        
+       
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect("/productos")->with('status', $e->getMessage());
     }
+}
 
     public function cartlist()
     {
 
-            if(Auth::check())
-            {
-                if(Cart::where('id_user','=',Auth::user()->id)->first()!==null){
-            $user=Auth::user()->id;
-            $datos['cart'] = DB::table('carts')
-            ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
-            ->join('imagen_producto', 'carts.id_producto', '=', 'imagen_producto.producto_id')
-            ->where('carts.id_user', '=', $user)
-            ->select('producto.*', 'carts.id as cart_id', 'imagen_producto.url_imagen_producto', 'carts.quantity')
-            ->get();
+        if(Auth::check())
+        {
+            if(Cart::where('id_user','=',Auth::user()->id)->first()!==null){
 
-            
-            $datos['total'] = $this->calcular_precio($datos['cart']);
-    
-            return view('shop.cartlist', $datos)->with('status', 'listado');
-                }else{
-                    return view('shop.cartout'); 
-                }
+        $user=Auth::user()->id;
+        $datos['cart'] = DB::table('carts')
+        ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
+        ->where('carts.id_user', '=', $user)
+        ->select('producto.*', 'carts.id as cart_id', 'carts.quantity')
+        ->get();
 
+        $datos['imagenes']= array();
+        foreach($datos['cart'] as $producto){
+            array_push($datos['imagenes'],DB::table('imagen_producto')->select('producto_id','url_imagen_producto')->where('producto_id','=',$producto->id_producto)->first());
+        }
+
+        
+        $datos['total'] = $this->calcular_precio($datos['cart']);
+
+        return view('shop.cartlist', $datos)->with('status', 'listado');
+            }else{
+                return view('shop.cartout'); 
             }
-            else {
-                return view('shop.cartout');
-            }
+
+        }
+        else {
+            return view('shop.cartout');
+        }
+
     
 
     }
 
-    public function ordernow(Request $request)
-    {
-        
+    public function enviorden(Request $request) {
         $input = $request->all();
+        
 
         $Domiciliario =Domiciliario::where('estado_domiciliario','=',1)
         ->orderByRaw('rand()')
@@ -144,13 +172,11 @@ class ShopController extends Controller
         $user=Auth::user()->id;
         $cart = DB::table('carts')
             ->join('producto', 'carts.id_producto', '=', 'producto.id_producto')
-            ->join('imagen_producto', 'carts.id_producto', '=', 'imagen_producto.producto_id')
             ->where('carts.id_user', '=', $user)
-            ->select('producto.*', 'carts.id as cart_id', 'imagen_producto.url_imagen_producto', 'carts.quantity')
+            ->select('producto.*', 'carts.id as cart_id', 'carts.quantity')
             ->get();
 
-        try
-            {
+        try{
             DB::beginTransaction();
             $venta = venta::insertGetId([
                 "fecha_venta" => date('Y-m-d'),
@@ -165,25 +191,31 @@ class ShopController extends Controller
             foreach ($cart as $key => $producto) {
                 $P = Producto::find($producto->id_producto);
                 detalleVenta::create([
-                    "cantidad_detalle_venta" => $producto->quantity,
-                    "precio_detalle_venta" => ($P->precio_producto * $producto->quantity),
+                    "cantidad_detalle_venta" => $input["quantity"][$key],
+                    "precio_detalle_venta" => ($P->precio_producto * $input["quantity"][$key]),
                     "venta_id" => $venta,
                     "producto_id" => $producto->id_producto
 
                     
                 ]);
-                if ($P->existencia_producto > $producto->quantity) {
-                    $P->update(["existencia_producto" => $P->existencia_producto - $producto->quantity]);
+                if ($P->existencia_producto >= $input["quantity"][$key]){
+                    $P->update(["existencia_producto" => $P->existencia_producto - $input["quantity"][$key]]);
+                } else {
+                    throw new Exception('Cantidad excedida');
                 }
 
                 Cart::where('id_user', $user)->delete();
             }
             DB::commit();
-            return view('shop.ordernow');
+            return view('shop.thanks')->with('status', 'registrado');
+        
+
         } catch (\Exception $e) {
             DB::rollBack();
-            return view('shop.cartlist');
+            return redirect("/cartlist")->with('status', $e->getMessage());
         }
+        
+      
 
 
         /*$datos = Cart::all;
@@ -194,6 +226,7 @@ class ShopController extends Controller
         
         
     }
+    
     public function calcular_precio($productos)
     {
         $precio = 0;
@@ -205,26 +238,7 @@ class ShopController extends Controller
         return $precio;
     }
 
-    public function RecogerTienda() {
-        return view('shop.thanks');
-
-    }
-
-    public function enviorden(Request $request) {
-
-        $message = request()->validate([
-            'address' => 'required',
-            'rate' => 'required',
-            'cellphone' => 'required',
-            'typeSend' => 'required'
-        ]);
-
-        Mail::to('macyjlemosv@gmail.com')->send(new MailOrderDetailMailable($message));
-        
-        return view('shop.thanks');
-        
-    }
-
+    
 
     public function search(Request $request)
     {
@@ -242,45 +256,29 @@ class ShopController extends Controller
         }
     }
 
-    public function orderPlace(Request $request){
+    public function orderPlace(Request $request,$id){
+        $input = $request->all();
+        
+        try{
+            DB::beginTransaction();
+            
+            CalificacionProducto::create([ 
+                "valor_calificacion_producto"=> $input['calificacion'],
+                "producto_id"=>$id
+                         ]);
+              
+            
+            DB::commit();
+            return redirect("/detalle/$id")->with('status', 'registrado');
+        
 
-        return $request->input();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect("/detalle/$id")->with('status', $e->getMessage());
+        }
     }
 
     
-    
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function deletecart($cart_id)
     {
         try

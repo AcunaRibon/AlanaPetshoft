@@ -8,27 +8,22 @@
 <div class="container pt-5">
 
     <div class="row">
-
-        <?php foreach ($estadosVentas as $estadoVenta) : ?>
+    @foreach($estados as $estado)
             <div class="col-sm-4 ">
                 <div class="card-columns-fluid">
                     <div class="card  bg-light">
                         <div class="card-body">
-                            <h5 class="card-text"><b><?php echo $estadoVenta->nombre_estado_venta ?></b></h5>
-                            <?php foreach ($Activados as $activos) : ?>
+                            <h5 class="card-text"><b> {{$estado->nombre_estado_venta}} </b></h5>
+                            
                                 <p class="card-text card-title" style="text-align:center;">
-                                <h3><?php if ($activos->estado_venta_id == $estadoVenta->id_estado_venta) {
-
-                                    ?>{{$activos->Contador}}<?php } ?></h3>
+                                <h3>{{$estado->total_estados}}</h3>
                                 </p>
-                            <?php endforeach; ?>
-
+                            
                         </div>
                     </div>
                 </div>
-
             </div>
-        <?php endforeach; ?>
+        @endforeach
     </div>
     <div class="row">
         <div class="col">
