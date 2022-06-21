@@ -6,7 +6,7 @@
 
 
 <div class="container pt-5">
-<h6>Mi perfil</h6>
+<h2>Mi perfil</h2>
 
 <br>
 <br>

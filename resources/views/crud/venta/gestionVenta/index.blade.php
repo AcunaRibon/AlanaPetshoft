@@ -432,6 +432,7 @@
 <input value="la venta" id="mensajeAlerta" hidden>
 <input value="Venta" id="mensajeAlerta1" hidden>
 <input value="La venta" id="mensajeAlerta2" hidden>
+
 @if (session('status'))
 @if (session('status') == 'registrado')
 <input value="registrado" id="tipoAlerta" hidden>

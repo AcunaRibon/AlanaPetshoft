@@ -13,3 +13,25 @@
 </section>
 
 @endsection
+
+@section('js')
+
+<input value="el carrito" id="mensajeAlerta" hidden>
+<input value="Carrito" id="mensajeAlerta1" hidden>
+<input value="El carrito" id="mensajeAlerta2" hidden>
+
+@if (session('status'))
+@if (session('status') == 'registrado')
+<input value="registrado" id="tipoAlerta" hidden>
+@elseif (session('status') == 'Producto Agregado')
+<input value="Producto Agregado" id="tipoAlerta" hidden>
+@elseif (session('status') == 'Cantidad excedida')
+<input value="Cantidad excedida" id="tipoAlerta" hidden>
+@else
+
+<input value="error" id="tipoAlerta" hidden>
+@endif
+@endif
+
+
+@stop

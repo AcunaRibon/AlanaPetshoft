@@ -75,7 +75,7 @@ class VentaController extends Controller
                 "fecha_venta" => $input["fecha_venta1"],
                 "descuento_venta" => $input["descuento_venta1"],
                 "total_venta" => $this->calcular_precio($input["productos_id"], $input["cantidades"],$input["descuento_venta1"]),
-                "calificacion_servicio_venta" => $input["calificacion_servicio_venta"],
+                "calificacion_servicio_venta" => $input["calificacion_servicio_venta1"],
                 "cliente_id" => $input["cliente_id1"],
                 "domiciliario_documento" => $input["domiciliario_documento1"],
                 "estado_venta_id" => $input["estado_venta_id1"]
@@ -89,7 +89,7 @@ class VentaController extends Controller
                     "venta_id" => $venta,
                     "producto_id" => $producto
                 ]);
-                if ($P->existencia_producto > $input["cantidades"][$key]) {
+                if ($P->existencia_producto >= $input["cantidades"][$key]) {
                     $P->update(["existencia_producto" => $P->existencia_producto - $input["cantidades"][$key]]);
                 } else {
                     throw new Exception('Cantidad excedida');
@@ -118,7 +118,7 @@ class VentaController extends Controller
                 "fecha_venta" => $input["fecha_venta2"],
                 "descuento_venta" => $input["descuento_venta2"],
                 "total_venta" => $this->calcular_precio($input["productos_id"], $input["cantidades"],$input["descuento_venta2"]),
-                "calificacion_servicio_venta" => $input["calificacion_servicio_venta"],
+                "calificacion_servicio_venta" => $input["calificacion_servicio_venta2"],
                 "cliente_id" => $input["cliente_id2"],
                 "domiciliario_documento" => $input["domiciliario_documento2"],
                 "estado_venta_id" => $input["estado_venta_id2"]
@@ -135,7 +135,7 @@ class VentaController extends Controller
                     ->get();
 
                 if (isset($cantidad_detalle[0])) {
-                    if ($P->existencia_producto > $input["cantidades"][$key]) {
+                    if ($P->existencia_producto >= $input["cantidades"][$key]) {
 
                         if ($input["cantidades"][$key] < $cantidad_detalle[0]->cantidad_detalle_venta) {
                             $P->update(["existencia_producto" => $P->existencia_producto + abs($cantidad_detalle[0]->cantidad_detalle_venta - $input["cantidades"][$key])]);
@@ -280,6 +280,7 @@ class VentaController extends Controller
          'cliente_id1'=>['required'],
         'domiciliario_documento1'=>['required'],
         'estado_venta_id1'=>['required'],
+        'calificacion_servicio_venta1'=>['required']
       
     ]);
     }
@@ -290,6 +291,7 @@ class VentaController extends Controller
          'cliente_id2'=>['required'],
         'domiciliario_documento2'=>['required'],
         'estado_venta_id2'=>['required'],
+        'calificacion_servicio_venta2'=>['required']
       
     ]);
     }

@@ -102,7 +102,7 @@
             <?php
             if (isset($venta->estado_venta_id) == false) {
             ?>
-                <option selected disabled>Selecciona una opción</option>
+                <option selected disabled >Selecciona una opción</option>
             <?php
             }
             ?>
@@ -127,51 +127,57 @@
         @enderror
     </div>
     <div class="col-3 mb-2">
-        <label for="calificacion_servicio_venta" class="form-label">Calificación Servicio:</label>
-        <select name="calificacion_servicio_venta" id="calificacion_servicio_venta" class="form-control" title="Calificación del servicio que da el cliente">
+        <label for="calificacion_servicio_venta{{$tipo}}" class="form-label">Calificación Servicio:</label>
+        <select name="calificacion_servicio_venta{{$tipo}}" id="calificacion_servicio_venta{{$tipo}}" class="form-select @error('calificacion_servicio_venta'.$tipo) is-invalid @enderror" autofocus  autocomplete="calificacion_servicio_venta" title="Calificación del servicio que da el cliente">
             <?php
             if (isset($venta->calificacion_servicio_venta) == false) {
             ?>
-                <option selected>Selecciona una opción</option>
+                 <option selected disabled >Selecciona una opción</option>
             <?php
             }
             ?>
-            <option <?php
+            <option  <?php
                     if (isset($venta->calificacion_servicio_venta)) {
-                        if ($venta->calificacion_servicio_venta) {
+                        if ($venta->calificacion_servicio_venta==1) {
                     ?> selected <?php
                                     }
-                                }
-                                        ?> value="1"> Pésima</option>
+                                 else if (old('calificacion_servicio_venta'.$tipo) == 1) {
+                                        ?>selected <?php }}?>value="1"> Pésima</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 2) {
                     ?> selected <?php
                                     }
-                                }
-                                        ?> value="2"> mala</option>
+                                 else if (old('calificacion_servicio_venta'.$tipo) == 2) {
+                                    ?>selected <?php }}?> value="2"> mala</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 3) {
                     ?> selected <?php
                                     }
-                                }
-                                        ?> value="3"> regular</option>
+                                 else if (old('calificacion_servicio_venta'.$tipo) == 3) {
+                                    ?>selected <?php }}?> value="3"> regular</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 3) {
                     ?> selected <?php
                                     }
-                                }
-                                        ?> value="4"> buena</option>
+                                else if (old('calificacion_servicio_venta'.$tipo) == 4) {
+                                    ?>selected <?php }}?> value="4"> buena</option>
             <option <?php
                     if (isset($venta->calificacion_servicio_venta)) {
                         if ($venta->calificacion_servicio_venta == 5) {
                     ?> selected <?php
                                     }
-                                }
-                                        ?> value="5"> excelente</option>
+                                 else if (old('calificacion_servicio_venta'.$tipo) == 5) {
+                                    ?>selected <?php }}?> value="5"> excelente</option>
         </select>
+        @error('calificacion_servicio_venta'.$tipo)
+        <input value="{{$modo}}" id="tipoAlerta" hidden>
+        <p class="text-danger fw-bold">
+            * {{$message}}
+        </p>
+        @enderror
     </div>
     <div class="col-3 mb-2">
         <label for="descuento_venta" class="form-label">Descuento: </label>
