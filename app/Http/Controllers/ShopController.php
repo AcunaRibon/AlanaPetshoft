@@ -244,12 +244,20 @@ class ShopController extends Controller
     {
         if(Producto::where('nombre_producto', 'like', '%'.$request->input('query').'%')->first()!== null) {
 
-        $datos = Producto::
-        join('imagen_producto', 'producto.id_producto', '=', 'imagen_producto.producto_id')
+        
+        $datos['productos']= DB::table('producto')
+        ->where('existencia_producto','>',0)
+        ->where('estado_producto','!=',0)
         ->where('nombre_producto', 'like', '%'.$request->input('query').'%')
+        ->select('producto.*')
         ->get();
+        $datos['imagenes']= array();
+        foreach($datos['productos'] as $producto){
+            array_push($datos['imagenes'],DB::table('imagen_producto')->select('producto_id','url_imagen_producto')->where('producto_id','=',$producto->id_producto)->first());
+        }
+      
 
-        return view('shop.search', ['productos'=>$datos]);
+        return view('shop.search', $datos);
         }
         else {
             return view('shop.searchout');
