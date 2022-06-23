@@ -22,7 +22,7 @@
                   <center>
                     @foreach($imagenes as $imagen)
                     <?php if ($imagen->producto_id == $carts->id_producto) { ?>
-                      <img src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}" width="100px" height="100px">
+                      <img src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}" width="100px" height="100px" title="Imagen del producto '{{$carts->nombre_producto}}'">
                     <?php
                     }
                     ?>
@@ -38,8 +38,8 @@
                 </td>
                 <td>$ {{$carts->precio_producto}}</td>
                 <td>
-                  <a class="btn-cancel" href="{{url('delete', $carts->cart_id)}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <a class="btn-cancel" href="{{url('delete', $carts->cart_id)}}" title="Eliminar producto del carrito">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" >
                       <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
                       <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
                     </svg>

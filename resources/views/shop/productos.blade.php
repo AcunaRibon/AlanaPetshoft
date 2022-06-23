@@ -19,7 +19,7 @@
 
                         @foreach($imagenes as $imagen)
                         <?php if ($imagen->producto_id == $producto->id_producto) { ?>
-                            <img title="{{$producto-> nombre_producto}}" src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}">
+                            <img  src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}" title="Clic para ver el detalle del producto">
                         <?php
                         }
                         ?>
@@ -27,7 +27,7 @@
 
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">{{$producto-> nombre_producto}}</h5>
+                        <h5 class="card-title" title="Nombre del producto">{{$producto-> nombre_producto}}</h5>
 
                         <p class="precio1 ">$ {{$producto-> precio_producto}} </p>
 
@@ -39,7 +39,7 @@
                             <input type="hidden" name="cantidadProducto" id="cantidadProducto" value="{{$producto-> existencia_producto}}">
 
                             <input type="hidden" value="1" min="1" class="form-control" style="width:100px" name="quantity">
-                            <button class="btn-card registrar" data-toggle="modal" value="Registrar" type="submit">Agregar al carrito</button>
+                            <button class="btn-card registrar" data-toggle="modal" value="Registrar" type="submit" title="Agregar producto al carrito">Agregar al carrito</button>
 
                         </form>
                     </div>
