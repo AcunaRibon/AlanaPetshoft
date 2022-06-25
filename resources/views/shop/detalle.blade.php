@@ -18,7 +18,7 @@
                 @foreach($imagenes as $imagen)
                 <?php if ($imagen->producto_id == $producto[0]->id_producto) { ?>
                     <div class="carousel-item active" data-bs-interval="10000">
-                        <img src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}" class="" alt="...">
+                        <img src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}" class="" alt="..." width="200" height="200">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>{{$producto[0]->nombre_producto}}</h5>
 

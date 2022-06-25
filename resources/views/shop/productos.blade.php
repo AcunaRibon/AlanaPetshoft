@@ -19,7 +19,7 @@
 
                         @foreach($imagenes as $imagen)
                         <?php if ($imagen->producto_id == $producto->id_producto) { ?>
-                            <img  src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}" title="Clic para ver el detalle del producto">
+                            <img  src="{{ asset('../storage').'/app/public/'.$imagen->url_imagen_producto }}" title="Clic para ver el detalle del producto" width="200" height="200">
                         <?php
                         }
                         ?>
