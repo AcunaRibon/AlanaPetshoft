@@ -61,6 +61,8 @@
  
    @section('js')
   
+ 
+
     <input value="el producto" id="mensajeAlerta" hidden>
     <input value="Producto" id="mensajeAlerta1" hidden>
     <input value="El producto" id="mensajeAlerta2" hidden>

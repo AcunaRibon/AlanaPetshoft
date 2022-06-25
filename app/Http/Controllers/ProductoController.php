@@ -26,6 +26,7 @@ class ProductoController extends Controller
         $datos['tipoProductos'] = TipoProducto::all();
 
         $datos['imagenes'] = ImagenProducto::all();
+        
         $datos['Existencia'] = Producto::select("*")
             ->where("estado_producto", "=", 1)
             ->count();
