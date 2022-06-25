@@ -19,9 +19,13 @@ class DomiciliarioController extends Controller
     {
         try
         {
-        $domiciliarios = Domiciliario::all();
-        $total = Domiciliario::count();
-        return view('crud.venta.domiciliario.index', compact('domiciliarios', 'total'))->with('status', 'listado');
+            $datos['domiciliarios'] = Domiciliario::where("estado_domiciliario", "=", 1)->get();
+            $datos['domiciliariosInactivos'] = Domiciliario::where("estado_domiciliario", "=", 0)->get();
+        $datos['total'] = Domiciliario::count();
+        $datos['Existencia'] = Domiciliario::select("*")
+            ->where("estado_domiciliario", "=", 1)
+            ->count();
+        return view('crud.venta.domiciliario.index', $datos)->with('status', 'listado');
         }
         catch(\Exception $e)
         {
@@ -139,9 +143,20 @@ class DomiciliarioController extends Controller
         try
         {
             DB::beginTransaction();
-            Domiciliario::destroy($documento_domiciliario);
+            $Dom = Domiciliario::find($documento_domiciliario);
+            if ($Dom->estado_domiciliario == 0) {
+                Domiciliario::where('documento_domiciliario', '=', $Dom->id_producto)->update([
+                    "estado_domiciliario" => 1
+                ]);
+                $statusValidator = "restaurado";
+            } else if ($Dom->estado_domiciliario == 1) {
+                Domiciliario::where('documento_domiciliario', '=', $Dom->id_producto)->update([
+                    "estado_domiciliario" => 0
+                ]);
+                $statusValidator = "cancelado";
+            }
             DB::commit();
-            return redirect()->route('domiciliario.index')->with('status', 'cancelado');
+            return redirect()->route('domiciliario.index')->with('status', $statusValidator);
         }
         catch(\Exception $e)
         {
