@@ -11,7 +11,7 @@
 <div class="form-group mb-2">
     <label for="url_imagen_producto">Foto:</label>
     {{isset($producto->url_imagen_producto)?$producto->url_imagen_producto:''}}
-    <input type="file" name="url_imagen_producto{{$tipo}}[]" id="url_imagen_producto{{$tipo}}[]" class="form-control  @error('url_imagen_producto'.$tipo.'.*') is-invalid @enderror" value="{{isset($producto->url_imagen_producto)?$producto->url_imagen_producto:''}}" multiple accept="image/*" title="Imagenes del producto">
+    <input type="file" name="url_imagen_producto{{$tipo}}[]" id="url_imagen_producto{{$tipo}}[]" class="form-control  @error('url_imagen_producto'.$tipo.'.*') is-invalid @enderror" value="{{isset($producto->url_imagen_producto)?$producto->url_imagen_producto:''}}" multiple accept="image/*" title="Imagenes del producto" required>
     @error('url_imagen_producto'.$tipo.'.*')
     <input value="{{$modo}}" id="tipoAlerta" hidden>
     <p class="text-danger fw-bold">

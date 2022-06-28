@@ -342,6 +342,8 @@
     <input value="cancelado" id="tipoAlerta" hidden>
     @elseif (session('status') == 'restaurado')
     <input value="restaurado" id="tipoAlerta" hidden>
+    @elseif (session('status') == 'No imagen')
+    <input value="No imagen" id="tipoAlerta" hidden>
     @else
     <input value="error" id="tipoAlerta" hidden>
     @endif
