@@ -11,8 +11,14 @@
 <div class="form-group mb-2">
     <label for="url_imagen_producto">Foto:</label>
     {{isset($producto->url_imagen_producto)?$producto->url_imagen_producto:''}}
-    <input type="file" name="url_imagen_producto{{$tipo}}[]" id="url_imagen_producto{{$tipo}}[]" class="form-control  @error('url_imagen_producto'.$tipo.'.*') is-invalid @enderror" value="{{isset($producto->url_imagen_producto)?$producto->url_imagen_producto:''}}" multiple accept="image/*" title="Imagenes del producto" required>
+    <input type="file" name="url_imagen_producto{{$tipo}}[]" id="url_imagen_producto{{$tipo}}[]" class="form-control  @error('url_imagen_producto'.$tipo.'.*') is-invalid @enderror @error('url_imagen_producto'.$tipo) is-invalid @enderror" value="{{isset($producto->url_imagen_producto)?$producto->url_imagen_producto:''}}" multiple accept="image/*" title="Imagenes del producto" required>
     @error('url_imagen_producto'.$tipo.'.*')
+    <input value="{{$modo}}" id="tipoAlerta" hidden>
+    <p class="text-danger fw-bold">
+        * {{$message}}
+    </p>
+    @enderror
+    @error('url_imagen_producto'.$tipo)
     <input value="{{$modo}}" id="tipoAlerta" hidden>
     <p class="text-danger fw-bold">
         * {{$message}}
@@ -25,7 +31,7 @@
         <?php
         if (isset($producto->tipo_producto_id) == false) {
         ?>
-            <option selected>Selecciona una opción</option>
+            <option selected value="">Selecciona una opción</option>
         <?php
         }
         ?>
@@ -63,7 +69,7 @@
         <?php
         if (isset($producto->estado_producto) == false) {
         ?>
-            <option selected>Selecciona una opción</option>
+            <option selected value="">Selecciona una opción</option>
         <?php
         }
         ?>
