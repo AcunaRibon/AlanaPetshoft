@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\ProductoExport;
+use Exception;
+
 
 
 class ProductoController extends Controller
@@ -175,12 +177,21 @@ class ProductoController extends Controller
     public function destroyImg($id)
     {
         $imagen = ImagenProducto::where('id_imagen_producto', '=', $id)->first();
+        $validator =  DB::table('imagen_producto')
+                ->where('producto_id', '=', $imagen->producto_id)
+                ->groupBy('producto_id')
+                ->count();
         try {
             DB::beginTransaction();
+            if($validator>1){
             ImagenProducto::where('id_imagen_producto', '=', $id)->delete();
             Storage::delete('public/' . $imagen->url_imagen_producto);
             DB::commit();
             return redirect("/producto")->with('status', 'actualizado');
+            }else{
+                throw new Exception('No imagen'); 
+            }
+            
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect("/producto")->with('status', $e->getMessage());

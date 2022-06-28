@@ -193,6 +193,16 @@ if(tipoAlerta == 'Cantidad excedida')
     )
 }
 
+
+if(tipoAlerta == 'No imagen')
+{
+    swalA.fire(
+        'Cantidad Mínima excedida',
+        'El producto necesita imagenes',
+        'error'
+    )
+}
+
 if(tipoAlerta == 'Producto Agregado')
 {
     swalA.fire(
