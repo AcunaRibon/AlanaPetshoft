@@ -10,7 +10,7 @@
       @csrf
       <div class="card-body" id="form-send-cartlist">
         <div class="row">
-          <div class="col-8">
+          <div class="col-12 col-md-6">
 
 
             <table class="table table-sm">
@@ -50,7 +50,8 @@
             </table>
 
           </div>
-          <div class="col-4" style="float: right">
+         
+          <div class="col-12 col-md-6" style="float: right">
 
 
             <table class="table table-bordered">
