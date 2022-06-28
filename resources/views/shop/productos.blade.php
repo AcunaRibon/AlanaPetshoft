@@ -13,7 +13,7 @@
     <div class="row">
 
         <?php foreach ($productos as $producto) { ?>
-            <div class="col-3 cd-size" width="auto" height="auto">
+            <div class=" col-12 col-md-4  cd-size " width="auto" height="auto">
                 <div class="card ">
                     <a href="detalle/{{$producto->id_producto}}">
 

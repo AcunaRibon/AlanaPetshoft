@@ -9,7 +9,7 @@
 </div>
 
 <div id="panel-control" class="row" style="padding: 5%; padding-top: 0%;">
-    <div class="col-6">
+    <div class="col-12 col-md-6">
 
 
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -45,7 +45,7 @@
 
 
 
-    <div class="col-6">
+    <div class="col-12 col-md-6">
         <a href="{{ url('/productos') }}" title="Regresar al catálogo">Regresar</a>
         <h2 class="h2pro">{{$producto[0]->nombre_producto}}</h2>
         <br><br>
